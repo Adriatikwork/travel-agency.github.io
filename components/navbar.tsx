@@ -49,8 +49,8 @@ export function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center group">
-            <img src={`${basePath}/images/logo_landscape.png`} alt="Fluturo Travel Agency" className="h-16 w-auto object-contain" />
+          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center group h-full">
+            <img src={`${basePath}/images/logo_landscape.png`} alt="Fluturo Travel Agency" className="h-full w-auto object-contain" />
           </button>
 
           {/* Desktop Navigation */}
