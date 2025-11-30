@@ -51,12 +51,12 @@ export function Navbar() {
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center group h-full"
+            className="flex items-center group py-3"
           >
             <img
-              src={`${basePath}/images/logo-landscape.png`}
+              src={`${basePath}/images/logo_landscape.png`}
               alt="Fluturo Travel Agency"
-              className="h-full w-auto object-contain"
+              className="h-14 w-auto object-contain"
             />
           </button>
 
