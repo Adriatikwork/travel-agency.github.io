@@ -4,7 +4,11 @@
  * @returns The full path with basePath prefix
  */
 export function getImagePath(path: string): string {
-  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
+  // Handle undefined, empty string, whitespace, or literal quote strings
+  if (!basePath || basePath.trim() === '' || basePath === "''" || basePath === '""') {
+    return path;
+  }
   return `${basePath}${path}`;
 }
 

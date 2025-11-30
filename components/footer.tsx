@@ -4,6 +4,14 @@ import { Button } from "@/components/ui/button"
 import { Facebook, Instagram, Twitter, Linkedin, ArrowUp, Mail, Phone, MapPin } from "lucide-react"
 import { useState, useEffect } from "react"
 
+// Helper to get base path, handling v0.dev edge cases
+const getBasePath = () => {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH;
+  // Return empty string if undefined, empty, or contains quotes
+  if (!base || base === "''" || base === '""' || base.trim() === '') return '';
+  return base;
+};
+
 interface FooterData {
   tagline: string
   contact: {
@@ -30,6 +38,7 @@ const socialIcons = {
 }
 
 export function Footer({ data }: { data: FooterData }) {
+  const basePath = getBasePath();
   const [showScrollTop, setShowScrollTop] = useState(false)
 
   useEffect(() => {
@@ -51,7 +60,7 @@ export function Footer({ data }: { data: FooterData }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-8">
           {/* Brand Section */}
           <div className="space-y-4">
-            <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/image.png`} alt="Fluturo" className="h-16 w-16 sm:h-20 sm:w-20 object-contain" />
+            <img src={`${basePath}/images/image.png`} alt="Fluturo" className="h-20 w-auto sm:h-24 sm:w-auto object-contain" />
             <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-xs text-pretty">{data.tagline}</p>
           </div>
 

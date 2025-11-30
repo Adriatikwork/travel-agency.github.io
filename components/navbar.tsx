@@ -4,7 +4,16 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
+// Helper to get base path, handling v0.dev edge cases
+const getBasePath = () => {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH;
+  // Return empty string if undefined, empty, or contains quotes
+  if (!base || base === "''" || base === '""' || base.trim() === '') return '';
+  return base;
+};
+
 export function Navbar() {
+  const basePath = getBasePath();
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -44,7 +53,7 @@ export function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-3 group"
           >
-            <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/logo-transparent.png`} alt="Fluturo" className="h-16 w-auto object-contain" />
+            <img src={`${basePath}/images/logo-transparent.png`} alt="Fluturo" className="h-20 sm:h-24 w-auto object-contain" />
           </button>
 
           {/* Desktop Navigation */}

@@ -11,7 +11,16 @@ interface HeroData {
   ctaText: string
 }
 
+// Helper to get base path, handling v0.dev edge cases
+const getBasePath = () => {
+  const base = process.env.NEXT_PUBLIC_BASE_PATH;
+  // Return empty string if undefined, empty, or contains quotes
+  if (!base || base === "''" || base === '""' || base.trim() === '') return '';
+  return base;
+};
+
 export function HeroSection({ data }: { data: HeroData }) {
+  const basePath = getBasePath();
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -22,17 +31,17 @@ export function HeroSection({ data }: { data: HeroData }) {
   return (
     <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#30b2f5] via-[#2da9ed] to-[#4abef0] pt-20">
       <img
-        src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/cloud.png`}
+        src={`${basePath}/images/cloud.png`}
         alt=""
         className="absolute bottom-24 right-16 w-[400px] h-auto opacity-70 animate-float-slow pointer-events-none"
       />
       <img
-        src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/cloud.png`}
+        src={`${basePath}/images/cloud.png`}
         alt=""
         className="absolute bottom-8 right-64 w-[320px] h-auto opacity-50 animate-float-slower pointer-events-none"
       />
       <img
-        src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/cloud.png`}
+        src={`${basePath}/images/cloud.png`}
         alt=""
         className="absolute bottom-40 right-96 w-[280px] h-auto opacity-40 animate-float-medium pointer-events-none"
       />
@@ -124,7 +133,7 @@ export function HeroSection({ data }: { data: HeroData }) {
           {/* Right Side - Airplane */}
           <div className="relative hidden lg:block">
             <img
-              src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/AirplaneFinal.png`}
+              src={`${basePath}/images/AirplaneFinal.png`}
               alt="Fluturo Airplane"
               className="w-full max-w-3xl h-auto object-contain drop-shadow-2xl relative z-10 -mr-32"
             />
