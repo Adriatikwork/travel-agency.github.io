@@ -11,8 +11,8 @@ const nextConfig = {
   },
   output: 'export',
   trailingSlash: true,
-  basePath: '',
-  assetPrefix: '',
+  basePath: '/travel-agency.github.io',
+  assetPrefix: '/travel-agency.github.io',
 }
 
 export default nextConfig
