@@ -45,7 +45,7 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
           {packages.map((pkg) => (
             <Card key={pkg.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300">
               <div className="relative h-56 overflow-hidden">
-                <img src={pkg.image || "/placeholder.svg"} alt={pkg.title} className="w-full h-full object-cover" />
+                <img src={pkg.image || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/placeholder.svg`} alt={pkg.title} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
 
                 {/* Labels */}

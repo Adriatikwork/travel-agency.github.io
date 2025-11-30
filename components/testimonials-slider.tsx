@@ -78,7 +78,7 @@ export function TestimonialsSlider({ testimonials }: { testimonials: Testimonial
                 <div className="flex flex-col items-center text-center space-y-6">
                   {/* Avatar */}
                   <img
-                    src={currentTestimonial.image || "/placeholder.svg"}
+                    src={currentTestimonial.image || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/placeholder.svg`}
                     alt={currentTestimonial.name}
                     className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-sky-100"
                   />
