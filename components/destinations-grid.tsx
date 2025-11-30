@@ -3,6 +3,7 @@
 import { Star, MapPin, Clock } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
+import { getImagePath } from "@/lib/image-path"
 
 interface Destination {
   id: string
@@ -53,7 +54,7 @@ export function DestinationsGrid({ destinations, currency }: DestinationsGridPro
         >
           <div className="relative h-64 overflow-hidden">
             <img
-              src={destination.primaryImage || `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/placeholder.svg`}
+              src={getImagePath(destination.primaryImage || '/placeholder.svg')}
               alt={destination.name}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />

@@ -44,7 +44,7 @@ export function Navbar() {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center gap-3 group"
           >
-            <img src="/images/logo-transparent.png" alt="Fluturo" className="h-16 w-auto object-contain" />
+            <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/images/logo-transparent.png`} alt="Fluturo" className="h-16 w-auto object-contain" />
           </button>
 
           {/* Desktop Navigation */}
