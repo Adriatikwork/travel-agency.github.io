@@ -124,7 +124,7 @@ export function HeroSection({ data }: { data: HeroData }) {
           {/* Right Side - Airplane */}
           <div className="relative hidden lg:block">
             <img
-              src="/images/airplanefinal.png"
+              src="/images/AirplaneFinal.png"
               alt="Fluturo Airplane"
               className="w-full max-w-3xl h-auto object-contain drop-shadow-2xl relative z-10 -mr-32"
             />
@@ -132,7 +132,7 @@ export function HeroSection({ data }: { data: HeroData }) {
 
           {/* Mobile: Airplane as watermark */}
           <div className="absolute lg:hidden top-1/2 -translate-y-1/2 right-0 w-full opacity-15 pointer-events-none">
-            <img src="/images/airplanefinal.png" alt="Fluturo Airplane" className="w-full h-auto object-contain" />
+            <img src="/images/AirplaneFinal.png" alt="Fluturo Airplane" className="w-full h-auto object-contain" />
           </div>
         </div>
       </div>
