@@ -1,0 +1,48 @@
+{
+  "hero": {
+    "title": "Discover Your Next",
+    "rotatingTexts": ["further.", "higher.", "beyond.", "away."],
+    "subtitle": "Experience the world with Fluturo.\nYour trusted travel partner\nfor unforgettable memories.",
+    "ctaText": "Start Planning"
+  },
+  "footer": {
+    "tagline": "Making travel dreams come true, one journey at a time",
+    "contact": {
+      "email": "hello@fluturo.com",
+      "phone": "+1 (555) 123-4567",
+      "address": "123 Travel Street, Adventure City, AC 12345"
+    },
+    "social": [
+      {
+        "name": "Facebook",
+        "url": "https://facebook.com/fluturo",
+        "icon": "facebook"
+      },
+      {
+        "name": "Instagram",
+        "url": "https://instagram.com/fluturo",
+        "icon": "instagram"
+      },
+      {
+        "name": "Twitter",
+        "url": "https://twitter.com/fluturo",
+        "icon": "twitter"
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://linkedin.com/company/fluturo",
+        "icon": "linkedin"
+      }
+    ],
+    "legal": [
+      {
+        "name": "Privacy Policy",
+        "url": "/privacy"
+      },
+      {
+        "name": "Terms of Service",
+        "url": "/terms"
+      }
+    ]
+  }
+}
