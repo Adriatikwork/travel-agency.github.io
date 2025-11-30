@@ -11,8 +11,8 @@ const nextConfig = {
   },
   output: 'export',
   trailingSlash: true,
-  basePath: '/travel-agency.github.io',
-  assetPrefix: '/travel-agency.github.io',
+  basePath: process.env.NODE_ENV === 'production' ? '/travel-agency.github.io' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/travel-agency.github.io' : '',
 }
 
 export default nextConfig
