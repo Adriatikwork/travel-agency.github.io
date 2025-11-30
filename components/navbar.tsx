@@ -50,7 +50,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center group">
-            <img src="/images/logo-landscape.png" alt="Fluturo Travel Agency" className="h-18 w-auto object-contain" />
+            <img src="/images/logo_landscape.png" alt="Fluturo Travel Agency" className="h-18 w-auto object-contain" />
           </button>
 
           {/* Desktop Navigation */}
