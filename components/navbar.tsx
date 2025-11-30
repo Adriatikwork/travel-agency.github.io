@@ -6,14 +6,14 @@ import { Menu, X } from "lucide-react"
 
 // Helper to get base path, handling v0.dev edge cases
 const getBasePath = () => {
-  const base = process.env.NEXT_PUBLIC_BASE_PATH;
+  const base = process.env.NEXT_PUBLIC_BASE_PATH
   // Return empty string if undefined, empty, or contains quotes
-  if (!base || base === "''" || base === '""' || base.trim() === '') return '';
-  return base;
-};
+  if (!base || base === "''" || base === '""' || base.trim() === "") return ""
+  return base
+}
 
 export function Navbar() {
-  const basePath = getBasePath();
+  const basePath = getBasePath()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -49,11 +49,8 @@ export function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-3 group"
-          >
-            <img src={`${basePath}/images/logo-transparent.png`} alt="Fluturo" className="h-20 sm:h-24 w-auto object-contain" />
+          <button onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center group">
+            <img src="/images/logo-landscape.png" alt="Fluturo Travel Agency" className="h-18 w-auto object-contain" />
           </button>
 
           {/* Desktop Navigation */}
