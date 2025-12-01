@@ -7,17 +7,28 @@ import Link from "next/link"
 import destinationsData from "@/data/destinations.json"
 import siteData from "@/data/site-data.json"
 
+// Generate static params for all destinations at build time
 export async function generateStaticParams() {
   return destinationsData.destinations.map((dest) => ({
     slug: dest.slug,
   }))
 }
 
-export default function DestinationPage({ params }: { params: { slug: string } }) {
-  const destination = destinationsData.destinations.find((d) => d.slug === params.slug)
+// Ensure this page is statically generated
+export const dynamicParams = false
+
+export default async function DestinationPage({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> | { slug: string } 
+}) {
+  // Handle both Promise and direct params (Next.js 15+ compatibility)
+  const resolvedParams = params instanceof Promise ? await params : params
+  const destination = destinationsData.destinations.find((d) => d.slug === resolvedParams.slug)
 
   if (!destination) {
     notFound()
+    return // TypeScript guard - unreachable but helps with type checking
   }
 
   const departures = destinationsData.departures.filter((dep) => destination.availableDepartureIds.includes(dep.id))
@@ -188,7 +199,7 @@ export default function DestinationPage({ params }: { params: { slug: string } }
                   <Button className="w-full bg-sky-500 hover:bg-sky-600 text-white py-6 text-lg font-semibold shadow-lg">
                     Book Now
                   </Button>
-                  <a href={`tel:${siteData.contact.phone}`}>
+                  <a href={`tel:${siteData.footer.contact.phone}`}>
                     <Button
                       variant="outline"
                       className="w-full py-6 text-lg border-sky-500 text-sky-600 hover:bg-sky-50 bg-transparent"
@@ -197,7 +208,7 @@ export default function DestinationPage({ params }: { params: { slug: string } }
                       Call Us
                     </Button>
                   </a>
-                  <a href={`mailto:${siteData.contact.email}`}>
+                  <a href={`mailto:${siteData.footer.contact.email}`}>
                     <Button
                       variant="outline"
                       className="w-full py-6 text-lg border-gray-300 hover:bg-gray-50 bg-transparent"
@@ -211,8 +222,8 @@ export default function DestinationPage({ params }: { params: { slug: string } }
                 {/* Contact Info */}
                 <div className="pt-6 border-t border-gray-200 text-center text-sm text-gray-600">
                   <p className="mb-2">Need help? Contact us:</p>
-                  <p className="font-semibold text-gray-900">{siteData.contact.phone}</p>
-                  <p className="text-gray-500">{siteData.contact.email}</p>
+                  <p className="font-semibold text-gray-900">{siteData.footer.contact.phone}</p>
+                  <p className="text-gray-500">{siteData.footer.contact.email}</p>
                 </div>
               </CardContent>
             </Card>
@@ -222,3 +233,4 @@ export default function DestinationPage({ params }: { params: { slug: string } }
     </div>
   )
 }
+
