@@ -1,6 +1,6 @@
 "use client"
 
-import { Check, Tag, ArrowRight } from "lucide-react"
+import { Check, Tag, ArrowRight, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getImagePath } from "@/lib/image-path"
 import { useState } from "react"
@@ -82,43 +82,43 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
               </div>
 
               {/* Content */}
-              <div className="p-6 space-y-4">
-                <p className="text-gray-600 text-sm leading-relaxed">{pkg.summary}</p>
+              <div className="p-5 space-y-3">
+                <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">{pkg.summary}</p>
 
                 {/* Inclusions */}
                 <div className="space-y-2">
-                  <div className="text-sm font-semibold text-gray-900">What's Included:</div>
+                  <div className="text-xs font-semibold text-gray-900">What's Included:</div>
                   <div className="space-y-1">
-                    {pkg.inclusions.slice(0, 4).map((inclusion, i) => (
-                      <div key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                        <Check className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
+                    {pkg.inclusions.slice(0, 3).map((inclusion, i) => (
+                      <div key={i} className="flex items-start gap-1.5 text-xs text-gray-600">
+                        <Check className="w-3.5 h-3.5 text-green-600 mt-0.5 flex-shrink-0" />
                         <span>{inclusion}</span>
                       </div>
                     ))}
-                    {pkg.inclusions.length > 4 && (
-                      <div className="text-sm text-gray-500 ml-6">+{pkg.inclusions.length - 4} more inclusions</div>
+                    {pkg.inclusions.length > 3 && (
+                      <div className="text-xs text-gray-500 ml-5">+{pkg.inclusions.length - 3} more inclusions</div>
                     )}
                   </div>
                 </div>
 
                 {/* Duration and Price */}
-                <div className="flex items-center justify-between pt-4 border-t border-gray-200">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Check className="w-4 h-4" />
-                    <span>{pkg.duration} nights</span>
+                <div className="flex items-center justify-between pt-3 border-t border-gray-200">
+                  <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                    <Clock className="w-3.5 h-3.5" />
+                    <span className="text-xs">{pkg.duration} nights</span>
                   </div>
                   <div className="text-right">
                     <div className="text-xs text-gray-500">From</div>
-                    <div className="text-2xl font-bold text-blue-700">
+                    <div className="text-xl font-bold text-blue-700">
                       {currency}
                       {pkg.price}
                     </div>
                   </div>
                 </div>
 
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl shadow-lg">
+                <Button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl shadow-lg py-2 text-sm">
                   Book Package
-                  <ArrowRight className="w-4 h-4 ml-2" />
+                  <ArrowRight className="w-3.5 h-3.5 ml-2" />
                 </Button>
               </div>
             </div>
