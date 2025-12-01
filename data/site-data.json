@@ -5,12 +5,17 @@
     "subtitle": "Experience the world with Fluturo.\nYour trusted travel partner\nfor unforgettable memories.",
     "ctaText": "Start Planning"
   },
+  "company": {
+    "name": "Fluturo Travel Agency",
+    "founded": "2023-06-24",
+    "description": "Premium travel agency based in Kosovo, specializing in European destinations and unforgettable travel experiences."
+  },
   "footer": {
     "tagline": "Making travel dreams come true, one journey at a time",
     "contact": {
-      "email": "hello@fluturo.com",
-      "phone": "+1 (555) 123-4567",
-      "address": "123 Travel Street, Adventure City, AC 12345"
+      "email": "info@fluturo.co",
+      "phone": "+ 383 44 66 33 44",
+      "address": "Fehmi Agani 43, Pristina, Kosovo"
     },
     "social": [
       {

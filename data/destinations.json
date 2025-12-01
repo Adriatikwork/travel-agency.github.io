@@ -28,6 +28,203 @@
   ],
   "destinations": [
     {
+      "id": "dest-bansko-jan-01",
+      "slug": "bansko-family-vacation",
+      "name": "Bansko",
+      "city": "Bansko",
+      "country": "Bulgaria",
+      "continent": "Europe",
+      "tagline": "Family Winter Wonderland",
+      "descriptionShort": "Start the year with family relaxation, snow and fun in Bansko!",
+      "descriptionLong": "5 nights of relaxation, snow and entertainment for the whole family! Comfortable accommodation, ski slopes very close and activities for everyone. A perfect start to the new year, where nature, snow and tranquility meet with the most beautiful family moments.",
+      "primaryImage": "/placeholder.svg?height=400&width=600",
+      "gallery": ["/placeholder.svg?height=400&width=600", "/placeholder.svg?height=400&width=600"],
+      "pricing": {
+        "from": 1085,
+        "currency": "EUR",
+        "perPerson": false,
+        "priceCategory": "mid-range",
+        "note": "Package for 2+2 (children under 10 years)"
+      },
+      "duration": {
+        "minNights": 5,
+        "maxNights": 5,
+        "specificDates": "January 1-5"
+      },
+      "mealPlan": "Half Board - breakfast & dinner",
+      "rating": null,
+      "popularityScore": 90,
+      "featured": true,
+      "isNew": true,
+      "themes": ["family", "winter", "ski"],
+      "travelStyles": ["relaxation", "adventure"],
+      "seasonality": {
+        "best": ["winter"],
+        "avoid": []
+      },
+      "availableDepartureIds": ["dep-prn", "dep-tia"],
+      "tags": ["skiing", "family-friendly", "half-board", "limited-spots"],
+      "included": ["accommodation", "half-board", "ski-access"],
+      "highlights": ["Comfortable accommodation", "Ski slopes nearby", "Activities for all family", "Snow & relaxation"]
+    },
+    {
+      "id": "dest-prague-dec-01",
+      "slug": "prague-christmas-getaway",
+      "name": "Prague",
+      "city": "Prague",
+      "country": "Czech Republic",
+      "continent": "Europe",
+      "tagline": "Christmas Magic Awaits",
+      "descriptionShort": "A short escape, but full of magic. A limited offer, but with memories that last long.",
+      "descriptionLong": "Experience the magical Christmas atmosphere of Prague with its historic streets, festive markets and stunning architecture. Make December an unforgettable experience!",
+      "primaryImage": "/placeholder.svg?height=400&width=600",
+      "gallery": ["/placeholder.svg?height=400&width=600", "/placeholder.svg?height=400&width=600"],
+      "pricing": {
+        "from": 299,
+        "currency": "EUR",
+        "perPerson": true,
+        "priceCategory": "budget"
+      },
+      "duration": {
+        "minNights": 2,
+        "maxNights": 2,
+        "specificDates": "December 22-24"
+      },
+      "mealPlan": "Breakfast included",
+      "rating": null,
+      "popularityScore": 92,
+      "featured": true,
+      "isNew": true,
+      "themes": ["city-break", "romantic", "christmas"],
+      "travelStyles": ["culture", "shopping"],
+      "seasonality": {
+        "best": ["winter"],
+        "avoid": []
+      },
+      "availableDepartureIds": ["dep-tia"],
+      "tags": ["christmas-markets", "short-break", "cultural", "limited-offer"],
+      "included": ["flight-from-tirana", "hotel-accommodation", "breakfast"],
+      "highlights": ["Historic Old Town", "Christmas markets", "Castle & architecture", "Festive atmosphere"]
+    },
+    {
+      "id": "dest-st-moritz-jan-01",
+      "slug": "st-moritz-luxury-ski",
+      "name": "St. Moritz",
+      "city": "St. Moritz",
+      "country": "Switzerland",
+      "continent": "Europe",
+      "tagline": "Luxury Alpine Experience",
+      "descriptionShort": "Unforgettable holiday in St. Moritz!",
+      "descriptionLong": "Experience the magical snow, luxury skiing and breathtaking views in one of the world's most exclusive ski resorts. Make your winter special!",
+      "primaryImage": "/placeholder.svg?height=400&width=600",
+      "gallery": ["/placeholder.svg?height=400&width=600", "/placeholder.svg?height=400&width=600"],
+      "pricing": {
+        "from": 2999,
+        "currency": "EUR",
+        "perPerson": false,
+        "priceCategory": "premium",
+        "note": "Price for couple"
+      },
+      "duration": {
+        "minNights": 5,
+        "maxNights": 5,
+        "specificDates": "January 20-25"
+      },
+      "mealPlan": null,
+      "rating": null,
+      "popularityScore": 88,
+      "featured": true,
+      "isNew": true,
+      "themes": ["luxury", "winter", "ski", "romantic"],
+      "travelStyles": ["adventure", "relaxation"],
+      "seasonality": {
+        "best": ["winter"],
+        "avoid": []
+      },
+      "availableDepartureIds": ["dep-prn"],
+      "tags": ["luxury-ski", "swiss-alps", "exclusive", "couples"],
+      "included": null,
+      "highlights": ["Luxury skiing", "Breathtaking alpine views", "World-class resort", "Premium experience"]
+    },
+    {
+      "id": "dest-vienna-jan-01",
+      "slug": "vienna-winter-culture",
+      "name": "Vienna",
+      "city": "Vienna",
+      "country": "Austria",
+      "continent": "Europe",
+      "tagline": "Winter Cultural Oasis",
+      "descriptionShort": "Vienna is magical even in January!",
+      "descriptionLong": "After the holidays, the city of music and culture transforms into a peaceful winter oasis. Walks through the historic streets, traditional cafes and impressive architecture make every moment feel like a fairy tale. Experience the atmosphere of famous cafes, enjoy typical Austrian sweets and relax among the warm lights that reflect on the canals and city squares.",
+      "primaryImage": "/placeholder.svg?height=400&width=600",
+      "gallery": ["/placeholder.svg?height=400&width=600", "/placeholder.svg?height=400&width=600"],
+      "pricing": {
+        "from": 149,
+        "currency": "EUR",
+        "perPerson": true,
+        "priceCategory": "budget"
+      },
+      "duration": {
+        "minNights": 2,
+        "maxNights": 2,
+        "specificDates": "January 16-18"
+      },
+      "mealPlan": "Breakfast included",
+      "rating": null,
+      "popularityScore": 87,
+      "featured": true,
+      "isNew": true,
+      "themes": ["city-break", "culture", "winter"],
+      "travelStyles": ["culture", "relaxation"],
+      "seasonality": {
+        "best": ["winter"],
+        "avoid": []
+      },
+      "availableDepartureIds": ["dep-prn"],
+      "tags": ["cafes", "architecture", "cultural", "peaceful"],
+      "included": ["flight-from-prishtina", "hotel-accommodation", "breakfast"],
+      "highlights": ["Famous Viennese cafes", "Historic architecture", "Austrian sweets", "Winter atmosphere"]
+    },
+    {
+      "id": "dest-barcelona-dec-01",
+      "slug": "barcelona-december-escape",
+      "name": "Barcelona",
+      "city": "Barcelona",
+      "country": "Spain",
+      "continent": "Europe",
+      "tagline": "Mediterranean Winter Sun",
+      "descriptionShort": "Enjoy the days of December under the warm Mediterranean sun!",
+      "descriptionLong": "Barcelona awaits you with festive lights, seaside walks and an atmosphere full of energy that only this city has. Perfect vacation before the holidays with La Rambla, Sagrada Familia & Catalan squares, tapas, Spanish vibe and magical winter nights.",
+      "primaryImage": "/placeholder.svg?height=400&width=600",
+      "gallery": ["/placeholder.svg?height=400&width=600", "/placeholder.svg?height=400&width=600"],
+      "pricing": {
+        "from": 269,
+        "currency": "EUR",
+        "perPerson": true,
+        "priceCategory": "budget"
+      },
+      "duration": {
+        "minNights": 2,
+        "maxNights": 2,
+        "specificDates": "December 19-21"
+      },
+      "mealPlan": "Breakfast included",
+      "rating": null,
+      "popularityScore": 94,
+      "featured": true,
+      "isNew": true,
+      "themes": ["city-break", "beach", "culture"],
+      "travelStyles": ["shopping", "culture"],
+      "seasonality": {
+        "best": ["winter"],
+        "avoid": []
+      },
+      "availableDepartureIds": ["dep-tia"],
+      "tags": ["gaudi", "tapas", "mediterranean", "pre-christmas"],
+      "included": ["flight-from-tirana", "hotel-accommodation", "breakfast"],
+      "highlights": ["La Rambla", "Sagrada Familia", "Catalan culture", "Tapas & Spanish vibe"]
+    },
+    {
       "id": "dest-maldives-01",
       "slug": "maldives-from-prishtina",
       "name": "Maldives",

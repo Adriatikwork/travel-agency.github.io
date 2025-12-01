@@ -71,7 +71,7 @@ export function StatsSection({ stats, whyChoose }: StatsSectionProps) {
           setCounts((prev) => ({ ...prev, [stat.id]: stat.value }))
           clearInterval(timer)
         } else {
-          setCounts((prev) => ({ ...prev, [stat.id]: Math.floor(current) }))
+          setCounts((prev) => ({ ...prev, [stat.id]: Math.floor(current * 10) / 10 }))
         }
       }, duration / steps)
     })
@@ -90,7 +90,9 @@ export function StatsSection({ stats, whyChoose }: StatsSectionProps) {
                   <Icon className="h-8 w-8" />
                 </div>
                 <div className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
-                  {counts[stat.id]?.toLocaleString() || 0}
+                  {stat.id === "stat-rating"
+                    ? (counts[stat.id] || 0).toFixed(1)
+                    : counts[stat.id]?.toLocaleString() || 0}
                   {stat.suffix}
                 </div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>

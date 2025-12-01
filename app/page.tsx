@@ -167,7 +167,11 @@ export default function HomePage() {
                 {filteredDestinations.length} {filteredDestinations.length === 1 ? "destination" : "destinations"} found
               </p>
             </div>
-            <DestinationsGrid destinations={filteredDestinations} currency={destinationsData.meta.currency} />
+            <DestinationsGrid
+              destinations={filteredDestinations}
+              departures={destinationsData.departures}
+              currency={destinationsData.meta.currency}
+            />
           </div>
         </section>
       </div>

@@ -3,48 +3,48 @@
     {
       "id": "stat-destinations",
       "label": "Destinations",
-      "value": 150,
+      "value": 120,
       "suffix": "+",
       "icon": "globe"
     },
     {
       "id": "stat-travelers",
       "label": "Happy Travelers",
-      "value": 25000,
+      "value": 5000,
       "suffix": "+",
       "icon": "users"
     },
     {
-      "id": "stat-partners",
-      "label": "Travel Partners",
-      "value": 500,
-      "suffix": "+",
-      "icon": "handshake"
+      "id": "stat-rating",
+      "label": "Traveler Rating",
+      "value": 4.9,
+      "suffix": "/5",
+      "icon": "award"
     },
     {
       "id": "stat-experience",
-      "label": "Years Experience",
-      "value": 15,
-      "suffix": "",
-      "icon": "award"
+      "label": "Years in Operation",
+      "value": 1,
+      "suffix": "+",
+      "icon": "handshake"
     }
   ],
   "whyChoose": [
     {
+      "title": "Local Experts",
+      "description": "Our team knows every destination inside and out, providing authentic local experiences"
+    },
+    {
+      "title": "24/7 Support",
+      "description": "We're here for you before, during, and after your trip - anytime you need us"
+    },
+    {
       "title": "Best Price Guarantee",
-      "description": "We match any price and give you an extra discount"
+      "description": "Competitive prices with transparent pricing and no hidden fees"
     },
     {
-      "title": "Expert Travel Consultants",
-      "description": "Our team has visited every destination we offer"
-    },
-    {
-      "title": "24/7 Customer Support",
-      "description": "We're here for you before, during, and after your trip"
-    },
-    {
-      "title": "Flexible Booking",
-      "description": "Free cancellation up to 48 hours before departure"
+      "title": "Trusted Travel Partner",
+      "description": "Operating since June 2023, delivering unforgettable travel experiences throughout Europe"
     }
   ]
 }
