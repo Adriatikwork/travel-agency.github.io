@@ -55,9 +55,6 @@ jobs:
         env:
           NODE_ENV: production
           
-      - name: Create .nojekyll file
-        run: touch ./out/.nojekyll
-          
       - name: Setup Pages
         uses: actions/configure-pages@v4
           
@@ -75,5 +72,6 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
+        timeout-minutes: 5
         uses: actions/deploy-pages@v4
 
