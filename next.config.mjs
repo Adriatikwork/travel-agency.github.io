@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === 'production';
+const basePath = isProd ? '/travel-agency.github.io' : '';
+
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
@@ -11,8 +14,8 @@ const nextConfig = {
   },
   output: 'export',
   trailingSlash: true,
-  basePath: '',
-  assetPrefix: '',
+  basePath: basePath,
+  assetPrefix: basePath,
 }
 
 export default nextConfig
