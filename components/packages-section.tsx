@@ -1,10 +1,11 @@
 "use client"
 
-import { Check, Tag } from "lucide-react"
+import { Check, Tag, ArrowRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { getImagePath } from "@/lib/image-path"
+import { useState } from "react"
 
 interface Package {
   id: string
@@ -28,6 +29,8 @@ interface PackagesSectionProps {
 }
 
 export function PackagesSection({ packages, currency }: PackagesSectionProps) {
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
+
   if (packages.length === 0) {
     return null
   }
@@ -44,26 +47,39 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {packages.map((pkg) => (
-            <Card key={pkg.id} className="overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <Card
+              key={pkg.id}
+              className="overflow-hidden transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1 cursor-pointer"
+              onMouseEnter={() => setHoveredCard(pkg.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
               <div className="relative h-56 overflow-hidden">
-                <img src={getImagePath(pkg.image || '/placeholder.svg')} alt={pkg.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                <img
+                  src={getImagePath(pkg.image || "/placeholder.svg")}
+                  alt={pkg.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-t transition-all duration-300 ${
+                    hoveredCard === pkg.id
+                      ? "from-black/70 via-black/30 to-transparent"
+                      : "from-black/50 to-transparent"
+                  }`}
+                />
 
-                {/* Labels */}
                 <div className="absolute top-3 left-3 flex gap-2">
-                  {pkg.isFeatured && <Badge className="bg-sky-500 text-white border-0">Featured</Badge>}
+                  {pkg.isFeatured && <Badge className="bg-sky-500 text-white border-0 shadow-lg">Featured</Badge>}
                   {pkg.isOnSale && (
-                    <Badge className="bg-red-500 text-white border-0">
+                    <Badge className="bg-red-500 text-white border-0 shadow-lg">
                       <Tag className="h-3 w-3 mr-1" />
                       On Sale
                     </Badge>
                   )}
                 </div>
 
-                {/* Destination */}
                 {pkg.destinationName && (
                   <div className="absolute bottom-3 left-3">
-                    <p className="text-white font-semibold text-sm">{pkg.destinationName}</p>
+                    <p className="text-white font-semibold text-sm drop-shadow-lg">{pkg.destinationName}</p>
                   </div>
                 )}
               </div>
@@ -74,7 +90,6 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
                   <p className="text-sm text-gray-600 leading-relaxed">{pkg.summary}</p>
                 </div>
 
-                {/* Duration & Type */}
                 <div className="flex items-center gap-3 text-sm">
                   <Badge variant="outline" className="capitalize">
                     {pkg.duration} nights
@@ -84,7 +99,6 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
                   </Badge>
                 </div>
 
-                {/* Inclusions */}
                 <div className="space-y-2">
                   <p className="text-sm font-semibold text-gray-700">Includes:</p>
                   <ul className="space-y-1">
@@ -109,7 +123,10 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
                     {pkg.price}
                   </p>
                 </div>
-                <Button className="bg-sky-500 hover:bg-sky-600">View Details</Button>
+                <Button className="bg-sky-500 hover:bg-sky-600 shadow-lg hover:shadow-xl transition-all group">
+                  View Details
+                  <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                </Button>
               </CardFooter>
             </Card>
           ))}
