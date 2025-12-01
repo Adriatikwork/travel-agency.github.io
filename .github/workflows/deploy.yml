@@ -14,7 +14,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: true  # Cancel previous builds to speed up deployment
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -49,37 +49,18 @@ jobs:
           
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
-        
-      - name: Set basePath from repository name
-        id: set-basepath
-        run: |
-          # Extract owner and repo name from GITHUB_REPOSITORY (format: owner/repo-name)
-          OWNER=$(echo "${{ github.repository }}" | cut -d'/' -f1)
-          REPO_NAME=$(echo "${{ github.repository }}" | cut -d'/' -f2)
-          # For user/org pages: if repo-name matches owner.github.io, basePath is empty
-          # For project pages: basePath should be /repo-name
-          if [[ "$REPO_NAME" == "$OWNER.github.io" ]]; then
-            echo "BASE_PATH=" >> $GITHUB_ENV
-            echo "Detected user/org page - basePath is empty"
-          else
-            echo "BASE_PATH=/$REPO_NAME" >> $GITHUB_ENV
-            echo "Detected project page - basePath is /$REPO_NAME"
-          fi
-          echo "Repository: ${{ github.repository }}"
-          echo "Base Path will be: $BASE_PATH"
           
       - name: Build Next.js app
         run: pnpm run build
         env:
           NODE_ENV: production
-          NEXT_PUBLIC_BASE_PATH: ${{ env.BASE_PATH }}
           
       - name: Create .nojekyll file
         run: touch ./out/.nojekyll
           
       - name: Setup Pages
         uses: actions/configure-pages@v4
-        
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
