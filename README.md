@@ -115,8 +115,11 @@ docker compose down                        # Stop all
 This project includes GitHub Actions workflow for automatic deployment:
 
 1. **Push to main/master branch** - triggers automatic build and deploy
-2. **GitHub Actions builds** the static site
+2. **GitHub Actions builds** the static site (typically 2-5 minutes)
 3. **Deploys to GitHub Pages** automatically
+4. **Pages update** - Changes appear on GitHub Pages within 1-5 minutes after deployment completes
+
+**Note**: The first build may take longer as it generates all static destination pages. Subsequent builds are faster due to caching.
 
 #### Setup GitHub Pages:
 
@@ -124,6 +127,12 @@ This project includes GitHub Actions workflow for automatic deployment:
 2. Set Source to "GitHub Actions"
 3. Update `CNAME` file with your custom domain (if applicable)
 4. Push changes to trigger deployment
+
+#### Checking Deployment Status:
+
+- View build progress: Go to your repository → Actions tab
+- Check deployment: Repository Settings → Pages → See recent deployments
+- Typical timeline: Build (2-5 min) → Deploy (1-2 min) → Pages update (1-5 min)
 
 ### Manual Deployment
 
@@ -143,7 +152,10 @@ travel-agency-website/
 │   ├── globals.css        # Global styles
 │   ├── layout.tsx         # Root layout
 │   ├── loading.tsx        # Loading UI
-│   └── page.tsx           # Home page
+│   ├── page.tsx           # Home page
+│   └── destinations/      # Dynamic destination routes
+│       └── [slug]/        # Individual destination pages (SSG)
+│           └── page.tsx   # Destination detail page
 ├── components/            # React components
 │   ├── ui/               # UI primitives (Radix UI)
 │   ├── navbar.tsx        # Navigation
@@ -197,7 +209,8 @@ The project is configured for static export in `next.config.mjs`:
 
 - ✅ Fully responsive design
 - ✅ Dark/Light mode support
-- ✅ Static site generation (SSG)
+- ✅ Static site generation (SSG) with dynamic routes
+- ✅ Pre-generated destination pages for GitHub Pages
 - ✅ SEO optimized
 - ✅ Fast page loads
 - ✅ Modern UI components
@@ -221,7 +234,15 @@ NEXT_PUBLIC_API_URL=https://your-api.com
   - No server-side rendering (SSR)
   - No API routes
   - All pages are pre-rendered at build time
+  - Dynamic routes (`/destinations/[slug]`) are statically generated using `generateStaticParams()`
   - Perfect for GitHub Pages and static hosting
+  
+- **Destination Pages**: All destination pages are pre-generated at build time:
+  - `/destinations/bansko-family-vacation/`
+  - `/destinations/prague-christmas-getaway/`
+  - `/destinations/st-moritz-luxury-ski/`
+  - `/destinations/vienna-winter-culture/`
+  - `/destinations/barcelona-december-escape/`
 
 - **Docker ports**:
   - Production: `8908:3000`
