@@ -64,11 +64,11 @@ export function DestinationsGrid({ destinations, departures, currency }: Destina
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center max-w-[1020px] mx-auto">
         {destinations.map((destination) => (
           <div
             key={destination.id}
-            className="group relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+            className="group relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 w-[310px]"
             onMouseEnter={() => setHoveredCard(destination.id)}
             onMouseLeave={() => setHoveredCard(null)}
           >

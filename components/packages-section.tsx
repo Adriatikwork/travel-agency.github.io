@@ -43,11 +43,11 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center max-w-[1020px] mx-auto">
           {packages.map((pkg) => (
             <div
               key={pkg.id}
-              className="group relative bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-blue-300 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+              className="group relative bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-blue-300 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 w-[310px]"
               onMouseEnter={() => setHoveredCard(pkg.id)}
               onMouseLeave={() => setHoveredCard(null)}
             >
