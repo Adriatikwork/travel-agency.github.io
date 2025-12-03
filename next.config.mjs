@@ -3,9 +3,6 @@ const isProd = process.env.NODE_ENV === 'production';
 const basePath = ''; // Empty for custom domain (fluturo.co)
 
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
