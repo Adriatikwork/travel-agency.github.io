@@ -24,27 +24,27 @@
     {
       "id": "stat-experience",
       "label": "Years in Operation",
-      "value": 1,
+      "value": 2,
       "suffix": "+",
       "icon": "handshake"
     }
   ],
   "whyChoose": [
     {
-      "title": "Local Experts",
-      "description": "Our team knows every destination inside and out, providing authentic local experiences"
+      "title": "Personalized Travel Experiences",
+      "description": "Every journey is tailored to your preferences, from relaxing holidays and beach getaways to concerts and special events."
     },
     {
-      "title": "24/7 Support",
-      "description": "We're here for you before, during, and after your trip - anytime you need us"
+      "title": "Expertise You Can Trust",
+      "description": "Our founders bring years of hands-on experience in the travel industry, ensuring seamless and memorable trips."
     },
     {
-      "title": "Best Price Guarantee",
-      "description": "Competitive prices with transparent pricing and no hidden fees"
+      "title": "Global & Local Reach",
+      "description": "We provide travel solutions for destinations worldwide while offering deep local knowledge of the Balkans and coastal regions."
     },
     {
-      "title": "Trusted Travel Partner",
-      "description": "Operating since June 2023, delivering unforgettable travel experiences throughout Europe"
+      "title": "Stress-Free Planning",
+      "description": "From flights to accommodations and transfers, we handle every detail so you can enjoy a smooth, worry-free travel experience."
     }
   ]
 }

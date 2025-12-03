@@ -1,12 +1,15 @@
 "use client"
 
-import { useState, useCallback, useMemo } from "react"
+import { useEffect, useState, useCallback, useMemo } from "react"
+import { useSearchParams } from "next/navigation"
 import { Navbar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
 import { SearchFilterBar, type FilterState } from "@/components/search-filter-bar"
 import { DestinationsGrid } from "@/components/destinations-grid"
 import { PackagesSection } from "@/components/packages-section"
-import { StatsSection } from "@/components/stats-section"
+import { ServicesSection } from "@/components/services-section"
+import { AboutSection } from "@/components/about-section"
+import { TeamSection } from "@/components/team-section"
 import { TestimonialsSlider } from "@/components/testimonials-slider"
 import { ContactForm } from "@/components/contact-form"
 import { Footer } from "@/components/footer"
@@ -15,8 +18,11 @@ import destinationsData from "@/data/destinations.json"
 import packagesData from "@/data/packages.json"
 import statsData from "@/data/stats.json"
 import testimonialsData from "@/data/testimonials.json"
+import ComingSoonPage from "@/app/coming-soon/page"
 
 export default function HomePage() {
+  const searchParams = useSearchParams()
+  const [showActualSite, setShowActualSite] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [filters, setFilters] = useState<FilterState>({
     priceMin: 0,
@@ -30,7 +36,6 @@ export default function HomePage() {
   })
   const [sortBy, setSortBy] = useState("popularity")
 
-  // Filter and sort destinations
   const filteredDestinations = useMemo(() => {
     let results = [...destinationsData.destinations]
 
@@ -65,12 +70,12 @@ export default function HomePage() {
 
     // Rating filter
     if (filters.minRating > 0) {
-      results = results.filter((dest) => dest.rating >= filters.minRating)
+      results = results.filter((dest) => dest.rating !== null && dest.rating >= filters.minRating)
     }
 
     // Themes filter
     if (filters.themes.length > 0) {
-      results = results.filter((dest) => filters.themes.some((theme) => dest.themes.includes(theme)))
+      results = results.filter((dest) => filters.themes.some((theme: string) => dest.themes.includes(theme)))
     }
 
     // Featured filter
@@ -92,7 +97,7 @@ export default function HomePage() {
         results.sort((a, b) => b.pricing.from - a.pricing.from)
         break
       case "rating":
-        results.sort((a, b) => b.rating - a.rating)
+        results.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0))
         break
       case "name":
         results.sort((a, b) => a.name.localeCompare(b.name))
@@ -106,7 +111,6 @@ export default function HomePage() {
     return results
   }, [searchQuery, filters, sortBy])
 
-  // Filter packages based on current destination filters
   const filteredPackages = useMemo(() => {
     const visibleDestinationIds = new Set(filteredDestinations.map((d) => d.id))
 
@@ -122,7 +126,6 @@ export default function HomePage() {
       .slice(0, 6) // Show max 6 packages
   }, [filteredDestinations])
 
-  // Enrich testimonials with destination names
   const enrichedTestimonials = useMemo(() => {
     return testimonialsData.testimonials.map((testimonial) => {
       const destination = destinationsData.destinations.find((d) => d.id === testimonial.destinationId)
@@ -144,6 +147,25 @@ export default function HomePage() {
   const handleSort = useCallback((sort: string) => {
     setSortBy(sort)
   }, [])
+
+  useEffect(() => {
+    const urlToken = searchParams.get("token")
+    const storedToken = typeof window !== "undefined" ? localStorage.getItem("site_access_token") : null
+
+    // Secret token to access actual site
+    const SECRET_TOKEN = "fluturo2025"
+
+    if (urlToken === SECRET_TOKEN) {
+      localStorage.setItem("site_access_token", SECRET_TOKEN)
+      setShowActualSite(true)
+    } else if (storedToken === SECRET_TOKEN) {
+      setShowActualSite(true)
+    }
+  }, [searchParams])
+
+  if (!showActualSite) {
+    return <ComingSoonPage />
+  }
 
   return (
     <main className="min-h-screen">
@@ -182,8 +204,16 @@ export default function HomePage() {
         </div>
       )}
 
-      <div id="stats">
-        <StatsSection stats={statsData.stats} whyChoose={statsData.whyChoose} />
+      <div id="services">
+        <ServicesSection />
+      </div>
+
+      <div id="about">
+        <AboutSection stats={statsData.stats} whyChoose={statsData.whyChoose} />
+      </div>
+
+      <div id="team">
+        <TeamSection />
       </div>
 
       <div id="testimonials">

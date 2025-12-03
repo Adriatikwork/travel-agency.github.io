@@ -4,10 +4,8 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
-// Helper to get base path, handling v0.dev edge cases
 const getBasePath = () => {
   const base = process.env.NEXT_PUBLIC_BASE_PATH
-  // Return empty string if undefined, empty, or contains quotes
   if (!base || base === "''" || base === '""' || base.trim() === "") return ""
   return base
 }
@@ -36,19 +34,19 @@ export function Navbar() {
   const navLinks = [
     { name: "Destinations", id: "destinations" },
     { name: "Packages", id: "packages" },
-    { name: "About", id: "stats" },
-    { name: "Contact", id: "contact" },
+    { name: "Services", id: "services" },
+    { name: "About", id: "about" },
+    { name: "Team", id: "team" },
   ]
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#30b2f5] ${
-        isScrolled ? "shadow-lg" : ""
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-[#38b6ff] shadow-lg" : "bg-[#38b6ff]"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="flex items-center group py-3"
@@ -60,7 +58,6 @@ export function Navbar() {
             />
           </button>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <button
@@ -73,13 +70,12 @@ export function Navbar() {
             ))}
             <Button
               onClick={() => scrollToSection("contact")}
-              className="bg-white hover:bg-white/90 text-[#30b2f5] rounded-full px-6 font-semibold border-2 border-white/20"
+              className="bg-white hover:bg-white/90 text-[#38b6ff] rounded-full px-6 font-semibold border-2 border-white/20"
             >
               Plan a trip
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="md:hidden p-2 text-white hover:text-white/80"
@@ -88,7 +84,6 @@ export function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 py-4 border-t border-white/20 space-y-3">
             {navLinks.map((link) => (
@@ -102,7 +97,7 @@ export function Navbar() {
             ))}
             <Button
               onClick={() => scrollToSection("contact")}
-              className="w-full bg-white hover:bg-white/90 text-[#30b2f5] rounded-full font-semibold"
+              className="w-full bg-white hover:bg-white/90 text-[#38b6ff] rounded-full font-semibold"
             >
               Plan a trip
             </Button>
