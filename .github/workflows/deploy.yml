@@ -54,6 +54,9 @@ jobs:
         run: pnpm run build
         env:
           NODE_ENV: production
+      
+      - name: Copy CNAME to out directory
+        run: cp CNAME out/CNAME
           
       - name: Setup Pages
         uses: actions/configure-pages@v4

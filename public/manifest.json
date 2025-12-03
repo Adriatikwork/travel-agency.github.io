@@ -1,0 +1,24 @@
+{
+  "name": "Fluturo Travel Agency - Discover Your Next Adventure",
+  "short_name": "Fluturo",
+  "description": "Experience the world with Fluturo - Your trusted travel partner for unforgettable memories. Plan your dream vacation today.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0ea5e9",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/logo_landscape.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo_landscape.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+
