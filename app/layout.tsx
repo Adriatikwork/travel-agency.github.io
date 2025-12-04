@@ -56,22 +56,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [
-      {
-        url: `${basePath}/icon-light-32x32.png`,
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: `${basePath}/icon-dark-32x32.png`,
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: `${basePath}/icon.svg`,
-        type: "image/svg+xml",
-      },
-    ],
-    apple: `${basePath}/apple-icon.png`,
-    shortcut: "/images/logo_landscape.png",
+    icon: "/images/image.png",
+    shortcut: "/images/image.png",
+    apple: "/images/image.png",
   },
   manifest: "/manifest.json",
 }
