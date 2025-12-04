@@ -8,8 +8,14 @@
       "tripType": "honeymoon",
       "themes": ["beach", "luxury", "romantic"],
       "rating": 5,
-      "reviewShort": "Our Maldives honeymoon was absolutely magical! Every detail was perfectly planned.",
-      "reviewLong": "Fluturo made our honeymoon to the Maldives absolutely magical! From the overwater villa to the private sunset dinner, every detail was perfectly planned. We didn't have to worry about a thing and could just focus on enjoying our time together. The seaplane transfer was an experience in itself. Highly recommend!",
+      "reviewShort": {
+        "en": "Our Maldives honeymoon was absolutely magical! Every detail was perfectly planned.",
+        "sq": "Muaji ynë i mjaltit në Maldive ishte absolutisht magjik! Çdo detaj ishte planifikuar në mënyrë perfekte."
+      },
+      "reviewLong": {
+        "en": "Fluturo made our honeymoon to the Maldives absolutely magical! From the overwater villa to the private sunset dinner, every detail was perfectly planned. We didn't have to worry about a thing and could just focus on enjoying our time together. The seaplane transfer was an experience in itself. Highly recommend!",
+        "sq": "Fluturo e bëri muajin tonë të mjaltit në Maldive absolutisht magjik! Nga vila mbi ujë deri te darka private në perëndim dielli, çdo detaj ishte planifikuar në mënyrë perfekte. Nuk na u desh të shqetësoheshim për asgjë dhe thjesht mund të fokusoheshim në shijimin e kohës së përbashkët. Transferta me hidroplan ishte një përvojë në vetvete. E rekomandojmë shumë!"
+      },
       "image": "/placeholder.svg?height=100&width=100",
       "travelDate": "2024-12",
       "featured": true
@@ -22,8 +28,14 @@
       "tripType": "romantic",
       "themes": ["city-break", "culture", "romantic"],
       "rating": 5,
-      "reviewShort": "Best travel agency ever! Paris was even more beautiful than we imagined.",
-      "reviewLong": "Best travel agency I've ever worked with. Their attention to detail and personalized service made our Paris getaway unforgettable. The Seine cruise at sunset and the gourmet dinner recommendations were highlights. Will definitely book again!",
+      "reviewShort": {
+        "en": "Best travel agency ever! Paris was even more beautiful than we imagined.",
+        "sq": "Agjencia më e mirë e udhëtimit! Parisi ishte edhe më i bukur se sa e kishim imagjinuar."
+      },
+      "reviewLong": {
+        "en": "Best travel agency I've ever worked with. Their attention to detail and personalized service made our Paris getaway unforgettable. The Seine cruise at sunset and the gourmet dinner recommendations were highlights. Will definitely book again!",
+        "sq": "Agjencia më e mirë e udhëtimit me të cilën kam punuar ndonjëherë. Vëmendja e tyre ndaj detajeve dhe shërbimi i personalizuar e bënë arratisjen tonë në Paris të paharrueshme. Lundrimi në Seinë në perëndim dielli dhe rekomandimet për darkë gourmet ishin pika kulmore. Definitivisht do të rezervojmë përsëri!"
+      },
       "image": "/placeholder.svg?height=100&width=100",
       "travelDate": "2024-10",
       "featured": true
@@ -36,8 +48,14 @@
       "tripType": "family",
       "themes": ["family", "beach", "culture"],
       "rating": 5,
-      "reviewShort": "Perfect family vacation! The kids loved the temple visits and beach activities.",
-      "reviewLong": "From booking to landing, everything was seamless. The team at Fluturo went above and beyond to ensure our family vacation to Bali was perfect. The kids loved the temple visits and the beach, while we enjoyed the spa and cultural experiences. Thank you!",
+      "reviewShort": {
+        "en": "Perfect family vacation! The kids loved the temple visits and beach activities.",
+        "sq": "Pushim perfekt familjar! Fëmijët e donin vizitat në tempuj dhe aktivitetet në plazh."
+      },
+      "reviewLong": {
+        "en": "From booking to landing, everything was seamless. The team at Fluturo went above and beyond to ensure our family vacation to Bali was perfect. The kids loved the temple visits and the beach, while we enjoyed the spa and cultural experiences. Thank you!",
+        "sq": "Nga rezervimi deri në ulje, gjithçka ishte e qetë. Ekipi në Fluturo shkoi përtej pritshmërive për të siguruar që pushimi ynë familjar në Bali të ishte perfekt. Fëmijët i donin vizitat në tempuj dhe plazhin, ndërsa ne shijonim spa-n dhe përvojat kulturore. Faleminderit!"
+      },
       "image": "/placeholder.svg?height=100&width=100",
       "travelDate": "2024-11",
       "featured": true
@@ -50,8 +68,14 @@
       "tripType": "adventure",
       "themes": ["adventure", "luxury", "city-break"],
       "rating": 5,
-      "reviewShort": "Dubai exceeded all expectations! The desert safari was incredible.",
-      "reviewLong": "Exceptional service and amazing deals! They found us the perfect luxury hotel in Dubai within our budget. The desert safari, Burj Khalifa visit, and shopping experiences were all incredible. Can't wait to plan our next trip with them.",
+      "reviewShort": {
+        "en": "Dubai exceeded all expectations! The desert safari was incredible.",
+        "sq": "Dubai i tejkaloi të gjitha pritshmëritë! Safari në shkretëtirë ishte i pabesueshëm."
+      },
+      "reviewLong": {
+        "en": "Exceptional service and amazing deals! They found us the perfect luxury hotel in Dubai within our budget. The desert safari, Burj Khalifa visit, and shopping experiences were all incredible. Can't wait to plan our next trip with them.",
+        "sq": "Shërbim i jashtëzakonshëm dhe oferta të mrekullueshme! Na gjetën hotelin perfekt luksoz në Dubai brenda buxhetit tonë. Safari në shkretëtirë, vizita në Burj Khalifa dhe përvojat e blerjeve ishin të gjitha të pabesueshme. Mezi presim të planifikojmë udhëtimin tonë të radhës me ta."
+      },
       "image": "/placeholder.svg?height=100&width=100",
       "travelDate": "2025-01",
       "featured": true
@@ -64,8 +88,14 @@
       "tripType": "honeymoon",
       "themes": ["romantic", "beach", "honeymoon"],
       "rating": 5,
-      "reviewShort": "Santorini sunsets and caldera views made our honeymoon unforgettable!",
-      "reviewLong": "Our honeymoon in Santorini was a dream come true! The caldera view hotel was breathtaking, and the wine tasting tour was so romantic. Fluturo handled everything perfectly, from airport transfers to restaurant reservations. We felt like VIPs the entire trip!",
+      "reviewShort": {
+        "en": "Santorini sunsets and caldera views made our honeymoon unforgettable!",
+        "sq": "Perëndimet e diellit në Santorini dhe pamjet e kalderës e bënë muajin tonë të mjaltit të paharrueshëm!"
+      },
+      "reviewLong": {
+        "en": "Our honeymoon in Santorini was a dream come true! The caldera view hotel was breathtaking, and the wine tasting tour was so romantic. Fluturo handled everything perfectly, from airport transfers to restaurant reservations. We felt like VIPs the entire trip!",
+        "sq": "Muaji ynë i mjaltit në Santorini ishte një ëndërr e bërë realitet! Hoteli me pamje nga kaldera ishte mahnitës, dhe turi i degustimit të verës ishte kaq romantik. Fluturo i menaxhoi të gjitha në mënyrë perfekte, nga transfertat në aeroport deri te rezervimet në restorante. U ndihem si VIP gjatë gjithë udhëtimit!"
+      },
       "image": "/placeholder.svg?height=100&width=100",
       "travelDate": "2024-09",
       "featured": false
@@ -78,11 +108,31 @@
       "tripType": "family",
       "themes": ["family", "beach", "luxury"],
       "rating": 5,
-      "reviewShort": "Amazing family resort! Kids club was excellent, we got to relax while kids had fun.",
-      "reviewLong": "The Maldives family resort was perfect for us. The kids club kept our children entertained with activities while my husband and I enjoyed spa treatments and water sports. The family villa was spacious and comfortable. Fluturo really knows how to pick the best properties!",
+      "reviewShort": {
+        "en": "Amazing family resort! Kids club was excellent, we got to relax while kids had fun.",
+        "sq": "Resort i mrekullueshëm familjar! Klubi i fëmijëve ishte i shkëlqyer, ne u relaksuam ndërsa fëmijët u argëtuan."
+      },
+      "reviewLong": {
+        "en": "The Maldives family resort was perfect for us. The kids club kept our children entertained with activities while my husband and I enjoyed spa treatments and water sports. The family villa was spacious and comfortable. Fluturo really knows how to pick the best properties!",
+        "sq": "Resorti familjar në Maldive ishte perfekt për ne. Klubi i fëmijëve i mbajti fëmijët tanë të argëtuar me aktivitete ndërsa unë dhe bashkëshorti im shijonim trajtimet spa dhe sportet ujore. Vila familjare ishte e gjerë dhe e rehatshme. Fluturo vërtet di si të zgjedhë pronat më të mira!"
+      },
       "image": "/placeholder.svg?height=100&width=100",
       "travelDate": "2024-12",
       "featured": false
     }
-  ]
+  ],
+  "ui": {
+    "title": {
+      "en": "What Our Travelers Say",
+      "sq": "Çfarë Thonë Udhëtarët Tanë"
+    },
+    "subtitle": {
+      "en": "Real experiences from real travelers who trusted us with their adventures",
+      "sq": "Përvoja reale nga udhëtarë të vërtetë që na besuan me aventurat e tyre"
+    },
+    "traveledTo": {
+      "en": "Traveled to",
+      "sq": "Udhëtoi në"
+    }
+  }
 }

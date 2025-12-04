@@ -1,0 +1,57 @@
+{
+    "members": [
+      {
+        "id": "dea-salihu",
+        "name": "Dea Salihu",
+        "role": {
+          "en": "CEO & Corporate Travel Manager",
+          "sq": "CEO & Menaxhere e Udhëtimeve Korporative"
+        },
+        "bio": {
+          "en": [
+            "From her very first journey abroad, Dea discovered not just a love for travel, but a talent for creating seamless and unforgettable experiences. Drawing from her personal adventures around the globe, she understood what makes a journey truly special: attention to detail, thoughtful planning, and experiences tailored to each traveler.",
+            "In 2023, Dea turned her passion into action by founding L.L.C, a travel agency dedicated to serving both local and international clients. As CTM, she has successfully managed travel for numerous corporate clients, organized staff retreats, private transfers, and wellness journeys, all while ensuring that every trip reflects comfort, efficiency, and personalization.",
+            "Dea's hands-on approach, vision, and leadership have made Fluturo a trusted partner for anyone seeking curated travel experiences. Under her guidance, travel is more than logistics, it's an art of crafting memorable journeys that inspire, rejuvenate, and connect people to the world."
+          ],
+          "sq": [
+            "Që nga udhëtimi i saj i parë jashtë vendit, Dea zbuloi jo vetëm një dashuri për udhëtimin, por edhe një talent për krijimin e përvojave të qeta dhe të paharrueshme. Duke u bazuar në aventurat e saj personale rreth botës, ajo kuptoi çfarë e bën një udhëtim vërtet special: vëmendja ndaj detajeve, planifikimi i menduar dhe përvojat e përshtatura për çdo udhëtar.",
+            "Në 2023, Dea e ktheu pasionin e saj në veprim duke themeluar L.L.C, një agjenci udhëtimi të dedikuar për t'i shërbyer klientëve vendas dhe ndërkombëtarë. Si MUK, ajo ka menaxhuar me sukses udhëtime për klientë të shumtë korporativë, ka organizuar pushime stafi, transferta private dhe udhëtime wellness, duke siguruar që çdo udhëtim të pasqyrojë rehatinë, efikasitetin dhe personalizimin.",
+            "Qasja praktike, vizioni dhe udhëheqja e Deas e kanë bërë Fluturo një partner të besuar për këdo që kërkon përvoja udhëtimi të kuruar. Nën udhëheqjen e saj, udhëtimi është më shumë se logjistikë, është arti i krijimit të udhëtimeve të paharrueshme që frymëzojnë, rigjallërojnë dhe i lidhin njerëzit me botën."
+          ]
+        },
+        "image": "/placeholder.svg?height=400&width=400"
+      },
+      {
+        "id": "enduena-januzi",
+        "name": "Enduena Januzi",
+        "role": {
+          "en": "Co-Founder & Head of General Operations",
+          "sq": "Bashkëthemeluese & Drejtuese e Operacioneve të Përgjithshme"
+        },
+        "bio": {
+          "en": [
+            "Enduena is the Co-Founder of Fluturo.ks, bringing over 10 years of experience in the local travel market. Throughout her career, she has developed a deep understanding of both individual travelers and corporate clients, allowing her to offer travel solutions that are perfectly tailored to each client's needs.",
+            "From booking flights and designing unique travel packages to organizing corporate retreats, private transfers, and wellness journeys, Enduena ensures that every journey is seamless, memorable, and personalized. She specializes in helping individual travelers plan unforgettable journeys, from relaxing holidays and beach getaways to concerts and special events.",
+            "Her deep knowledge of destinations, attention to detail, and passion for travel ensure that every trip is seamless, personalized, and truly memorable."
+          ],
+          "sq": [
+            "Enduena është Bashkëthemeluese e Fluturo.ks, duke sjellë mbi 10 vite përvojë në tregun lokal të udhëtimit. Përgjatë karrierës së saj, ajo ka zhvilluar një kuptim të thellë si për udhëtarët individualë ashtu edhe për klientët korporativë, duke i lejuar asaj të ofrojë zgjidhje udhëtimi të përshtatura në mënyrë perfekte për nevojat e çdo klienti.",
+            "Nga rezervimi i fluturimeve dhe dizajnimi i paketave unike të udhëtimit deri te organizimi i pushimeve korporative, transfertave private dhe udhëtimeve wellness, Enduena siguron që çdo udhëtim të jetë i qetë, i paharrueshëm dhe i personalizuar. Ajo specializohet në ndihmën e udhëtarëve individualë për të planifikuar udhëtime të paharrueshme, nga pushimet relaksuese dhe arratisjet në plazh deri te koncertet dhe ngjarjet speciale.",
+            "Njohuria e saj e thellë e destinacioneve, vëmendja ndaj detajeve dhe pasioni për udhëtimin sigurojnë që çdo udhëtim të jetë i qetë, i personalizuar dhe vërtet i paharrueshëm."
+          ]
+        },
+        "image": "/placeholder.svg?height=400&width=400"
+      }
+    ],
+    "ui": {
+      "title": {
+        "en": "Meet Our Team",
+        "sq": "Njihuni me Ekipin Tonë"
+      },
+      "subtitle": {
+        "en": "The passionate experts behind your unforgettable travel experiences",
+        "sq": "Ekspertët e pasionuar pas përvojave tuaja të paharrueshme të udhëtimit"
+      }
+    }
+  }
+  

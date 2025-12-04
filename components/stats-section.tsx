@@ -2,18 +2,20 @@
 
 import { useEffect, useRef, useState } from "react"
 import { Globe, Users, Handshake, Award, Check } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
+import statsData from "@/data/stats.json"
 
 interface Stat {
   id: string
-  label: string
+  label: { en: string; sq: string }
   value: number
   suffix: string
   icon: string
 }
 
 interface WhyItem {
-  title: string
-  description: string
+  title: { en: string; sq: string }
+  description: { en: string; sq: string }
 }
 
 interface StatsSectionProps {
@@ -32,6 +34,7 @@ export function StatsSection({ stats, whyChoose }: StatsSectionProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [counts, setCounts] = useState<Record<string, number>>({})
   const sectionRef = useRef<HTMLDivElement>(null)
+  const { language } = useLanguage()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -80,7 +83,7 @@ export function StatsSection({ stats, whyChoose }: StatsSectionProps) {
   return (
     <section ref={sectionRef} className="py-20 bg-gradient-to-br from-sky-50 to-blue-50">
       <div className="container mx-auto px-4">
-        {/* Stats Grid */}
+        {/* Stats Grid - Use translated labels */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
           {stats.map((stat) => {
             const Icon = iconMap[stat.icon as keyof typeof iconMap] || Globe
@@ -95,15 +98,15 @@ export function StatsSection({ stats, whyChoose }: StatsSectionProps) {
                     : counts[stat.id]?.toLocaleString() || 0}
                   {stat.suffix}
                 </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-gray-600 font-medium">{stat.label[language]}</div>
               </div>
             )
           })}
         </div>
 
-        {/* Why Choose Section */}
+        {/* Why Choose Section - Use translated content */}
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">Why Choose Fluturo?</h2>
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">{statsData.section.title[language]}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {whyChoose.map((item, index) => (
               <div
@@ -116,8 +119,8 @@ export function StatsSection({ stats, whyChoose }: StatsSectionProps) {
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title[language]}</h3>
+                  <p className="text-gray-600 leading-relaxed">{item.description[language]}</p>
                 </div>
               </div>
             ))}

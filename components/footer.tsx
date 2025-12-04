@@ -3,31 +3,15 @@
 import { Button } from "@/components/ui/button"
 import { Facebook, Instagram, Twitter, Linkedin, ArrowUp, Mail, Phone, MapPin } from "lucide-react"
 import { useState, useEffect } from "react"
+import { useLanguage } from "@/lib/language-context"
+import siteData from "@/data/site-data.json"
 
 // Helper to get base path, handling v0.dev edge cases
 const getBasePath = () => {
-  const base = process.env.NEXT_PUBLIC_BASE_PATH;
+  const base = process.env.NEXT_PUBLIC_BASE_PATH
   // Return empty string if undefined, empty, or contains quotes
-  if (!base || base === "''" || base === '""' || base.trim() === '') return '';
-  return base;
-};
-
-interface FooterData {
-  tagline: string
-  contact: {
-    email: string
-    phone: string
-    address: string
-  }
-  social: Array<{
-    name: string
-    url: string
-    icon: string
-  }>
-  legal: Array<{
-    name: string
-    url: string
-  }>
+  if (!base || base === "''" || base === '""' || base.trim() === "") return ""
+  return base
 }
 
 const socialIcons = {
@@ -37,8 +21,10 @@ const socialIcons = {
   linkedin: Linkedin,
 }
 
-export function Footer({ data }: { data: FooterData }) {
-  const basePath = getBasePath();
+export function Footer() {
+  const { language } = useLanguage()
+  const { footer } = siteData
+  const basePath = getBasePath()
   const [showScrollTop, setShowScrollTop] = useState(false)
 
   useEffect(() => {
@@ -60,31 +46,37 @@ export function Footer({ data }: { data: FooterData }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12 mb-8">
           {/* Brand Section */}
           <div className="space-y-4">
-            <img src={`${basePath}/images/image.png`} alt="Fluturo" className="h-20 w-auto sm:h-24 sm:w-auto object-contain" />
-            <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-xs text-pretty">{data.tagline}</p>
+            <img
+              src={`${basePath}/images/image.png`}
+              alt="Fluturo"
+              className="h-20 w-auto sm:h-24 sm:w-auto object-contain"
+            />
+            <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-xs text-pretty">
+              {footer.tagline[language]}
+            </p>
           </div>
 
           {/* Contact Section */}
           <div className="space-y-4">
-            <h3 className="text-lg sm:text-xl font-semibold mb-4">Contact Us</h3>
+            <h3 className="text-lg sm:text-xl font-semibold mb-4">{footer.sections.contactUs[language]}</h3>
             <div className="space-y-3 text-sm sm:text-base">
               <a
-                href={`mailto:${data.contact.email}`}
+                href={`mailto:${footer.contact.email}`}
                 className="flex items-start gap-3 text-gray-400 hover:text-sky-400 transition-colors group"
               >
                 <Mail className="w-5 h-5 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                <span className="break-all">{data.contact.email}</span>
+                <span className="break-all">{footer.contact.email}</span>
               </a>
               <a
-                href={`tel:${data.contact.phone}`}
+                href={`tel:${footer.contact.phone}`}
                 className="flex items-start gap-3 text-gray-400 hover:text-sky-400 transition-colors group"
               >
                 <Phone className="w-5 h-5 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-                <span>{data.contact.phone}</span>
+                <span>{footer.contact.phone}</span>
               </a>
               <div className="flex items-start gap-3 text-gray-400">
                 <MapPin className="w-5 h-5 flex-shrink-0 mt-0.5" />
-                <span className="text-pretty">{data.contact.address}</span>
+                <span className="text-pretty">{footer.contact.address[language]}</span>
               </div>
             </div>
           </div>
@@ -92,9 +84,9 @@ export function Footer({ data }: { data: FooterData }) {
           {/* Social & Legal Section */}
           <div className="space-y-6">
             <div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-4">Follow Us</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-4">{footer.sections.followUs[language]}</h3>
               <div className="flex gap-3">
-                {data.social.map((social) => {
+                {footer.social.map((social) => {
                   const Icon = socialIcons[social.icon as keyof typeof socialIcons]
                   return (
                     <a
@@ -113,11 +105,11 @@ export function Footer({ data }: { data: FooterData }) {
             </div>
 
             <div>
-              <h3 className="text-lg sm:text-xl font-semibold mb-4">Legal</h3>
+              <h3 className="text-lg sm:text-xl font-semibold mb-4">{footer.sections.legal[language]}</h3>
               <div className="flex flex-wrap gap-4 text-sm">
-                {data.legal.map((link) => (
-                  <a key={link.name} href={link.url} className="text-gray-400 hover:text-sky-400 transition-colors">
-                    {link.name}
+                {footer.legal.map((link) => (
+                  <a key={link.url} href={link.url} className="text-gray-400 hover:text-sky-400 transition-colors">
+                    {link.name[language]}
                   </a>
                 ))}
               </div>
@@ -128,7 +120,7 @@ export function Footer({ data }: { data: FooterData }) {
         {/* Bottom Bar */}
         <div className="border-t border-gray-800 pt-8 text-center">
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} Fluturo Travel Agency. All rights reserved.
+            © {new Date().getFullYear()} Fluturo Travel Agency. {footer.copyright[language]}
           </p>
         </div>
       </div>

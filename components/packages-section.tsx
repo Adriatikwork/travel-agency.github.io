@@ -4,17 +4,19 @@ import { Check, Tag, ArrowRight, Clock, ChevronLeft, ChevronRight } from "lucide
 import { Button } from "@/components/ui/button"
 import { getImagePath } from "@/lib/image-path"
 import { useState } from "react"
+import { useLanguage } from "@/lib/language-context"
+import packagesData from "@/data/packages"
 
 interface Package {
   id: string
-  title: string
+  title: { en: string; sq: string }
   destinationId: string
   destinationName?: string
-  summary: string
+  summary: { en: string; sq: string }
   image: string
   price: number
   duration: number
-  inclusions: string[]
+  inclusions: { en: string[]; sq: string[] }
   packageType: string
   themes: string[]
   isFeatured: boolean
@@ -28,6 +30,8 @@ interface PackagesSectionProps {
 
 export function PackagesSection({ packages, currency }: PackagesSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const { language } = useLanguage()
+  const ui = packagesData.ui
 
   if (packages.length === 0) {
     return null
@@ -56,10 +60,8 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-12">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-4">Curated Travel Packages</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            All-inclusive experiences crafted for unforgettable journeys
-          </p>
+          <h2 className="text-4xl lg:text-5xl font-bold mb-4">{ui.title[language]}</h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">{ui.subtitle[language]}</p>
         </div>
 
         <div className="relative max-w-6xl mx-auto">
@@ -89,7 +91,7 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
                   <div className="relative h-56 overflow-hidden">
                     <img
                       src={getImagePath(pkg.image || "/placeholder.svg")}
-                      alt={pkg.title}
+                      alt={pkg.title[language]}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
@@ -97,37 +99,39 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
                     <div className="absolute top-4 left-4 flex gap-2">
                       {pkg.isFeatured && (
                         <span className="px-3 py-1 bg-yellow-400 text-gray-900 text-xs font-semibold rounded-full">
-                          Featured
+                          {ui.featured[language]}
                         </span>
                       )}
                       {pkg.isOnSale && (
                         <span className="px-3 py-1 bg-[#38b6ff] text-white text-xs font-semibold rounded-full flex items-center gap-1">
                           <Tag className="w-3 h-3" />
-                          On Sale
+                          {ui.onSale[language]}
                         </span>
                       )}
                     </div>
 
                     <div className="absolute bottom-4 left-4 text-white">
                       {pkg.destinationName && <div className="text-sm opacity-90">{pkg.destinationName}</div>}
-                      <div className="text-2xl font-bold">{pkg.title}</div>
+                      <div className="text-2xl font-bold">{pkg.title[language]}</div>
                     </div>
                   </div>
 
                   <div className="p-5 space-y-3">
-                    <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">{pkg.summary}</p>
+                    <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">{pkg.summary[language]}</p>
 
                     <div className="space-y-2">
-                      <div className="text-xs font-semibold text-gray-900">What's Included:</div>
+                      <div className="text-xs font-semibold text-gray-900">{ui.whatsIncluded[language]}</div>
                       <div className="space-y-1">
-                        {pkg.inclusions.slice(0, 3).map((inclusion, i) => (
+                        {pkg.inclusions[language].slice(0, 3).map((inclusion, i) => (
                           <div key={i} className="flex items-start gap-1.5 text-xs text-gray-600">
                             <Check className="w-3.5 h-3.5 text-[#38b6ff] mt-0.5 flex-shrink-0" />
                             <span>{inclusion}</span>
                           </div>
                         ))}
-                        {pkg.inclusions.length > 3 && (
-                          <div className="text-xs text-gray-500 ml-5">+{pkg.inclusions.length - 3} more inclusions</div>
+                        {pkg.inclusions[language].length > 3 && (
+                          <div className="text-xs text-gray-500 ml-5">
+                            +{pkg.inclusions[language].length - 3} {ui.moreInclusions[language]}
+                          </div>
                         )}
                       </div>
                     </div>
@@ -135,10 +139,12 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
                     <div className="flex items-center justify-between pt-3 border-t border-gray-200">
                       <div className="flex items-center gap-1.5 text-sm text-gray-600">
                         <Clock className="w-3.5 h-3.5" />
-                        <span className="text-xs">{pkg.duration} nights</span>
+                        <span className="text-xs">
+                          {pkg.duration} {ui.nights[language]}
+                        </span>
                       </div>
                       <div className="text-right">
-                        <div className="text-xs text-gray-500">From</div>
+                        <div className="text-xs text-gray-500">{ui.from[language]}</div>
                         <div className="text-xl font-bold text-[#38b6ff]">
                           {currency}
                           {pkg.price}
@@ -147,7 +153,7 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
                     </div>
 
                     <Button className="w-full bg-[#38b6ff] hover:bg-[#2a9de8] text-white rounded-xl shadow-lg py-2 text-sm transition-colors">
-                      Book Package
+                      {ui.bookPackage[language]}
                       <ArrowRight className="w-3.5 h-3.5 ml-2" />
                     </Button>
                   </div>

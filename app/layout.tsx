@@ -2,29 +2,30 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { LanguageProvider } from "@/lib/language-context"
 import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ""
 
 export const metadata: Metadata = {
   title: "Fluturo Travel Agency - Discover Your Next Adventure | Premium Travel Experiences",
   description:
     "Experience the world with Fluturo - Your trusted travel partner for unforgettable memories. Premium travel packages, expert planning, and personalized adventures worldwide. Plan your dream vacation today.",
-  generator: "v0.app",
+  generator: "fluturo.co",
   keywords: [
-    "travel agency", 
-    "vacation planning", 
-    "travel packages", 
-    "adventure travel", 
-    "fluturo", 
+    "travel agency",
+    "vacation planning",
+    "travel packages",
+    "adventure travel",
+    "fluturo",
     "luxury travel",
     "international travel",
     "tour packages",
     "holiday planning",
-    "destination travel"
+    "destination travel",
   ],
   openGraph: {
     title: "Fluturo Travel Agency - Discover Your Next Adventure",
@@ -100,7 +101,10 @@ export default function RootLayout({
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content="/images/logo_landscape.png" />
         <meta name="twitter:title" content="Fluturo Travel Agency - Discover Your Next Adventure" />
-        <meta name="twitter:description" content="Experience the world with Fluturo - Your trusted travel partner for unforgettable memories." />
+        <meta
+          name="twitter:description"
+          content="Experience the world with Fluturo - Your trusted travel partner for unforgettable memories."
+        />
 
         {/* Structured Data - Schema.org */}
         <script
@@ -110,7 +114,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "TravelAgency",
               name: "Fluturo Travel Agency",
-              description: "Premium travel agency offering personalized vacation packages and adventure travel experiences worldwide.",
+              description:
+                "Premium travel agency offering personalized vacation packages and adventure travel experiences worldwide.",
               url: "https://fluturo.co",
               logo: "https://fluturo.co/images/logo_landscape.png",
               image: "https://fluturo.co/images/logo_landscape.png",
@@ -127,7 +132,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`font-sans antialiased`}>
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
         <Analytics />
       </body>
     </html>

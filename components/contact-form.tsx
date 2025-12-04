@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CheckCircle } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
+import contactData from "@/data/contact.json"
 
 interface ContactFormProps {
   destinations: Array<{ id: string; name: string }>
@@ -16,6 +18,8 @@ interface ContactFormProps {
 }
 
 export function ContactForm({ destinations, departures }: ContactFormProps) {
+  const { language } = useLanguage()
+  const { section, form, success } = contactData
   const [submitted, setSubmitted] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
@@ -63,10 +67,8 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
             <div className="inline-flex items-center justify-center w-20 h-20 bg-green-100 text-green-600 rounded-full mb-6">
               <CheckCircle className="h-10 w-10" />
             </div>
-            <h3 className="text-3xl font-bold text-gray-900 mb-4">Thank You!</h3>
-            <p className="text-xl text-gray-600">
-              Your inquiry has been received. Our travel experts will contact you shortly to plan your perfect trip.
-            </p>
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">{success.title[language]}</h3>
+            <p className="text-xl text-gray-600">{success.message[language]}</p>
           </div>
         </div>
       </section>
@@ -78,15 +80,15 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Plan Your Trip</h2>
-            <p className="text-xl text-gray-600">Tell us about your dream vacation and we'll make it happen</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">{section.title[language]}</h2>
+            <p className="text-xl text-gray-600">{section.subtitle[language]}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6 bg-gray-50 p-8 rounded-2xl shadow-lg">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Name */}
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name *</Label>
+                <Label htmlFor="name">{form.fullName[language]} *</Label>
                 <Input
                   id="name"
                   required
@@ -98,7 +100,7 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
               {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email">Email *</Label>
+                <Label htmlFor="email">{form.email[language]} *</Label>
                 <Input
                   id="email"
                   type="email"
@@ -111,7 +113,7 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
               {/* Phone */}
               <div className="space-y-2">
-                <Label htmlFor="phone">Phone *</Label>
+                <Label htmlFor="phone">{form.phone[language]} *</Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -124,14 +126,14 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
               {/* Departure City */}
               <div className="space-y-2">
-                <Label htmlFor="departureCity">Departure City *</Label>
+                <Label htmlFor="departureCity">{form.departureCity[language]} *</Label>
                 <Select
                   value={formData.departureCity}
                   onValueChange={(value) => handleChange("departureCity", value)}
                   required
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select departure" />
+                    <SelectValue placeholder={form.selectDeparture[language]} />
                   </SelectTrigger>
                   <SelectContent>
                     {departures.map((dep) => (
@@ -145,14 +147,14 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
               {/* Destination */}
               <div className="space-y-2">
-                <Label htmlFor="destination">Desired Destination *</Label>
+                <Label htmlFor="destination">{form.destination[language]} *</Label>
                 <Select
                   value={formData.destination}
                   onValueChange={(value) => handleChange("destination", value)}
                   required
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select destination" />
+                    <SelectValue placeholder={form.selectDestination[language]} />
                   </SelectTrigger>
                   <SelectContent>
                     {destinations.map((dest) => (
@@ -166,25 +168,25 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
               {/* Trip Type */}
               <div className="space-y-2">
-                <Label htmlFor="tripType">Trip Type *</Label>
+                <Label htmlFor="tripType">{form.tripType[language]} *</Label>
                 <Select value={formData.tripType} onValueChange={(value) => handleChange("tripType", value)} required>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select type" />
+                    <SelectValue placeholder={form.selectType[language]} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="honeymoon">Honeymoon</SelectItem>
-                    <SelectItem value="family">Family Vacation</SelectItem>
-                    <SelectItem value="romantic">Romantic Getaway</SelectItem>
-                    <SelectItem value="adventure">Adventure</SelectItem>
-                    <SelectItem value="luxury">Luxury Experience</SelectItem>
-                    <SelectItem value="group">Group Travel</SelectItem>
+                    <SelectItem value="honeymoon">{form.tripTypes.honeymoon[language]}</SelectItem>
+                    <SelectItem value="family">{form.tripTypes.family[language]}</SelectItem>
+                    <SelectItem value="romantic">{form.tripTypes.romantic[language]}</SelectItem>
+                    <SelectItem value="adventure">{form.tripTypes.adventure[language]}</SelectItem>
+                    <SelectItem value="luxury">{form.tripTypes.luxury[language]}</SelectItem>
+                    <SelectItem value="group">{form.tripTypes.group[language]}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               {/* Date From */}
               <div className="space-y-2">
-                <Label htmlFor="dateFrom">Travel Date From *</Label>
+                <Label htmlFor="dateFrom">{form.dateFrom[language]} *</Label>
                 <Input
                   id="dateFrom"
                   type="date"
@@ -196,7 +198,7 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
               {/* Date To */}
               <div className="space-y-2">
-                <Label htmlFor="dateTo">Travel Date To *</Label>
+                <Label htmlFor="dateTo">{form.dateTo[language]} *</Label>
                 <Input
                   id="dateTo"
                   type="date"
@@ -208,7 +210,7 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
               {/* Travelers */}
               <div className="space-y-2">
-                <Label htmlFor="travelers">Number of Travelers *</Label>
+                <Label htmlFor="travelers">{form.travelers[language]} *</Label>
                 <Select value={formData.travelers} onValueChange={(value) => handleChange("travelers", value)} required>
                   <SelectTrigger>
                     <SelectValue />
@@ -216,7 +218,7 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
                   <SelectContent>
                     {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                       <SelectItem key={num} value={num.toString()}>
-                        {num} {num === 1 ? "Person" : "People"}
+                        {num} {num === 1 ? form.person[language] : form.people[language]}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -226,18 +228,18 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
             {/* Message */}
             <div className="space-y-2">
-              <Label htmlFor="message">Additional Information</Label>
+              <Label htmlFor="message">{form.additionalInfo[language]}</Label>
               <Textarea
                 id="message"
                 rows={5}
                 value={formData.message}
                 onChange={(e) => handleChange("message", e.target.value)}
-                placeholder="Tell us about your preferences, special requests, or any questions you have..."
+                placeholder={form.additionalInfoPlaceholder[language]}
               />
             </div>
 
             <Button type="submit" size="lg" className="w-full bg-sky-500 hover:bg-sky-600 text-lg py-6">
-              Submit Inquiry
+              {form.submit[language]}
             </Button>
           </form>
         </div>

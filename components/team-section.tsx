@@ -2,41 +2,21 @@
 import { getImagePath } from "@/lib/image-path"
 import { Briefcase } from "lucide-react"
 import { PixelTransition } from "./pixel-transition"
+import { useLanguage } from "@/lib/language-context"
+import teamData from "@/data/team.json"
 
 interface TeamMember {
   id: string
   name: string
-  role: string
-  bio: string[]
+  role: { en: string; sq: string }
+  bio: { en: string[]; sq: string[] }
   image?: string
 }
 
-const teamMembers: TeamMember[] = [
-  {
-    id: "dea-salihu",
-    name: "Dea Salihu",
-    role: "CEO & Corporate Travel Manager",
-    bio: [
-      "From her very first journey abroad, Dea discovered not just a love for travel, but a talent for creating seamless and unforgettable experiences. Drawing from her personal adventures around the globe, she understood what makes a journey truly special: attention to detail, thoughtful planning, and experiences tailored to each traveler.",
-      "In 2023, Dea turned her passion into action by founding L.L.C, a travel agency dedicated to serving both local and international clients. As CTM, she has successfully managed travel for numerous corporate clients, organized staff retreats, private transfers, and wellness journeys, all while ensuring that every trip reflects comfort, efficiency, and personalization.",
-      "Dea's hands-on approach, vision, and leadership have made Fluturo a trusted partner for anyone seeking curated travel experiences. Under her guidance, travel is more than logistics, it's an art of crafting memorable journeys that inspire, rejuvenate, and connect people to the world.",
-    ],
-    image: "/placeholder.svg?height=400&width=400",
-  },
-  {
-    id: "enduena-januzi",
-    name: "Enduena Januzi",
-    role: "Co-Founder & Head of General Operations",
-    bio: [
-      "Enduena is the Co-Founder of Fluturo.ks, bringing over 10 years of experience in the local travel market. Throughout her career, she has developed a deep understanding of both individual travelers and corporate clients, allowing her to offer travel solutions that are perfectly tailored to each client's needs.",
-      "From booking flights and designing unique travel packages to organizing corporate retreats, private transfers, and wellness journeys, Enduena ensures that every journey is seamless, memorable, and personalized. She specializes in helping individual travelers plan unforgettable journeys, from relaxing holidays and beach getaways to concerts and special events.",
-      "Her deep knowledge of destinations, attention to detail, and passion for travel ensure that every trip is seamless, personalized, and truly memorable.",
-    ],
-    image: "/placeholder.svg?height=400&width=400",
-  },
-]
-
 export function TeamSection() {
+  const { language } = useLanguage()
+  const { members, ui } = teamData
+
   return (
     <section id="team" className="relative py-16 overflow-hidden">
       <div className="absolute inset-0 -z-10">
@@ -52,14 +32,12 @@ export function TeamSection() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Meet Our Team</h2>
-          <p className="text-gray-600 max-w-xl mx-auto">
-            The passionate experts behind your unforgettable travel experiences
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{ui.title[language]}</h2>
+          <p className="text-gray-600 max-w-xl mx-auto">{ui.subtitle[language]}</p>
         </div>
 
         <div className="max-w-6xl mx-auto space-y-12">
-          {teamMembers.map((member, index) => (
+          {members.map((member: TeamMember, index: number) => (
             <div
               key={member.id}
               className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-6 items-center`}
@@ -72,7 +50,7 @@ export function TeamSection() {
                     <div
                       className={`bg-[#38b6ff] text-white w-full h-full flex items-center justify-center text-[8px] sm:text-[10px] font-bold`}
                     >
-                      {member.role.split(" ")[0]}
+                      {member.role[language].split(" ")[0]}
                     </div>
                   }
                   className="w-full"
@@ -126,7 +104,7 @@ export function TeamSection() {
                     >
                       <div className="text-white">
                         <Briefcase className="w-6 h-6 mb-2" />
-                        <p className="font-semibold">{member.role}</p>
+                        <p className="font-semibold">{member.role[language]}</p>
                       </div>
                     </div>
                   </div>
@@ -145,13 +123,13 @@ export function TeamSection() {
                     <div>
                       <h3 className="text-2xl font-bold text-gray-900 mb-1">{member.name}</h3>
                       <p className={`font-semibold ${index % 2 === 0 ? "text-[#38b6ff]" : "text-gray-600"}`}>
-                        {member.role}
+                        {member.role[language]}
                       </p>
                     </div>
                   </div>
 
                   <div className="space-y-3 text-sm text-gray-600 leading-relaxed">
-                    {member.bio.map((paragraph, idx) => (
+                    {member.bio[language].map((paragraph: string, idx: number) => (
                       <p key={idx}>{paragraph}</p>
                     ))}
                   </div>

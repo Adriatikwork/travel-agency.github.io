@@ -4,12 +4,21 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import RotatingText from "./rotating-text"
 import { Plane, Globe, Clock, MessageCircle } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
 
 interface HeroData {
-  title: string
-  rotatingTexts: string[]
-  subtitle: string
-  ctaText: string
+  title: { en: string; sq: string }
+  rotatingTexts: { en: string[]; sq: string[] }
+  subtitle: { en: string; sq: string }
+  ctaText: { en: string; sq: string }
+  startJourney: { en: string; sq: string }
+  viewTopDeals: { en: string; sq: string }
+  nextDepartures: { en: string; sq: string }
+  premiumAgency: { en: string; sq: string }
+  feelLighter: { en: string; sq: string }
+  destinations: { en: string; sq: string }
+  localExperts: { en: string; sq: string }
+  support247: { en: string; sq: string }
 }
 
 // Helper to get base path, handling v0.dev edge cases
@@ -23,6 +32,7 @@ const getBasePath = () => {
 export function HeroSection({ data }: { data: HeroData }) {
   const basePath = getBasePath()
   const [scrollY, setScrollY] = useState(0)
+  const { language } = useLanguage()
 
   // Lightweight parallax effect
   useEffect(() => {
@@ -91,16 +101,16 @@ export function HeroSection({ data }: { data: HeroData }) {
           {/* Left Content Area */}
           <div className="space-y-4 md:space-y-5 lg:pt-8">
             <p className="text-white/80 text-sm md:text-base font-medium tracking-widest uppercase">
-              PREMIUM TRAVEL AGENCY
+              {data.premiumAgency[language]}
             </p>
 
             {/* Hero Title with Rotating Text */}
             <div className="space-y-1 md:space-y-2">
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                Fly{" "}
+                {data.title[language]}{" "}
                 <span className="inline-block">
                   <RotatingText
-                    texts={data.rotatingTexts}
+                    texts={data.rotatingTexts[language]}
                     mainClassName="px-3 md:px-4 bg-white text-[#30b2f5] overflow-hidden py-1.5 md:py-2 justify-center rounded-xl inline-block"
                     staggerFrom="last"
                     initial={{ y: "100%" }}
@@ -115,12 +125,10 @@ export function HeroSection({ data }: { data: HeroData }) {
               </h1>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-                Feel lighter.
+                {data.feelLighter[language]}
               </h1>
 
-              <p className="text-lg md:text-xl text-white/90 max-w-lg pt-2">
-                Fluturo takes care of flights, stays and experiences, so you just enjoy the journey.
-              </p>
+              <p className="text-lg md:text-xl text-white/90 max-w-lg pt-2">{data.subtitle[language]}</p>
             </div>
 
             {/* CTA Buttons */}
@@ -130,40 +138,48 @@ export function HeroSection({ data }: { data: HeroData }) {
                 size="lg"
                 className="bg-white hover:bg-white/90 text-[#30b2f5] px-8 py-6 text-lg rounded-full shadow-xl font-semibold transition-all duration-300 w-full sm:w-auto"
               >
-                Start your journey
+                {data.startJourney[language]}
               </Button>
               <Button
                 onClick={() => scrollToSection("packages")}
                 size="lg"
                 className="bg-white hover:bg-white/90 text-[#30b2f5] px-8 py-6 text-lg rounded-full shadow-xl font-semibold transition-all duration-300 w-full sm:w-auto"
               >
-                View top deals
+                {data.viewTopDeals[language]}
               </Button>
             </div>
 
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-4 max-w-md shadow-2xl border border-white/20 mt-6">
-              <h3 className="text-[#30b2f5] font-semibold text-sm uppercase tracking-wide mb-3">Next Departures</h3>
+              <h3 className="text-[#30b2f5] font-semibold text-sm uppercase tracking-wide mb-3">
+                {data.nextDepartures[language]}
+              </h3>
               <div className="space-y-2.5">
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-2">
                     <Plane className="h-4 w-4 text-[#30b2f5]" />
-                    <span className="text-gray-700 font-medium">Prishtina → Paris</span>
+                    <span className="text-gray-700 font-medium">
+                      {language === "sq" ? "Prishtinë" : "Prishtina"} → Paris
+                    </span>
                   </div>
-                  <span className="text-[#30b2f5] font-bold">from €199</span>
+                  <span className="text-[#30b2f5] font-bold">{language === "sq" ? "nga" : "from"} €199</span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-2">
                     <Plane className="h-4 w-4 text-[#30b2f5]" />
-                    <span className="text-gray-700 font-medium">Skopje → Vienna</span>
+                    <span className="text-gray-700 font-medium">
+                      {language === "sq" ? "Shkup" : "Skopje"} → {language === "sq" ? "Vjenë" : "Vienna"}
+                    </span>
                   </div>
-                  <span className="text-[#30b2f5] font-bold">from €89</span>
+                  <span className="text-[#30b2f5] font-bold">{language === "sq" ? "nga" : "from"} €89</span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <div className="flex items-center gap-2">
                     <Plane className="h-4 w-4 text-[#30b2f5]" />
-                    <span className="text-gray-700 font-medium">Tirana → London</span>
+                    <span className="text-gray-700 font-medium">
+                      {language === "sq" ? "Tiranë" : "Tirana"} → {language === "sq" ? "Londër" : "London"}
+                    </span>
                   </div>
-                  <span className="text-[#30b2f5] font-bold">from €149</span>
+                  <span className="text-[#30b2f5] font-bold">{language === "sq" ? "nga" : "from"} €149</span>
                 </div>
               </div>
             </div>
@@ -171,15 +187,15 @@ export function HeroSection({ data }: { data: HeroData }) {
             <div className="flex flex-wrap gap-6 md:gap-8 text-white pt-4">
               <div className="flex items-center gap-2.5">
                 <Globe className="h-6 w-6" />
-                <span className="text-base md:text-lg font-semibold">120+ destinations</span>
+                <span className="text-base md:text-lg font-semibold">{data.destinations[language]}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <MessageCircle className="h-6 w-6" />
-                <span className="text-base md:text-lg font-semibold">Local experts</span>
+                <span className="text-base md:text-lg font-semibold">{data.localExperts[language]}</span>
               </div>
               <div className="flex items-center gap-2.5">
                 <Clock className="h-6 w-6" />
-                <span className="text-base md:text-lg font-semibold">24/7 support</span>
+                <span className="text-base md:text-lg font-semibold">{data.support247[language]}</span>
               </div>
             </div>
           </div>

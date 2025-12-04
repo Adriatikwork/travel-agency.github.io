@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { useLanguage } from "@/lib/language-context"
+import searchData from "@/data/search.json"
 
 interface SearchFilterBarProps {
   onSearch: (query: string) => void
@@ -28,8 +30,10 @@ export interface FilterState {
 }
 
 export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: SearchFilterBarProps) {
+  const { language } = useLanguage()
+  const { placeholder, sortBy, filters: filtersText } = searchData
   const [searchQuery, setSearchQuery] = useState("")
-  const [sortBy, setSortBy] = useState("popularity")
+  const [sortByValue, setSortByValue] = useState("popularity")
   const [filters, setFilters] = useState<FilterState>({
     priceMin: 0,
     priceMax: 10000,
@@ -42,7 +46,16 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
   })
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
-  const themes = ["beach", "luxury", "adventure", "city-break", "romantic", "honeymoon", "family", "culture"]
+  const themeKeys = [
+    { key: "beach", label: filtersText.themeOptions.beach },
+    { key: "luxury", label: filtersText.themeOptions.luxury },
+    { key: "adventure", label: filtersText.themeOptions.adventure },
+    { key: "city-break", label: filtersText.themeOptions.cityBreak },
+    { key: "romantic", label: filtersText.themeOptions.romantic },
+    { key: "honeymoon", label: filtersText.themeOptions.honeymoon },
+    { key: "family", label: filtersText.themeOptions.family },
+    { key: "culture", label: filtersText.themeOptions.culture },
+  ]
 
   useEffect(() => {
     onSearch(searchQuery)
@@ -53,8 +66,8 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
   }, [filters, onFilter])
 
   useEffect(() => {
-    onSort(sortBy)
-  }, [sortBy, onSort])
+    onSort(sortByValue)
+  }, [sortByValue, onSort])
 
   const handleThemeToggle = (theme: string) => {
     setFilters((prev) => ({
@@ -90,38 +103,35 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
     <div className="sticky top-20 z-40 bg-white shadow-sm border-b border-gray-100">
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center max-w-5xl mx-auto">
-          {/* Search Input */}
           <div className="flex-1 relative">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
             <Input
               type="text"
-              placeholder="Search destinations, cities, themes..."
+              placeholder={placeholder[language]}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-12 h-14 text-base border-2 border-gray-200 rounded-xl focus:border-sky-400 focus:ring-2 focus:ring-sky-100 transition-all"
             />
           </div>
 
-          {/* Sort */}
-          <Select value={sortBy} onValueChange={setSortBy}>
+          <Select value={sortByValue} onValueChange={setSortByValue}>
             <SelectTrigger className="w-full md:w-52 h-14 border-2 border-gray-200 rounded-xl hover:border-gray-300 transition-colors">
-              <SelectValue placeholder="Sort by" />
+              <SelectValue placeholder={sortBy.label[language]} />
             </SelectTrigger>
             <SelectContent className="rounded-xl">
-              <SelectItem value="popularity">Most Popular</SelectItem>
-              <SelectItem value="price-low">Price: Low to High</SelectItem>
-              <SelectItem value="price-high">Price: High to Low</SelectItem>
-              <SelectItem value="rating">Highest Rated</SelectItem>
-              <SelectItem value="name">A-Z</SelectItem>
+              <SelectItem value="popularity">{sortBy.options.popularity[language]}</SelectItem>
+              <SelectItem value="price-low">{sortBy.options.priceLow[language]}</SelectItem>
+              <SelectItem value="price-high">{sortBy.options.priceHigh[language]}</SelectItem>
+              <SelectItem value="rating">{sortBy.options.rating[language]}</SelectItem>
+              <SelectItem value="name">{sortBy.options.name[language]}</SelectItem>
             </SelectContent>
           </Select>
 
-          {/* Filter Button */}
           <Sheet open={isFilterOpen} onOpenChange={setIsFilterOpen}>
             <SheetTrigger asChild>
               <Button className="h-14 px-8 bg-sky-500 hover:bg-sky-600 text-white rounded-xl shadow-md hover:shadow-lg transition-all relative font-semibold">
                 <SlidersHorizontal className="mr-2 h-5 w-5" />
-                Filters
+                {filtersText.button[language]}
                 {activeFilterCount > 0 && (
                   <span className="ml-2 bg-white text-sky-600 rounded-full min-w-[24px] h-6 px-2 flex items-center justify-center text-xs font-bold">
                     {activeFilterCount}
@@ -134,15 +144,15 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
                 <SheetTitle className="flex items-center justify-between text-2xl">
                   <span className="flex items-center gap-2">
                     <SlidersHorizontal className="h-6 w-6 text-sky-500" />
-                    Filters
+                    {filtersText.title[language]}
                   </span>
-                  <Button 
-                    variant="ghost" 
-                    size="sm" 
+                  <Button
+                    variant="ghost"
+                    size="sm"
                     onClick={resetFilters}
                     className="text-sky-600 hover:text-sky-700 hover:bg-sky-50"
                   >
-                    Reset All
+                    {filtersText.resetAll[language]}
                   </Button>
                 </SheetTitle>
               </SheetHeader>
@@ -151,14 +161,14 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
                 {/* Price Range */}
                 <div className="space-y-4">
                   <Label className="text-base font-semibold text-gray-900 uppercase tracking-wide text-xs">
-                    Price Range (EUR)
+                    {filtersText.priceRange[language]}
                   </Label>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Input
                         id="priceMin"
                         type="number"
-                        placeholder="Min"
+                        placeholder={filtersText.min[language]}
                         value={filters.priceMin}
                         onChange={(e) => setFilters({ ...filters, priceMin: Number(e.target.value) })}
                         className="h-11 rounded-lg border-gray-300 focus:border-sky-500 focus:ring-sky-200"
@@ -168,7 +178,7 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
                       <Input
                         id="priceMax"
                         type="number"
-                        placeholder="Max"
+                        placeholder={filtersText.max[language]}
                         value={filters.priceMax}
                         onChange={(e) => setFilters({ ...filters, priceMax: Number(e.target.value) })}
                         className="h-11 rounded-lg border-gray-300 focus:border-sky-500 focus:ring-sky-200"
@@ -182,14 +192,14 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
                 {/* Duration */}
                 <div className="space-y-4">
                   <Label className="text-base font-semibold text-gray-900 uppercase tracking-wide text-xs">
-                    Duration (nights)
+                    {filtersText.duration[language]}
                   </Label>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <Input
                         id="durationMin"
                         type="number"
-                        placeholder="Min"
+                        placeholder={filtersText.min[language]}
                         value={filters.durationMin}
                         onChange={(e) => setFilters({ ...filters, durationMin: Number(e.target.value) })}
                         className="h-11 rounded-lg border-gray-300 focus:border-sky-500 focus:ring-sky-200"
@@ -199,7 +209,7 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
                       <Input
                         id="durationMax"
                         type="number"
-                        placeholder="Max"
+                        placeholder={filtersText.max[language]}
                         value={filters.durationMax}
                         onChange={(e) => setFilters({ ...filters, durationMax: Number(e.target.value) })}
                         className="h-11 rounded-lg border-gray-300 focus:border-sky-500 focus:ring-sky-200"
@@ -213,20 +223,20 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
                 {/* Rating */}
                 <div className="space-y-4">
                   <Label className="text-base font-semibold text-gray-900 uppercase tracking-wide text-xs">
-                    Minimum Rating
+                    {filtersText.minRating[language]}
                   </Label>
                   <Select
                     value={filters.minRating.toString()}
                     onValueChange={(value) => setFilters({ ...filters, minRating: Number(value) })}
                   >
                     <SelectTrigger className="h-11 rounded-lg border-gray-300 hover:border-gray-400">
-                      <SelectValue placeholder="Any rating" />
+                      <SelectValue placeholder={filtersText.anyRating[language]} />
                     </SelectTrigger>
                     <SelectContent className="rounded-lg">
-                      <SelectItem value="0">Any rating</SelectItem>
-                      <SelectItem value="4">4+ Stars</SelectItem>
-                      <SelectItem value="4.5">4.5+ Stars</SelectItem>
-                      <SelectItem value="4.7">4.7+ Stars</SelectItem>
+                      <SelectItem value="0">{filtersText.anyRating[language]}</SelectItem>
+                      <SelectItem value="4">4+ {filtersText.stars[language]}</SelectItem>
+                      <SelectItem value="4.5">4.5+ {filtersText.stars[language]}</SelectItem>
+                      <SelectItem value="4.7">4.7+ {filtersText.stars[language]}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -236,17 +246,17 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
                 {/* Departure City */}
                 <div className="space-y-4">
                   <Label className="text-base font-semibold text-gray-900 uppercase tracking-wide text-xs">
-                    Departure City
+                    {filtersText.departureCity[language]}
                   </Label>
                   <Select
                     value={filters.departureId}
                     onValueChange={(value) => setFilters({ ...filters, departureId: value })}
                   >
                     <SelectTrigger className="h-11 rounded-lg border-gray-300 hover:border-gray-400">
-                      <SelectValue placeholder="Any departure" />
+                      <SelectValue placeholder={filtersText.anyDeparture[language]} />
                     </SelectTrigger>
                     <SelectContent className="rounded-lg">
-                      <SelectItem value="any">Any departure</SelectItem>
+                      <SelectItem value="any">{filtersText.anyDeparture[language]}</SelectItem>
                       {departures.map((dep) => (
                         <SelectItem key={dep.id} value={dep.id}>
                           {dep.city} ({dep.airportCode})
@@ -261,19 +271,22 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
                 {/* Themes */}
                 <div className="space-y-4">
                   <Label className="text-base font-semibold text-gray-900 uppercase tracking-wide text-xs">
-                    Themes
+                    {filtersText.themes[language]}
                   </Label>
                   <div className="grid grid-cols-2 gap-3">
-                    {themes.map((theme) => (
-                      <div key={theme} className="flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
+                    {themeKeys.map((theme) => (
+                      <div
+                        key={theme.key}
+                        className="flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+                      >
                         <Checkbox
-                          id={theme}
-                          checked={filters.themes.includes(theme)}
-                          onCheckedChange={() => handleThemeToggle(theme)}
+                          id={theme.key}
+                          checked={filters.themes.includes(theme.key)}
+                          onCheckedChange={() => handleThemeToggle(theme.key)}
                           className="data-[state=checked]:bg-sky-500 data-[state=checked]:border-sky-500"
                         />
-                        <Label htmlFor={theme} className="text-sm font-medium capitalize cursor-pointer flex-1">
-                          {theme}
+                        <Label htmlFor={theme.key} className="text-sm font-medium cursor-pointer flex-1">
+                          {theme.label[language]}
                         </Label>
                       </div>
                     ))}
@@ -291,7 +304,7 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
                     className="data-[state=checked]:bg-sky-500 data-[state=checked]:border-sky-500"
                   />
                   <Label htmlFor="featured" className="text-sm font-medium cursor-pointer flex-1">
-                    Show featured destinations only
+                    {filtersText.featuredOnly[language]}
                   </Label>
                 </div>
               </div>

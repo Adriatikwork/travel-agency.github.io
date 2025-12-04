@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Star, MapPin } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { getImagePath } from "@/lib/image-path"
+import { useLanguage } from "@/lib/language-context"
+import testimonialsData from "@/data/testimonials.json"
 
 interface Testimonial {
   id: string
@@ -15,14 +17,16 @@ interface Testimonial {
   destination?: string
   tripType: string
   rating: number
-  reviewShort: string
-  reviewLong: string
+  reviewShort: { en: string; sq: string }
+  reviewLong: { en: string; sq: string }
   image: string
   travelDate: string
   featured: boolean
 }
 
 export function TestimonialsSlider({ testimonials }: { testimonials: Testimonial[] }) {
+  const { language } = useLanguage()
+  const { ui } = testimonialsData
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
@@ -60,11 +64,9 @@ export function TestimonialsSlider({ testimonials }: { testimonials: Testimonial
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-balance">
-            What Our Travelers Say
+            {ui.title[language]}
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto text-pretty">
-            Real experiences from real travelers who trusted us with their adventures
-          </p>
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto text-pretty">{ui.subtitle[language]}</p>
         </div>
 
         <div className="max-w-4xl mx-auto relative">
@@ -79,7 +81,7 @@ export function TestimonialsSlider({ testimonials }: { testimonials: Testimonial
                 <div className="flex flex-col items-center text-center space-y-6">
                   {/* Avatar */}
                   <img
-                    src={getImagePath(currentTestimonial.image || '/placeholder.svg')}
+                    src={getImagePath(currentTestimonial.image || "/placeholder.svg")}
                     alt={currentTestimonial.name}
                     className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-sky-100"
                   />
@@ -91,9 +93,8 @@ export function TestimonialsSlider({ testimonials }: { testimonials: Testimonial
                     ))}
                   </div>
 
-                  {/* Testimonial Text */}
                   <p className="text-lg sm:text-xl text-gray-700 leading-relaxed max-w-2xl text-pretty">
-                    &quot;{currentTestimonial.reviewLong}&quot;
+                    &quot;{currentTestimonial.reviewLong[language]}&quot;
                   </p>
 
                   {/* Author Info */}
@@ -101,11 +102,12 @@ export function TestimonialsSlider({ testimonials }: { testimonials: Testimonial
                     <p className="font-semibold text-gray-900 text-lg">{currentTestimonial.name}</p>
                     <p className="text-gray-600 text-sm">{currentTestimonial.location}</p>
 
-                    {/* Destination Badge */}
                     {currentTestimonial.destination && (
                       <div className="inline-flex items-center gap-2 bg-sky-100 text-sky-700 px-4 py-2 rounded-full text-sm font-medium mt-2">
                         <MapPin className="h-4 w-4" />
-                        <span>Traveled to {currentTestimonial.destination}</span>
+                        <span>
+                          {ui.traveledTo[language]} {currentTestimonial.destination}
+                        </span>
                       </div>
                     )}
                   </div>

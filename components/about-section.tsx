@@ -2,17 +2,20 @@
 
 import { useEffect, useRef, useState } from "react"
 import { CheckCircle } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
+import aboutData from "@/data/about.json"
+import statsData from "@/data/stats.json"
 
 interface Stat {
   id: string
-  label: string
+  label: { en: string; sq: string }
   value: number
   suffix: string
 }
 
 interface WhyChooseItem {
-  title: string
-  description: string
+  title: { en: string; sq: string }
+  description: { en: string; sq: string }
 }
 
 interface AboutSectionProps {
@@ -24,6 +27,7 @@ export function AboutSection({ stats, whyChoose }: AboutSectionProps) {
   const [isVisible, setIsVisible] = useState(false)
   const [counts, setCounts] = useState<Record<string, number>>({})
   const sectionRef = useRef<HTMLDivElement>(null)
+  const { language } = useLanguage()
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -70,14 +74,15 @@ export function AboutSection({ stats, whyChoose }: AboutSectionProps) {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <div className="inline-block px-4 py-1 bg-[#38b6ff]/10 rounded-full mb-3">
-              <span className="text-xs font-bold text-[#38b6ff] uppercase tracking-wider">About Us</span>
+              <span className="text-xs font-bold text-[#38b6ff] uppercase tracking-wider">
+                {aboutData.section.label[language]}
+              </span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-              Your Journey, Our <span className="text-[#38b6ff]">Passion</span>
+              {aboutData.section.title[language]}{" "}
+              <span className="text-[#38b6ff]">{aboutData.section.titleHighlight[language]}</span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Since 2023, turning travel dreams into reality with flights, packages, and wellness journeys
-            </p>
+            <p className="text-gray-600 max-w-2xl mx-auto">{aboutData.section.subtitle[language]}</p>
           </div>
 
           <div className="flex flex-wrap justify-center gap-6 mb-12">
@@ -89,15 +94,13 @@ export function AboutSection({ stats, whyChoose }: AboutSectionProps) {
                     : counts[stat.id]?.toLocaleString() || 0}
                   {stat.suffix}
                 </div>
-                <div className="text-xs text-gray-600 font-medium mt-1">{stat.label}</div>
+                <div className="text-xs text-gray-600 font-medium mt-1">{stat.label[language]}</div>
               </div>
             ))}
           </div>
 
           <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-              Why Choose <span className="text-[#38b6ff]">Fluturo?</span>
-            </h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">{statsData.section.title[language]}</h3>
             <div className="grid md:grid-cols-2 gap-4">
               {whyChoose.map((item, idx) => (
                 <div key={idx} className="flex gap-3">
@@ -107,8 +110,8 @@ export function AboutSection({ stats, whyChoose }: AboutSectionProps) {
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 text-sm mb-1">{item.title}</h4>
-                    <p className="text-xs text-gray-600 leading-relaxed">{item.description}</p>
+                    <h4 className="font-bold text-gray-900 text-sm mb-1">{item.title[language]}</h4>
+                    <p className="text-xs text-gray-600 leading-relaxed">{item.description[language]}</p>
                   </div>
                 </div>
               ))}

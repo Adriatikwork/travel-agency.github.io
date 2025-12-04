@@ -13,15 +13,17 @@ import { TeamSection } from "@/components/team-section"
 import { TestimonialsSlider } from "@/components/testimonials-slider"
 import { ContactForm } from "@/components/contact-form"
 import { Footer } from "@/components/footer"
+import { useLanguage } from "@/lib/language-context"
 import siteData from "@/data/site-data.json"
-import destinationsData from "@/data/destinations.json"
-import packagesData from "@/data/packages.json"
+import destinationsData from "@/data/destinations"
+import packagesData from "@/data/packages"
 import statsData from "@/data/stats.json"
 import testimonialsData from "@/data/testimonials.json"
 import ComingSoonPage from "@/app/coming-soon/page"
 
 export default function HomePage() {
   const searchParams = useSearchParams()
+  const { language } = useLanguage()
   const [showActualSite, setShowActualSite] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [filters, setFilters] = useState<FilterState>({
@@ -43,19 +45,25 @@ export default function HomePage() {
     if (searchQuery) {
       const query = searchQuery.toLowerCase()
       results = results.filter((dest) => {
+        const tagline = typeof dest.tagline === "object" ? dest.tagline[language] : dest.tagline
+        const country = typeof dest.country === "object" ? dest.country[language] : dest.country
         return (
           dest.name.toLowerCase().includes(query) ||
           dest.city.toLowerCase().includes(query) ||
-          dest.country.toLowerCase().includes(query) ||
+          country.toLowerCase().includes(query) ||
           dest.continent.toLowerCase().includes(query) ||
-          dest.tagline.toLowerCase().includes(query) ||
+          tagline.toLowerCase().includes(query) ||
           dest.themes.some((theme) => theme.toLowerCase().includes(query)) ||
-          dest.tags.some((tag) => tag.toLowerCase().includes(query)) ||
-          destinationsData.departures.some(
-            (dep) =>
+          (Array.isArray(dest.tags) ? dest.tags : dest.tags?.[language] || []).some((tag: string) =>
+            tag.toLowerCase().includes(query),
+          ) ||
+          destinationsData.departures.some((dep) => {
+            const depCity = typeof dep.city === "object" ? dep.city[language] : dep.city
+            return (
               dest.availableDepartureIds.includes(dep.id) &&
-              (dep.city.toLowerCase().includes(query) || dep.airportCode.toLowerCase().includes(query)),
-          )
+              (depCity.toLowerCase().includes(query) || dep.airportCode.toLowerCase().includes(query))
+            )
+          })
         )
       })
     }
@@ -109,7 +117,7 @@ export default function HomePage() {
     }
 
     return results
-  }, [searchQuery, filters, sortBy])
+  }, [searchQuery, filters, sortBy, language])
 
   const filteredPackages = useMemo(() => {
     const visibleDestinationIds = new Set(filteredDestinations.map((d) => d.id))
@@ -167,6 +175,8 @@ export default function HomePage() {
     return <ComingSoonPage />
   }
 
+  const { ui } = destinationsData
+
   return (
     <main className="min-h-screen">
       <Navbar />
@@ -184,9 +194,10 @@ export default function HomePage() {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Explore Destinations</h2>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">{ui.exploreDestinations[language]}</h2>
               <p className="text-xl text-gray-600">
-                {filteredDestinations.length} {filteredDestinations.length === 1 ? "destination" : "destinations"} found
+                {filteredDestinations.length}{" "}
+                {filteredDestinations.length === 1 ? ui.destinationFound[language] : ui.destinationsFound[language]}
               </p>
             </div>
             <DestinationsGrid
@@ -228,13 +239,13 @@ export default function HomePage() {
           }))}
           departures={destinationsData.departures.map((d) => ({
             id: d.id,
-            city: d.city,
-            country: d.country,
+            city: typeof d.city === "object" ? d.city[language] : d.city,
+            country: typeof d.country === "object" ? d.country[language] : d.country,
           }))}
         />
       </div>
 
-      <Footer data={siteData.footer} />
+      <Footer />
     </main>
   )
 }
