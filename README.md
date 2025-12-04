@@ -1,272 +1,92 @@
-# Travel Agency Website
+# Fluturo – Your Gateway to Unforgettable Travel Experiences
 
-A modern, responsive travel agency website built with Next.js 16, React 19, TypeScript, and Tailwind CSS.
+Welcome to Fluturo, where every journey begins with a dream and ends with memories that last a lifetime. We craft personalized travel experiences for adventurers, families, and explorers seeking authentic connections with the world's most captivating destinations. Discover your next adventure at [https://fluturo.co](https://fluturo.co).
 
-## 🚀 Tech Stack
+## Fluturo at a Glance
 
-- **Framework**: Next.js 16 (Static Export)
-- **UI Library**: React 19
-- **Styling**: Tailwind CSS 4
-- **TypeScript**: Type-safe development
-- **UI Components**: Radix UI + Custom Components
-- **Animations**: Motion & Framer Motion
-- **Forms**: React Hook Form + Zod validation
+- Premium travel packages to Europe's most sought-after destinations
+- Family-friendly vacation planning with activities for all ages
+- Luxury ski getaways and cultural city escapes
+- Flexible booking options and personalized itineraries
+- Expert travel consultants ready to design your perfect trip
+- Competitive pricing without compromising on quality or experience
 
-## 📦 Prerequisites
+## Featured Destinations & Packages
 
-- Node.js 18 or higher
-- pnpm (recommended) or npm
-- Docker & Docker Compose (for containerized deployment)
+| Destination | Experience Highlights | Perfect For |
+| --- | --- | --- |
+| **Bansko Family Adventure** | Ski slopes, family activities, cozy mountain lodges, cultural tours | Families seeking winter fun |
+| **Prague Christmas Magic** | Historic Old Town, Christmas markets, festive atmosphere, local cuisine | Culture lovers & couples |
+| **St. Moritz Luxury Ski** | World-class slopes, 5-star accommodations, gourmet dining, spa retreats | Luxury travelers & ski enthusiasts |
+| **Vienna Winter Culture** | Imperial palaces, classical concerts, art museums, traditional coffee houses | History & art aficionados |
+| **Barcelona December Escape** | Gaudí architecture, Mediterranean beaches, tapas tours, vibrant nightlife | Urban explorers |
 
-## 🛠️ Installation
+Seasonal promotions and limited-time offers are featured directly on our website and shared through our newsletter.
 
-### Local Development
+## Why Choose Fluturo?
 
-1. Clone the repository:
-```bash
-git clone <your-repo-url>
-cd travel-agency-website
-```
+- **Curated Experiences:** Every destination handpicked by travel experts who've explored them firsthand.
+- **Stress-Free Planning:** From flight bookings to hotel reservations, we handle every detail so you can focus on excitement.
+- **Personalized Service:** Your travel consultant works with you to craft an itinerary that matches your interests, budget, and style.
+- **Modern Platform:** Browse destinations with stunning visuals, read detailed guides, and book seamlessly on our responsive website.
+- **Trusted Partner:** Dedicated support team available via email, phone, or contact form to assist before, during, and after your trip.
 
-2. Install dependencies:
-```bash
-pnpm install
-```
+## Contact & Booking
 
-3. Run the development server:
-```bash
-pnpm dev
-```
+- **Website:** [fluturo.co](https://fluturo.co)
+- **Email:** info@fluturo.co
+- **Online Inquiry Form:** [fluturo.co/#contact](https://fluturo.co/#contact)
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+Reach out with your travel goals (romantic getaway, family vacation, adventure trip), and we'll respond with personalized recommendations and package options within 24 hours.
 
-## 🐳 Docker Deployment
+## Our Service Promise
 
-### Development Mode (with hot reload)
+We believe travel should be inspiring, not stressful. Whether you're planning months ahead or seeking a last-minute escape, Fluturo delivers:
 
-```bash
-# Build and start development container
-pnpm docker:dev
+- **Transparent Pricing:** No hidden fees, clear breakdowns of what's included
+- **Quality Accommodations:** Carefully vetted hotels and resorts for comfort and convenience
+- **Local Expertise:** Insider tips and recommendations you won't find in guidebooks
+- **Flexible Options:** Customize any package to fit your schedule and preferences
+- **Peace of Mind:** Travel insurance recommendations and 24/7 emergency support
 
-# Access at http://localhost:8909
-```
+## Destinations We Love
 
-### Production Mode (static build)
+From the snow-capped peaks of the Swiss Alps to the sun-drenched streets of Barcelona, we specialize in European destinations that offer authentic cultural experiences, stunning natural beauty, and unforgettable adventures. Each destination page on our website features:
 
-```bash
-# Build and start production container
-pnpm docker:prod
+- Detailed itineraries and suggested activities
+- Accommodation recommendations for every budget
+- Best times to visit and local insider tips
+- Transportation options and getting-around guides
+- Photo galleries to inspire your wanderlust
 
-# Access at http://localhost:8908
-```
+## Customer Stories & Reviews
 
-### Other Docker Commands
+Our travelers share their experiences through testimonials featured on the homepage. We're proud to have helped hundreds of adventurers discover new corners of the world, create family memories, and fulfill bucket-list dreams.
 
-```bash
-# Stop all containers
-pnpm docker:stop
+## Stay Connected
 
-# View logs
-pnpm docker:logs
+- **Website Updates:** New destinations and packages added regularly at [fluturo.co](https://fluturo.co)
+- **Newsletter:** Subscribe for travel inspiration, destination guides, and exclusive deals
+- **Social Media:** Follow us for stunning travel photography and trip ideas
+- **Brand Voice:** Inspiring, helpful, and always ready to turn your travel dreams into reality
 
-# Build image manually
-pnpm docker:build
-
-# Run built image
-pnpm docker:run
-```
-
-### Direct Docker Commands
-
-```bash
-# Build production image
-docker build -t travel-agency .
-
-# Run production container
-docker run -p 8908:3000 travel-agency
-
-# Using docker-compose
-docker compose up travel-agency-app -d    # Production
-docker compose up travel-agency-dev -d    # Development
-docker compose down                        # Stop all
-```
-
-## 📜 Available Scripts
-
-| Script | Description |
-|--------|-------------|
-| `pnpm dev` | Start development server at localhost:3000 |
-| `pnpm build` | Build for production (static export) |
-| `pnpm start` | Start production server (after build) |
-| `pnpm lint` | Run ESLint |
-| `pnpm export` | Build and export static site |
-| `pnpm deploy` | Build, export, and prepare for deployment |
-| `pnpm docker:build` | Build Docker image |
-| `pnpm docker:run` | Run Docker container |
-| `pnpm docker:dev` | Start development container (port 8909) |
-| `pnpm docker:prod` | Start production container (port 8908) |
-| `pnpm docker:stop` | Stop all Docker containers |
-| `pnpm docker:logs` | View container logs |
-
-## 🌐 Deployment
-
-### GitHub Pages (Automated)
-
-This project includes GitHub Actions workflow for automatic deployment:
-
-1. **Push to main/master branch** - triggers automatic build and deploy
-2. **GitHub Actions builds** the static site (typically 2-5 minutes)
-3. **Deploys to GitHub Pages** automatically
-4. **Pages update** - Changes appear on GitHub Pages within 1-5 minutes after deployment completes
-
-**Note**: The first build may take longer as it generates all static destination pages. Subsequent builds are faster due to caching.
-
-#### Setup GitHub Pages:
-
-1. Go to repository Settings → Pages
-2. Set Source to "GitHub Actions"
-3. Update `CNAME` file with your custom domain (if applicable)
-4. Push changes to trigger deployment
-
-#### Checking Deployment Status:
-
-- View build progress: Go to your repository → Actions tab
-- Check deployment: Repository Settings → Pages → See recent deployments
-- Typical timeline: Build (2-5 min) → Deploy (1-2 min) → Pages update (1-5 min)
-
-### Manual Deployment
-
-```bash
-# Build static export
-pnpm run build
-
-# The static files will be in the 'out' directory
-# Upload the 'out' directory to your hosting provider
-```
-
-## 🗂️ Project Structure
-
-```
-travel-agency-website/
-├── app/                    # Next.js app directory
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
-│   ├── loading.tsx        # Loading UI
-│   ├── page.tsx           # Home page
-│   └── destinations/      # Dynamic destination routes
-│       └── [slug]/        # Individual destination pages (SSG)
-│           └── page.tsx   # Destination detail page
-├── components/            # React components
-│   ├── ui/               # UI primitives (Radix UI)
-│   ├── navbar.tsx        # Navigation
-│   ├── hero-section.tsx  # Hero component
-│   ├── footer.tsx        # Footer component
-│   └── ...
-├── data/                  # Static data (JSON)
-│   ├── destinations.json
-│   ├── packages.json
-│   ├── testimonials.json
-│   └── ...
-├── hooks/                 # Custom React hooks
-├── lib/                   # Utility functions
-├── public/               # Static assets
-├── styles/               # Additional styles
-├── .github/              # GitHub Actions workflows
-│   └── workflows/
-│       └── deploy.yml    # Auto-deploy configuration
-├── Dockerfile            # Production Docker config
-├── Dockerfile.dev        # Development Docker config
-├── docker-compose.yml    # Docker Compose configuration
-├── .dockerignore         # Docker ignore file
-├── .gitignore            # Git ignore file
-├── CNAME                 # Custom domain configuration
-└── next.config.mjs       # Next.js configuration
-```
-
-## ⚙️ Configuration
-
-### Port Configuration
-
-- **Local Development**: `localhost:3000`
-- **Docker Production**: `localhost:8908`
-- **Docker Development**: `localhost:8909`
-
-### Custom Domain
-
-Update the `CNAME` file with your domain:
-```
-your-travel-domain.com
-```
-
-### Next.js Configuration
-
-The project is configured for static export in `next.config.mjs`:
-- Static export enabled (`output: 'export'`)
-- Images unoptimized for static hosting
-- TypeScript/ESLint errors ignored during build (configurable)
-
-## 🎨 Features
-
-- ✅ Fully responsive design
-- ✅ Dark/Light mode support
-- ✅ Static site generation (SSG) with dynamic routes
-- ✅ Pre-generated destination pages for GitHub Pages
-- ✅ SEO optimized
-- ✅ Fast page loads
-- ✅ Modern UI components
-- ✅ Form validation
-- ✅ Docker support
-- ✅ CI/CD with GitHub Actions
-- ✅ TypeScript for type safety
-
-## 🔧 Environment Variables
-
-Create `.env.local` for local development:
-
-```env
-# Add your environment variables here
-NEXT_PUBLIC_API_URL=https://your-api.com
-```
-
-## 📝 Notes
-
-- This project uses **static export** (`output: 'export'`), which means:
-  - No server-side rendering (SSR)
-  - No API routes
-  - All pages are pre-rendered at build time
-  - Dynamic routes (`/destinations/[slug]`) are statically generated using `generateStaticParams()`
-  - Perfect for GitHub Pages and static hosting
-  
-- **Destination Pages**: All destination pages are pre-generated at build time:
-  - `/destinations/bansko-family-vacation/`
-  - `/destinations/prague-christmas-getaway/`
-  - `/destinations/st-moritz-luxury-ski/`
-  - `/destinations/vienna-winter-culture/`
-  - `/destinations/barcelona-december-escape/`
-
-- **Docker ports**:
-  - Production: `8908:3000`
-  - Development: `8909:3000`
-  
-- **GitHub Actions** automatically deploys to GitHub Pages on push to main/master
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is private and proprietary.
-
-## 🆘 Support
-
-For issues and questions, please open an issue in the GitHub repository.
+## Our Digital Experience
+
+- **Modern Platform:** Built with Next.js for lightning-fast browsing and seamless navigation
+- **Mobile-Optimized:** Plan your trip from anywhere, on any device
+- **SEO-Friendly:** Destination guides optimized to help you find us when searching for your next adventure
+- **Progressive Web App:** Install Fluturo on your mobile device for app-like experience
+- **Secure & Fast:** Hosted on reliable infrastructure for a smooth booking experience
+
+## Technical Foundation (Brief Overview)
+
+- Framework: Next.js 16 with React 19 for modern web experience
+- SEO: Comprehensive metadata, structured data, and sitemap for search visibility
+- Design: Tailwind CSS for beautiful, responsive layouts
+- Performance: Optimized for speed and accessibility across all devices
+
+For partnership inquiries, media requests, or general questions, contact us at info@fluturo.co – we're here to make your travel dreams a reality, both online and in the destinations you'll explore.
 
 ---
 
-**Note**: Make sure to update the `CNAME` file with your actual domain before deploying to production.
-
+**Start Your Next Adventure Today** → [fluturo.co](https://fluturo.co)
