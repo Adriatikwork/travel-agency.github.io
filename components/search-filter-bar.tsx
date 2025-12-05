@@ -1,13 +1,13 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Search, SlidersHorizontal } from "lucide-react"
+import { Search, SlidersHorizontal, X } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useLanguage } from "@/lib/language-context"
 import searchData from "@/data/search.json"
 
@@ -15,7 +15,12 @@ interface SearchFilterBarProps {
   onSearch: (query: string) => void
   onFilter: (filters: FilterState) => void
   onSort: (sort: string) => void
-  departures: Array<{ id: string; city: string; country: string; airportCode: string }>
+  departures: Array<{
+    id: string
+    city: string | { en: string; sq: string }
+    country: string | { en: string; sq: string }
+    airportCode: string
+  }>
 }
 
 export interface FilterState {
@@ -139,174 +144,171 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: Sear
                 )}
               </Button>
             </SheetTrigger>
-            <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
-              <SheetHeader className="border-b border-gray-100 pb-4">
-                <SheetTitle className="flex items-center justify-between text-2xl">
-                  <span className="flex items-center gap-2">
-                    <SlidersHorizontal className="h-6 w-6 text-sky-500" />
-                    {filtersText.title[language]}
-                  </span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={resetFilters}
-                    className="text-sky-600 hover:text-sky-700 hover:bg-sky-50"
-                  >
-                    {filtersText.resetAll[language]}
-                  </Button>
-                </SheetTitle>
-              </SheetHeader>
+            <SheetContent className="w-full sm:max-w-md p-0 flex flex-col" hideClose>
+              <div className="flex items-center justify-between px-6 py-5 border-b border-gray-200 bg-gradient-to-r from-sky-50 to-blue-50">
+                <div className="flex items-center gap-3">
+                  <SlidersHorizontal className="h-5 w-5 text-sky-600" />
+                  <h2 className="text-xl font-bold text-gray-900">{filtersText.title[language]}</h2>
+                  {activeFilterCount > 0 && (
+                    <span className="bg-sky-500 text-white rounded-full min-w-[22px] h-[22px] px-2 flex items-center justify-center text-xs font-bold">
+                      {activeFilterCount}
+                    </span>
+                  )}
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setIsFilterOpen(false)}
+                  className="h-8 w-8 rounded-full hover:bg-gray-200"
+                >
+                  <X className="h-5 w-5" />
+                </Button>
+              </div>
 
-              <div className="space-y-6 pt-6">
-                {/* Price Range */}
-                <div className="space-y-4">
-                  <Label className="text-base font-semibold text-gray-900 uppercase tracking-wide text-xs">
-                    {filtersText.priceRange[language]}
-                  </Label>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
+              <div className="flex-1 overflow-y-auto px-6 py-5">
+                <div className="space-y-6">
+                  <div className="space-y-3">
+                    <Label className="text-sm font-bold text-gray-900 uppercase tracking-wide">
+                      {filtersText.priceRange[language]}
+                    </Label>
+                    <div className="grid grid-cols-2 gap-3">
                       <Input
-                        id="priceMin"
                         type="number"
                         placeholder={filtersText.min[language]}
                         value={filters.priceMin}
                         onChange={(e) => setFilters({ ...filters, priceMin: Number(e.target.value) })}
-                        className="h-11 rounded-lg border-gray-300 focus:border-sky-500 focus:ring-sky-200"
+                        className="h-10 rounded-lg"
                       />
-                    </div>
-                    <div>
                       <Input
-                        id="priceMax"
                         type="number"
                         placeholder={filtersText.max[language]}
                         value={filters.priceMax}
                         onChange={(e) => setFilters({ ...filters, priceMax: Number(e.target.value) })}
-                        className="h-11 rounded-lg border-gray-300 focus:border-sky-500 focus:ring-sky-200"
+                        className="h-10 rounded-lg"
                       />
                     </div>
                   </div>
-                </div>
 
-                <div className="border-t border-gray-200"></div>
+                  <div className="border-t border-gray-200"></div>
 
-                {/* Duration */}
-                <div className="space-y-4">
-                  <Label className="text-base font-semibold text-gray-900 uppercase tracking-wide text-xs">
-                    {filtersText.duration[language]}
-                  </Label>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
+                  <div className="space-y-3">
+                    <Label className="text-sm font-bold text-gray-900 uppercase tracking-wide">
+                      {filtersText.duration[language]}
+                    </Label>
+                    <div className="grid grid-cols-2 gap-3">
                       <Input
-                        id="durationMin"
                         type="number"
                         placeholder={filtersText.min[language]}
                         value={filters.durationMin}
                         onChange={(e) => setFilters({ ...filters, durationMin: Number(e.target.value) })}
-                        className="h-11 rounded-lg border-gray-300 focus:border-sky-500 focus:ring-sky-200"
+                        className="h-10 rounded-lg"
                       />
-                    </div>
-                    <div>
                       <Input
-                        id="durationMax"
                         type="number"
                         placeholder={filtersText.max[language]}
                         value={filters.durationMax}
                         onChange={(e) => setFilters({ ...filters, durationMax: Number(e.target.value) })}
-                        className="h-11 rounded-lg border-gray-300 focus:border-sky-500 focus:ring-sky-200"
+                        className="h-10 rounded-lg"
                       />
                     </div>
                   </div>
-                </div>
 
-                <div className="border-t border-gray-200"></div>
+                  <div className="border-t border-gray-200"></div>
 
-                {/* Rating */}
-                <div className="space-y-4">
-                  <Label className="text-base font-semibold text-gray-900 uppercase tracking-wide text-xs">
-                    {filtersText.minRating[language]}
-                  </Label>
-                  <Select
-                    value={filters.minRating.toString()}
-                    onValueChange={(value) => setFilters({ ...filters, minRating: Number(value) })}
-                  >
-                    <SelectTrigger className="h-11 rounded-lg border-gray-300 hover:border-gray-400">
-                      <SelectValue placeholder={filtersText.anyRating[language]} />
-                    </SelectTrigger>
-                    <SelectContent className="rounded-lg">
-                      <SelectItem value="0">{filtersText.anyRating[language]}</SelectItem>
-                      <SelectItem value="4">4+ {filtersText.stars[language]}</SelectItem>
-                      <SelectItem value="4.5">4.5+ {filtersText.stars[language]}</SelectItem>
-                      <SelectItem value="4.7">4.7+ {filtersText.stars[language]}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                  <div className="space-y-3">
+                    <Label className="text-sm font-bold text-gray-900 uppercase tracking-wide">
+                      {filtersText.minRating[language]}
+                    </Label>
+                    <Select
+                      value={filters.minRating.toString()}
+                      onValueChange={(value) => setFilters({ ...filters, minRating: Number(value) })}
+                    >
+                      <SelectTrigger className="h-10 rounded-lg">
+                        <SelectValue placeholder={filtersText.anyRating[language]} />
+                      </SelectTrigger>
+                      <SelectContent className="rounded-lg">
+                        <SelectItem value="0">{filtersText.anyRating[language]}</SelectItem>
+                        <SelectItem value="4">4+ {filtersText.stars[language]}</SelectItem>
+                        <SelectItem value="4.5">4.5+ {filtersText.stars[language]}</SelectItem>
+                        <SelectItem value="4.7">4.7+ {filtersText.stars[language]}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                <div className="border-t border-gray-200"></div>
+                  <div className="border-t border-gray-200"></div>
 
-                {/* Departure City */}
-                <div className="space-y-4">
-                  <Label className="text-base font-semibold text-gray-900 uppercase tracking-wide text-xs">
-                    {filtersText.departureCity[language]}
-                  </Label>
-                  <Select
-                    value={filters.departureId}
-                    onValueChange={(value) => setFilters({ ...filters, departureId: value })}
-                  >
-                    <SelectTrigger className="h-11 rounded-lg border-gray-300 hover:border-gray-400">
-                      <SelectValue placeholder={filtersText.anyDeparture[language]} />
-                    </SelectTrigger>
-                    <SelectContent className="rounded-lg">
-                      <SelectItem value="any">{filtersText.anyDeparture[language]}</SelectItem>
-                      {departures.map((dep) => (
-                        <SelectItem key={dep.id} value={dep.id}>
-                          {dep.city} ({dep.airportCode})
-                        </SelectItem>
+                  <div className="space-y-3">
+                    <Label className="text-sm font-bold text-gray-900 uppercase tracking-wide">
+                      {filtersText.departureCity[language]}
+                    </Label>
+                    <Select
+                      value={filters.departureId}
+                      onValueChange={(value) => setFilters({ ...filters, departureId: value })}
+                    >
+                      <SelectTrigger className="h-10 rounded-lg">
+                        <SelectValue placeholder={filtersText.anyDeparture[language]} />
+                      </SelectTrigger>
+                      <SelectContent className="rounded-lg">
+                        <SelectItem value="any">{filtersText.anyDeparture[language]}</SelectItem>
+                        {departures.map((dep) => (
+                          <SelectItem key={dep.id} value={dep.id}>
+                            {typeof dep.city === "object" ? dep.city[language] : dep.city} ({dep.airportCode})
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="border-t border-gray-200"></div>
+
+                  <div className="space-y-3">
+                    <Label className="text-sm font-bold text-gray-900 uppercase tracking-wide">
+                      {filtersText.themes[language]}
+                    </Label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {themeKeys.map((theme) => (
+                        <div
+                          key={theme.key}
+                          className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+                        >
+                          <Checkbox
+                            id={theme.key}
+                            checked={filters.themes.includes(theme.key)}
+                            onCheckedChange={() => handleThemeToggle(theme.key)}
+                            className="data-[state=checked]:bg-sky-500 data-[state=checked]:border-sky-500"
+                          />
+                          <Label htmlFor={theme.key} className="text-sm cursor-pointer flex-1">
+                            {theme.label[language]}
+                          </Label>
+                        </div>
                       ))}
-                    </SelectContent>
-                  </Select>
-                </div>
+                    </div>
+                  </div>
 
-                <div className="border-t border-gray-200"></div>
+                  <div className="border-t border-gray-200"></div>
 
-                {/* Themes */}
-                <div className="space-y-4">
-                  <Label className="text-base font-semibold text-gray-900 uppercase tracking-wide text-xs">
-                    {filtersText.themes[language]}
-                  </Label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {themeKeys.map((theme) => (
-                      <div
-                        key={theme.key}
-                        className="flex items-center space-x-2.5 p-2.5 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
-                      >
-                        <Checkbox
-                          id={theme.key}
-                          checked={filters.themes.includes(theme.key)}
-                          onCheckedChange={() => handleThemeToggle(theme.key)}
-                          className="data-[state=checked]:bg-sky-500 data-[state=checked]:border-sky-500"
-                        />
-                        <Label htmlFor={theme.key} className="text-sm font-medium cursor-pointer flex-1">
-                          {theme.label[language]}
-                        </Label>
-                      </div>
-                    ))}
+                  <div className="flex items-center space-x-2.5 p-3 rounded-lg bg-sky-50 border border-sky-100 cursor-pointer hover:bg-sky-100 transition-colors">
+                    <Checkbox
+                      id="featured"
+                      checked={filters.featuredOnly}
+                      onCheckedChange={(checked) => setFilters({ ...filters, featuredOnly: checked as boolean })}
+                      className="data-[state=checked]:bg-sky-500 data-[state=checked]:border-sky-500"
+                    />
+                    <Label htmlFor="featured" className="text-sm font-medium cursor-pointer flex-1">
+                      {filtersText.featuredOnly[language]}
+                    </Label>
                   </div>
                 </div>
+              </div>
 
-                <div className="border-t border-gray-200"></div>
-
-                {/* Featured Only */}
-                <div className="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer">
-                  <Checkbox
-                    id="featured"
-                    checked={filters.featuredOnly}
-                    onCheckedChange={(checked) => setFilters({ ...filters, featuredOnly: checked as boolean })}
-                    className="data-[state=checked]:bg-sky-500 data-[state=checked]:border-sky-500"
-                  />
-                  <Label htmlFor="featured" className="text-sm font-medium cursor-pointer flex-1">
-                    {filtersText.featuredOnly[language]}
-                  </Label>
-                </div>
+              <div className="border-t border-gray-200 px-6 py-4 bg-gray-50">
+                <Button
+                  onClick={resetFilters}
+                  variant="outline"
+                  className="w-full h-11 rounded-lg border-2 border-gray-300 hover:bg-gray-100 font-semibold bg-transparent"
+                >
+                  {filtersText.resetAll[language]}
+                </Button>
               </div>
             </SheetContent>
           </Sheet>
