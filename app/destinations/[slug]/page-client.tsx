@@ -26,6 +26,8 @@ import destinationsData from "@/data/destinations"
 import siteData from "@/data/site-data.json"
 import { InteractiveGlobe } from "@/components/interactive-globe"
 import { useState } from "react"
+import BounceCards from "@/components/bounce-cards"
+import { ImageModal } from "@/components/image-modal"
 
 // Helper function to get text value (handles both string and multilingual object)
 function getText(value: string | { en: string; sq: string } | null | undefined, language: "en" | "sq"): string {
@@ -62,6 +64,7 @@ export function DestinationPageClient({ slug }: { slug: string }) {
   const { language } = useLanguage()
   const basePath = getBasePath()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const destination = destinationsData.destinations.find((d) => d.slug === slug)
 
@@ -72,12 +75,15 @@ export function DestinationPageClient({ slug }: { slug: string }) {
 
   const departures = destinationsData.departures.filter((dep) => destination.availableDepartureIds.includes(dep.id))
 
-  const galleryImages = [
-    `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " landscape")}`,
-    `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " cityscape")}`,
-    `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " architecture")}`,
-    `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " culture")}`,
-  ]
+  // Use gallery images from destination data, or fallback to placeholder
+  const galleryImages = destination.gallery && destination.gallery.length > 0 
+    ? destination.gallery 
+    : [
+        `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " landscape")}`,
+        `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " cityscape")}`,
+        `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " architecture")}`,
+        `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " culture")}`,
+      ]
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length)
@@ -86,6 +92,18 @@ export function DestinationPageClient({ slug }: { slug: string }) {
   const prevImage = () => {
     setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)
   }
+
+  const handleImageClick = (index: number) => {
+    setCurrentImageIndex(index)
+    setIsModalOpen(true)
+  }
+
+  const transformStyles = [
+    "rotate(5deg) translate(-150px)",
+    "rotate(0deg) translate(-70px)",
+    "rotate(-5deg)",
+    "rotate(5deg) translate(70px)",
+  ]
 
   return (
     <div className="min-h-screen bg-background">
@@ -107,58 +125,31 @@ export function DestinationPageClient({ slug }: { slug: string }) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
           {/* Left Column - Main Content (7/12 width for better balance) */}
           <div className="lg:col-span-7 space-y-6">
-            <div className="space-y-4">
-              {/* Main Large Image */}
-              <div className="relative aspect-[16/10] rounded-2xl overflow-hidden group bg-muted">
-                <img
-                  src={galleryImages[currentImageIndex] || "/placeholder.svg"}
-                  alt={getText(destination.name, language)}
-                  className="w-full h-full object-cover"
-                />
-
-                {/* Image Navigation Arrows */}
-                <button
-                  onClick={prevImage}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-3 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100"
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="h-5 w-5" />
-                </button>
-                <button
-                  onClick={nextImage}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-3 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100"
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="h-5 w-5" />
-                </button>
-
-                {/* Image Counter */}
-                <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm text-white px-3 py-1.5 rounded-full text-sm font-medium">
-                  {currentImageIndex + 1} / {galleryImages.length}
-                </div>
-              </div>
-
-              {/* Thumbnail Gallery */}
-              <div className="grid grid-cols-4 gap-3">
-                {galleryImages.map((img, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentImageIndex(index)}
-                    className={`aspect-[4/3] rounded-lg overflow-hidden transition-all ${
-                      currentImageIndex === index
-                        ? "ring-4 ring-primary scale-105"
-                        : "ring-2 ring-transparent hover:ring-primary/50 opacity-70 hover:opacity-100"
-                    }`}
-                  >
-                    <img
-                      src={img || "/placeholder.svg"}
-                      alt={`${getText(destination.name, language)} ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
+            {/* BounceCards Image Gallery */}
+            <div className="flex justify-center items-center py-8 bg-gradient-to-br from-accent/20 via-background to-accent/10 rounded-2xl">
+              <BounceCards
+                className="custom-bounceCards"
+                images={galleryImages}
+                containerWidth={500}
+                containerHeight={250}
+                animationDelay={0.5}
+                animationStagger={0.08}
+                easeType="elastic.out(1, 0.5)"
+                transformStyles={transformStyles}
+                enableHover={true}
+                onImageClick={handleImageClick}
+              />
             </div>
+
+            {/* Image Modal */}
+            <ImageModal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              images={galleryImages}
+              currentIndex={currentImageIndex}
+              onNavigate={setCurrentImageIndex}
+              destinationName={getText(destination.name, language)}
+            />
 
             {/* Destination Header */}
             <div>

@@ -82,8 +82,13 @@ export const destinationsData = {
         en: "5 nights of relaxation, snow and entertainment for the whole family! Comfortable accommodation, ski slopes very close and activities for everyone. A perfect start to the new year, where nature, snow and tranquility meet with the most beautiful family moments.",
         sq: "5 netë relaksim, borë dhe argëtim për të gjithë familjen! Akomodim komod, pista skijimi shumë afër dhe aktivitete për të gjithë. Një fillim perfekt për vitin e ri, ku natyra, bora dhe qetësia takohen me momentet më të bukura familjare.",
       },
-      primaryImage: "/placeholder.svg?height=400&width=600",
-      gallery: ["/placeholder.svg?height=400&width=600", "/placeholder.svg?height=400&width=600"],
+      primaryImage: "https://images.unsplash.com/photo-1551524164-687a55dd1126?w=1200&h=800&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1551524164-687a55dd1126?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1605540436563-5bca919ae766?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1483664852095-d6cc6870702d?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1556196966-c6317315aced?w=1200&h=800&fit=crop"
+      ],
       pricing: {
         from: 1085,
         currency: "EUR",
@@ -161,8 +166,13 @@ export const destinationsData = {
         en: "Experience the magical Christmas atmosphere of Prague with its historic streets, festive markets and stunning architecture. Make December an unforgettable experience!",
         sq: "Përjetoni atmosferën magjike të Krishtlindjeve në Pragë me rrugët e saj historike, tregjet festive dhe arkitekturën mahnitëse. Bëjeni dhjetorin një përvojë të paharrueshme!",
       },
-      primaryImage: "/placeholder.svg?height=400&width=600",
-      gallery: ["/placeholder.svg?height=400&width=600", "/placeholder.svg?height=400&width=600"],
+      primaryImage: "https://images.unsplash.com/photo-1541849546-216549ae216d?w=1200&h=800&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1541849546-216549ae216d?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1519677100203-a0e668c92439?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1592906209472-a36b1f3782ef?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200&h=800&fit=crop"
+      ],
       pricing: {
         from: 299,
         currency: "EUR",
@@ -236,8 +246,13 @@ export const destinationsData = {
         en: "Experience the magical snow, luxury skiing and breathtaking views in one of the world's most exclusive ski resorts. Make your winter special!",
         sq: "Përjetoni borën magjike, skijimin luksoz dhe pamjet mahnitëse në një nga resortet më ekskluzive të skijimit në botë. Bëjeni dimrin tuaj special!",
       },
-      primaryImage: "/placeholder.svg?height=400&width=600",
-      gallery: ["/placeholder.svg?height=400&width=600", "/placeholder.svg?height=400&width=600"],
+      primaryImage: "https://images.unsplash.com/photo-1609863761484-7649ab97dc4d?w=1200&h=800&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1609863761484-7649ab97dc4d?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1610041321420-d77aa7c5b5c5?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1544272321-c0ee2cf0bb5c?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1502630859934-b3b41d18206c?w=1200&h=800&fit=crop"
+      ],
       pricing: {
         from: 2999,
         currency: "EUR",
@@ -309,8 +324,13 @@ export const destinationsData = {
         en: "After the holidays, the city of music and culture transforms into a peaceful winter oasis. Walks through the historic streets, traditional cafes and impressive architecture make every moment feel like a fairy tale. Experience the atmosphere of famous cafes, enjoy typical Austrian sweets and relax among the warm lights that reflect on the canals and city squares.",
         sq: "Pas festave, qyteti i muzikës dhe kulturës transformohet në një oazë paqësore dimërore. Shëtitjet nëpër rrugët historike, kafenetë tradicionale dhe arkitektura impresionuese e bëjnë çdo moment të ndihet si përrallë. Përjetoni atmosferën e kafeneve të famshme, shijoni ëmbëlsirat tipike austriake dhe relaksohuni mes dritave të ngrohta që pasqyrohen në kanalet dhe sheshet e qytetit.",
       },
-      primaryImage: "/placeholder.svg?height=400&width=600",
-      gallery: ["/placeholder.svg?height=400&width=600", "/placeholder.svg?height=400&width=600"],
+      primaryImage: "https://images.unsplash.com/photo-1609856878074-cf31e21ccb6b?w=1200&h=800&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1609856878074-cf31e21ccb6b?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1516550893923-42d28e5677af?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1558599652-5e0b1d719c2c?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1513581166391-887a96ddeafd?w=1200&h=800&fit=crop"
+      ],
       pricing: {
         from: 149,
         currency: "EUR",
@@ -384,8 +404,13 @@ export const destinationsData = {
         en: "Barcelona awaits you with festive lights, seaside walks and an atmosphere full of energy that only this city has. Perfect vacation before the holidays with La Rambla, Sagrada Familia & Catalan squares, tapas, Spanish vibe and magical winter nights.",
         sq: "Barcelona ju pret me drita festive, shëtitje bregdetare dhe një atmosferë plot energji që vetëm ky qytet e ka. Pushim perfekt para festave me La Rambla, Sagrada Familia & sheshet katalane, tapas, atmosferë spanjolle dhe netë dimërore magjike.",
       },
-      primaryImage: "/placeholder.svg?height=400&width=600",
-      gallery: ["/placeholder.svg?height=400&width=600", "/placeholder.svg?height=400&width=600"],
+      primaryImage: "https://images.unsplash.com/photo-1562883676-8c7feb83f09b?w=1200&h=800&fit=crop",
+      gallery: [
+        "https://images.unsplash.com/photo-1562883676-8c7feb83f09b?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1511527661048-7fe73d85e9a4?w=1200&h=800&fit=crop",
+        "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1200&h=800&fit=crop"
+      ],
       pricing: {
         from: 269,
         currency: "EUR",
