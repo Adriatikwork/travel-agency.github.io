@@ -41,7 +41,8 @@ export function InteractiveGlobe({
 }: InteractiveGlobeProps) {
   const svgRef = useRef<SVGSVGElement>(null)
   const animationFrameRef = useRef<number | null>(null)
-  const timeoutRef = useRef<number | null>(null)
+  const timeoutsRef = useRef<number[]>([])
+  const isMountedRef = useRef(true)
   const [progress, setProgress] = useState(0)
   const [worldData, setWorldData] = useState<GeoFeature[]>([])
   const [rotation, setRotation] = useState([0, 0])
@@ -91,21 +92,25 @@ export function InteractiveGlobe({
     if (!autoAnimate || worldData.length === 0) return
     if (animationPhase !== "idle") return
 
+    isMountedRef.current = true
+
     const sequence = async () => {
+      if (!isMountedRef.current) return
       setAnimationPhase("spinning")
       const spinStart = Date.now()
       const spinDuration = 5000
 
       const spinAnimation = () => {
+        if (!isMountedRef.current) return
         const elapsed = Date.now() - spinStart
         const t = Math.min(elapsed / spinDuration, 1)
         const spinRotation = 360 * t
 
         setRotation([spinRotation, 0])
 
-        if (t < 1) {
+        if (t < 1 && isMountedRef.current) {
           animationFrameRef.current = requestAnimationFrame(spinAnimation)
-        } else {
+        } else if (isMountedRef.current) {
           setAnimationPhase("rotating")
           const rotateStart = Date.now()
           const rotateDuration = 3000
@@ -113,6 +118,7 @@ export function InteractiveGlobe({
           const targetRotation = [-targetLon, -targetLat]
 
           const rotateAnimation = () => {
+            if (!isMountedRef.current) return
             const elapsed = Date.now() - rotateStart
             const t = Math.min(elapsed / rotateDuration, 1)
             const eased = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
@@ -124,9 +130,9 @@ export function InteractiveGlobe({
 
             setRotation(currentRotation)
 
-            if (t < 1) {
+            if (t < 1 && isMountedRef.current) {
               animationFrameRef.current = requestAnimationFrame(rotateAnimation)
-            } else {
+            } else if (isMountedRef.current) {
               setAnimationPhase("zooming")
               const zoomStart = Date.now()
               const zoomDuration = 1500
@@ -134,6 +140,7 @@ export function InteractiveGlobe({
               const targetScale = 600
 
               const zoomAnimation = () => {
+                if (!isMountedRef.current) return
                 const elapsed = Date.now() - zoomStart
                 const t = Math.min(elapsed / zoomDuration, 1)
                 const eased = 1 - Math.pow(1 - t, 3)
@@ -141,15 +148,17 @@ export function InteractiveGlobe({
                 const currentScale = startScale + (targetScale - startScale) * eased
                 setScale(currentScale)
 
-                if (t < 1) {
+                if (t < 1 && isMountedRef.current) {
                   animationFrameRef.current = requestAnimationFrame(zoomAnimation)
-                } else {
-                  timeoutRef.current = window.setTimeout(() => {
+                } else if (isMountedRef.current) {
+                  const timeout1 = window.setTimeout(() => {
+                    if (!isMountedRef.current) return
                     setAnimationPhase("unfolding")
                     const unfoldStart = Date.now()
                     const unfoldDuration = 2000
 
                     const unfoldAnimation = () => {
+                      if (!isMountedRef.current) return
                       const elapsed = Date.now() - unfoldStart
                       const t = Math.min(elapsed / unfoldDuration, 1)
                       const eased = t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t
@@ -158,21 +167,24 @@ export function InteractiveGlobe({
                       const unfoldScale = 600
                       setScale(unfoldScale)
 
-                      if (t < 1) {
+                      if (t < 1 && isMountedRef.current) {
                         animationFrameRef.current = requestAnimationFrame(unfoldAnimation)
-                      } else {
+                      } else if (isMountedRef.current) {
                         setAnimationPhase("complete")
-                        timeoutRef.current = window.setTimeout(() => {
+                        const timeout2 = window.setTimeout(() => {
+                          if (!isMountedRef.current) return
                           setProgress(0)
                           setRotation([0, 0])
                           setScale(250)
                           setAnimationPhase("idle")
                         }, 2000)
+                        timeoutsRef.current.push(timeout2)
                       }
                     }
 
                     unfoldAnimation()
                   }, 500)
+                  timeoutsRef.current.push(timeout1)
                 }
               }
 
@@ -191,14 +203,13 @@ export function InteractiveGlobe({
 
     // Cleanup function to cancel animations on unmount
     return () => {
+      isMountedRef.current = false
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
         animationFrameRef.current = null
       }
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-        timeoutRef.current = null
-      }
+      timeoutsRef.current.forEach(timeout => clearTimeout(timeout))
+      timeoutsRef.current = []
     }
   }, [autoAnimate, worldData, targetLat, targetLon])
 
