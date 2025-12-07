@@ -88,7 +88,8 @@ export function InteractiveGlobe({
   }, [])
 
   useEffect(() => {
-    if (!autoAnimate || worldData.length === 0 || animationPhase !== "idle") return
+    if (!autoAnimate || worldData.length === 0) return
+    if (animationPhase !== "idle") return
 
     const sequence = async () => {
       setAnimationPhase("spinning")
@@ -199,7 +200,7 @@ export function InteractiveGlobe({
         timeoutRef.current = null
       }
     }
-  }, [autoAnimate, worldData, targetLat, targetLon, animationPhase])
+  }, [autoAnimate, worldData, targetLat, targetLon])
 
   useEffect(() => {
     if (!svgRef.current || worldData.length === 0) return
