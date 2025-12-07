@@ -103,32 +103,46 @@ export function Navbar() {
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-white hover:text-white/80 transition-transform hover:scale-110"
+            className="md:hidden p-2.5 text-white hover:bg-white/20 rounded-lg transition-all hover:scale-105 active:scale-95"
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
-            {isMobileMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-2 py-5 border-t border-white/20 space-y-1 animate-in slide-in-from-top">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollToSection(link.id)}
-                className="block w-full text-left py-3 px-2 text-white/90 hover:text-white hover:bg-white/10 font-semibold text-base rounded-lg transition-all"
-              >
-                {link.name}
-              </button>
-            ))}
-            <div className="py-3 px-2">
-              <LanguageSwitcher />
+          <div className="md:hidden overflow-hidden">
+            <div className="py-4 border-t border-white/30 space-y-2 animate-in slide-in-from-top duration-300">
+              {navLinks.map((link, index) => (
+                <button
+                  key={link.id}
+                  onClick={() => scrollToSection(link.id)}
+                  className="block w-full text-left py-3.5 px-4 text-white/95 hover:text-white hover:bg-white/15 active:bg-white/25 font-semibold text-base rounded-xl transition-all duration-200 group animate-in slide-in-from-top"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <span className="flex items-center justify-between">
+                    {link.name}
+                    <span className="text-white/40 group-hover:text-white/70 group-hover:translate-x-1 transition-all">
+                      →
+                    </span>
+                  </span>
+                </button>
+              ))}
+
+              <div className="pt-3 pb-2 px-4 flex items-center justify-between border-t border-white/20 mt-3">
+                <span className="text-white/80 text-sm font-medium">Language</span>
+                <LanguageSwitcher />
+              </div>
+
+              <div className="pt-2 px-4">
+                <Button
+                  onClick={() => scrollToSection("contact")}
+                  className="w-full bg-white hover:bg-white/90 text-[#38b6ff] rounded-xl font-bold text-base py-6 shadow-lg hover:shadow-xl transition-all active:scale-95 touch-manipulation"
+                >
+                  {siteData.nav.planTrip[language]}
+                </Button>
+              </div>
             </div>
-            <Button
-              onClick={() => scrollToSection("contact")}
-              className="w-full bg-white hover:bg-white/90 text-[#38b6ff] rounded-full font-bold text-base py-6 mt-2"
-            >
-              {siteData.nav.planTrip[language]}
-            </Button>
           </div>
         )}
       </div>

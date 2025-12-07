@@ -76,31 +76,41 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
   }
 
   return (
-    <section id="contact" className="py-20 bg-white">
-      <div className="container mx-auto px-4">
+    <section id="contact" className="py-12 sm:py-16 md:py-20 bg-white">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">{section.title[language]}</h2>
-            <p className="text-xl text-gray-600">{section.subtitle[language]}</p>
+          <div className="text-center mb-8 sm:mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4 text-balance">
+              {section.title[language]}
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 text-pretty">{section.subtitle[language]}</p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6 bg-gray-50 p-8 rounded-2xl shadow-lg">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form
+            onSubmit={handleSubmit}
+            className="space-y-4 sm:space-y-6 bg-gray-50 p-4 sm:p-6 md:p-8 rounded-2xl shadow-lg"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {/* Name */}
               <div className="space-y-2">
-                <Label htmlFor="name">{form.fullName[language]} *</Label>
+                <Label htmlFor="name" className="text-sm sm:text-base">
+                  {form.fullName[language]} *
+                </Label>
                 <Input
                   id="name"
                   required
                   value={formData.name}
                   onChange={(e) => handleChange("name", e.target.value)}
                   placeholder="John Doe"
+                  className="h-10 sm:h-11 text-sm sm:text-base"
                 />
               </div>
 
               {/* Email */}
               <div className="space-y-2">
-                <Label htmlFor="email">{form.email[language]} *</Label>
+                <Label htmlFor="email" className="text-sm sm:text-base">
+                  {form.email[language]} *
+                </Label>
                 <Input
                   id="email"
                   type="email"
@@ -108,12 +118,15 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
                   value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
                   placeholder="john@example.com"
+                  className="h-10 sm:h-11 text-sm sm:text-base"
                 />
               </div>
 
               {/* Phone */}
               <div className="space-y-2">
-                <Label htmlFor="phone">{form.phone[language]} *</Label>
+                <Label htmlFor="phone" className="text-sm sm:text-base">
+                  {form.phone[language]} *
+                </Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -121,18 +134,21 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
                   value={formData.phone}
                   onChange={(e) => handleChange("phone", e.target.value)}
                   placeholder="+383 44 123 456"
+                  className="h-10 sm:h-11 text-sm sm:text-base"
                 />
               </div>
 
               {/* Departure City */}
               <div className="space-y-2">
-                <Label htmlFor="departureCity">{form.departureCity[language]} *</Label>
+                <Label htmlFor="departureCity" className="text-sm sm:text-base">
+                  {form.departureCity[language]} *
+                </Label>
                 <Select
                   value={formData.departureCity}
                   onValueChange={(value) => handleChange("departureCity", value)}
                   required
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="h-10 sm:h-11 text-sm sm:text-base">
                     <SelectValue placeholder={form.selectDeparture[language]} />
                   </SelectTrigger>
                   <SelectContent>
@@ -147,13 +163,15 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
               {/* Destination */}
               <div className="space-y-2">
-                <Label htmlFor="destination">{form.destination[language]} *</Label>
+                <Label htmlFor="destination" className="text-sm sm:text-base">
+                  {form.destination[language]} *
+                </Label>
                 <Select
                   value={formData.destination}
                   onValueChange={(value) => handleChange("destination", value)}
                   required
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="h-10 sm:h-11 text-sm sm:text-base">
                     <SelectValue placeholder={form.selectDestination[language]} />
                   </SelectTrigger>
                   <SelectContent>
@@ -168,9 +186,11 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
               {/* Trip Type */}
               <div className="space-y-2">
-                <Label htmlFor="tripType">{form.tripType[language]} *</Label>
+                <Label htmlFor="tripType" className="text-sm sm:text-base">
+                  {form.tripType[language]} *
+                </Label>
                 <Select value={formData.tripType} onValueChange={(value) => handleChange("tripType", value)} required>
-                  <SelectTrigger>
+                  <SelectTrigger className="h-10 sm:h-11 text-sm sm:text-base">
                     <SelectValue placeholder={form.selectType[language]} />
                   </SelectTrigger>
                   <SelectContent>
@@ -186,33 +206,41 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
               {/* Date From */}
               <div className="space-y-2">
-                <Label htmlFor="dateFrom">{form.dateFrom[language]} *</Label>
+                <Label htmlFor="dateFrom" className="text-sm sm:text-base">
+                  {form.dateFrom[language]} *
+                </Label>
                 <Input
                   id="dateFrom"
                   type="date"
                   required
                   value={formData.dateFrom}
                   onChange={(e) => handleChange("dateFrom", e.target.value)}
+                  className="h-10 sm:h-11 text-sm sm:text-base"
                 />
               </div>
 
               {/* Date To */}
               <div className="space-y-2">
-                <Label htmlFor="dateTo">{form.dateTo[language]} *</Label>
+                <Label htmlFor="dateTo" className="text-sm sm:text-base">
+                  {form.dateTo[language]} *
+                </Label>
                 <Input
                   id="dateTo"
                   type="date"
                   required
                   value={formData.dateTo}
                   onChange={(e) => handleChange("dateTo", e.target.value)}
+                  className="h-10 sm:h-11 text-sm sm:text-base"
                 />
               </div>
 
               {/* Travelers */}
               <div className="space-y-2">
-                <Label htmlFor="travelers">{form.travelers[language]} *</Label>
+                <Label htmlFor="travelers" className="text-sm sm:text-base">
+                  {form.travelers[language]} *
+                </Label>
                 <Select value={formData.travelers} onValueChange={(value) => handleChange("travelers", value)} required>
-                  <SelectTrigger>
+                  <SelectTrigger className="h-10 sm:h-11 text-sm sm:text-base">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -228,17 +256,24 @@ export function ContactForm({ destinations, departures }: ContactFormProps) {
 
             {/* Message */}
             <div className="space-y-2">
-              <Label htmlFor="message">{form.additionalInfo[language]}</Label>
+              <Label htmlFor="message" className="text-sm sm:text-base">
+                {form.additionalInfo[language]}
+              </Label>
               <Textarea
                 id="message"
-                rows={5}
+                rows={4}
                 value={formData.message}
                 onChange={(e) => handleChange("message", e.target.value)}
                 placeholder={form.additionalInfoPlaceholder[language]}
+                className="text-sm sm:text-base"
               />
             </div>
 
-            <Button type="submit" size="lg" className="w-full bg-sky-500 hover:bg-sky-600 text-lg py-6">
+            <Button
+              type="submit"
+              size="lg"
+              className="w-full bg-sky-500 hover:bg-sky-600 text-base sm:text-lg py-5 sm:py-6 touch-manipulation"
+            >
               {form.submit[language]}
             </Button>
           </form>

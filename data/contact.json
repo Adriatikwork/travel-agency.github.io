@@ -1,119 +1,118 @@
 {
-    "section": {
-      "title": {
-        "en": "Plan Your Trip",
-        "sq": "Planifikoni Udhëtimin Tuaj"
+  "section": {
+    "title": {
+      "en": "Plan Your Trip",
+      "sq": "Planifikoni Udhëtimin Tuaj"
+    },
+    "subtitle": {
+      "en": "Tell us about your dream vacation and we'll make it happen",
+      "sq": "Na tregoni për pushimin tuaj ëndërror dhe ne do ta bëjmë realitet"
+    }
+  },
+  "form": {
+    "fullName": {
+      "en": "Full Name",
+      "sq": "Emri i Plotë"
+    },
+    "email": {
+      "en": "Email",
+      "sq": "Email"
+    },
+    "phone": {
+      "en": "Phone",
+      "sq": "Telefoni"
+    },
+    "departureCity": {
+      "en": "Departure City",
+      "sq": "Qyteti i Nisjes"
+    },
+    "selectDeparture": {
+      "en": "Select departure",
+      "sq": "Zgjidhni nisjen"
+    },
+    "destination": {
+      "en": "Desired Destination",
+      "sq": "Destinacioni i Dëshiruar"
+    },
+    "selectDestination": {
+      "en": "Select destination",
+      "sq": "Zgjidhni destinacionin"
+    },
+    "tripType": {
+      "en": "Trip Type",
+      "sq": "Lloji i Udhëtimit"
+    },
+    "selectType": {
+      "en": "Select type",
+      "sq": "Zgjidhni llojin"
+    },
+    "tripTypes": {
+      "honeymoon": {
+        "en": "Honeymoon",
+        "sq": "Muaji i Mjaltit"
       },
-      "subtitle": {
-        "en": "Tell us about your dream vacation and we'll make it happen",
-        "sq": "Na tregoni për pushimin tuaj ëndërror dhe ne do ta bëjmë realitet"
+      "family": {
+        "en": "Family Vacation",
+        "sq": "Pushim Familjar"
+      },
+      "romantic": {
+        "en": "Romantic Getaway",
+        "sq": "Arratisje Romantike"
+      },
+      "adventure": {
+        "en": "Adventure",
+        "sq": "Aventurë"
+      },
+      "luxury": {
+        "en": "Luxury Experience",
+        "sq": "Përvojë Luksoze"
+      },
+      "group": {
+        "en": "Group Travel",
+        "sq": "Udhëtim në Grup"
       }
     },
-    "form": {
-      "fullName": {
-        "en": "Full Name",
-        "sq": "Emri i Plotë"
-      },
-      "email": {
-        "en": "Email",
-        "sq": "Email"
-      },
-      "phone": {
-        "en": "Phone",
-        "sq": "Telefoni"
-      },
-      "departureCity": {
-        "en": "Departure City",
-        "sq": "Qyteti i Nisjes"
-      },
-      "selectDeparture": {
-        "en": "Select departure",
-        "sq": "Zgjidhni nisjen"
-      },
-      "destination": {
-        "en": "Desired Destination",
-        "sq": "Destinacioni i Dëshiruar"
-      },
-      "selectDestination": {
-        "en": "Select destination",
-        "sq": "Zgjidhni destinacionin"
-      },
-      "tripType": {
-        "en": "Trip Type",
-        "sq": "Lloji i Udhëtimit"
-      },
-      "selectType": {
-        "en": "Select type",
-        "sq": "Zgjidhni llojin"
-      },
-      "tripTypes": {
-        "honeymoon": {
-          "en": "Honeymoon",
-          "sq": "Muaji i Mjaltit"
-        },
-        "family": {
-          "en": "Family Vacation",
-          "sq": "Pushim Familjar"
-        },
-        "romantic": {
-          "en": "Romantic Getaway",
-          "sq": "Arratisje Romantike"
-        },
-        "adventure": {
-          "en": "Adventure",
-          "sq": "Aventurë"
-        },
-        "luxury": {
-          "en": "Luxury Experience",
-          "sq": "Përvojë Luksoze"
-        },
-        "group": {
-          "en": "Group Travel",
-          "sq": "Udhëtim në Grup"
-        }
-      },
-      "dateFrom": {
-        "en": "Travel Date From",
-        "sq": "Data e Udhëtimit Nga"
-      },
-      "dateTo": {
-        "en": "Travel Date To",
-        "sq": "Data e Udhëtimit Deri"
-      },
-      "travelers": {
-        "en": "Number of Travelers",
-        "sq": "Numri i Udhëtarëve"
-      },
-      "person": {
-        "en": "Person",
-        "sq": "Person"
-      },
-      "people": {
-        "en": "People",
-        "sq": "Persona"
-      },
-      "additionalInfo": {
-        "en": "Additional Information",
-        "sq": "Informacion Shtesë"
-      },
-      "additionalInfoPlaceholder": {
-        "en": "Tell us about your preferences, special requests, or any questions you have...",
-        "sq": "Na tregoni për preferencat tuaja, kërkesat speciale ose çdo pyetje që keni..."
-      },
-      "submit": {
-        "en": "Submit Inquiry",
-        "sq": "Dërgoni Kërkesën"
-      }
+    "dateFrom": {
+      "en": "Travel Date From",
+      "sq": "Data e Udhëtimit Nga"
     },
-    "success": {
-      "title": {
-        "en": "Thank You!",
-        "sq": "Faleminderit!"
-      },
-      "message": {
-        "en": "Your inquiry has been received. Our travel experts will contact you shortly to plan your perfect trip.",
-        "sq": "Kërkesa juaj është pranuar. Ekspertët tanë të udhëtimit do t'ju kontaktojnë së shpejti për të planifikuar udhëtimin tuaj perfekt."
-      }
+    "dateTo": {
+      "en": "Travel Date To",
+      "sq": "Data e Udhëtimit Deri"
+    },
+    "travelers": {
+      "en": "Number of Travelers",
+      "sq": "Numri i Udhëtarëve"
+    },
+    "person": {
+      "en": "Person",
+      "sq": "Person"
+    },
+    "people": {
+      "en": "People",
+      "sq": "Persona"
+    },
+    "additionalInfo": {
+      "en": "Additional Information",
+      "sq": "Informacion Shtesë"
+    },
+    "additionalInfoPlaceholder": {
+      "en": "Tell us about your preferences, special requests, or any questions you have...",
+      "sq": "Na tregoni për preferencat tuaja, kërkesat speciale ose çdo pyetje që keni..."
+    },
+    "submit": {
+      "en": "Submit Inquiry",
+      "sq": "Dërgoni Kërkesën"
+    }
+  },
+  "success": {
+    "title": {
+      "en": "Thank You!",
+      "sq": "Faleminderit!"
+    },
+    "message": {
+      "en": "Your inquiry has been received. Our travel experts will contact you shortly to plan your perfect trip.",
+      "sq": "Kërkesa juaj është pranuar. Ekspertët tanë të udhëtimit do t'ju kontaktojnë së shpejti për të planifikuar udhëtimin tuaj perfekt."
     }
   }
-  
+}

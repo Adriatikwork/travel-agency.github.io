@@ -1,21 +1,7 @@
 "use client"
 
 import { notFound } from "next/navigation"
-import {
-  MapPin,
-  Calendar,
-  Users,
-  Utensils,
-  Check,
-  Phone,
-  Mail,
-  ArrowLeft,
-  Plane,
-  Clock,
-  Star,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react"
+import { ArrowLeft, Plane, Clock, ChevronLeft, ChevronRight, Calendar, Users, Check } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -23,11 +9,8 @@ import Link from "next/link"
 import { useLanguage } from "@/lib/language-context"
 import { Navbar } from "@/components/navbar"
 import destinationsData from "@/data/destinations"
-import siteData from "@/data/site-data.json"
 import { InteractiveGlobe } from "@/components/interactive-globe"
 import { useState } from "react"
-import BounceCards from "@/components/bounce-cards"
-import { ImageModal } from "@/components/image-modal"
 
 // Helper function to get text value (handles both string and multilingual object)
 function getText(value: string | { en: string; sq: string } | null | undefined, language: "en" | "sq"): string {
@@ -64,7 +47,6 @@ export function DestinationPageClient({ slug }: { slug: string }) {
   const { language } = useLanguage()
   const basePath = getBasePath()
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
-  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const destination = destinationsData.destinations.find((d) => d.slug === slug)
 
@@ -76,14 +58,15 @@ export function DestinationPageClient({ slug }: { slug: string }) {
   const departures = destinationsData.departures.filter((dep) => destination.availableDepartureIds.includes(dep.id))
 
   // Use gallery images from destination data, or fallback to placeholder
-  const galleryImages = destination.gallery && destination.gallery.length > 0 
-    ? destination.gallery 
-    : [
-        `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " landscape")}`,
-        `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " cityscape")}`,
-        `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " architecture")}`,
-        `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " culture")}`,
-      ]
+  const galleryImages =
+    destination.gallery && destination.gallery.length > 0
+      ? destination.gallery
+      : [
+          `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " landscape")}`,
+          `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " cityscape")}`,
+          `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " architecture")}`,
+          `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination.name, language) + " culture")}`,
+        ]
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length)
@@ -93,143 +76,158 @@ export function DestinationPageClient({ slug }: { slug: string }) {
     setCurrentImageIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length)
   }
 
-  const handleImageClick = (index: number) => {
-    setCurrentImageIndex(index)
-    setIsModalOpen(true)
-  }
-
-  const transformStyles = [
-    "rotate(5deg) translate(-150px)",
-    "rotate(0deg) translate(-70px)",
-    "rotate(-5deg)",
-    "rotate(5deg) translate(70px)",
-  ]
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <div className="container mx-auto px-4 pt-28 pb-6">
+      <div className="container mx-auto px-4 pt-24 sm:pt-28 pb-4 sm:pb-6">
         <Link
           href="/"
-          className="inline-flex items-center text-muted-foreground hover:text-foreground mb-4 group transition-all"
+          className="inline-flex items-center text-muted-foreground hover:text-foreground mb-3 sm:mb-4 group transition-all touch-manipulation"
         >
           <ArrowLeft className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-          <span className="font-medium text-sm">
+          <span className="font-medium text-xs sm:text-sm">
             {language === "en" ? "Back to Destinations" : "Kthehu te Destinacionet"}
           </span>
         </Link>
       </div>
 
-      <div className="container mx-auto px-4 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-          {/* Left Column - Main Content (7/12 width for better balance) */}
-          <div className="lg:col-span-7 space-y-6">
-            {/* BounceCards Image Gallery */}
-            <div className="flex justify-center items-center py-8 bg-gradient-to-br from-accent/20 via-background to-accent/10 rounded-2xl">
-              <BounceCards
-                className="custom-bounceCards"
-                images={galleryImages}
-                containerWidth={500}
-                containerHeight={250}
-                animationDelay={0.5}
-                animationStagger={0.08}
-                easeType="elastic.out(1, 0.5)"
-                transformStyles={transformStyles}
-                enableHover={true}
-                onImageClick={handleImageClick}
-              />
+      <div className="container mx-auto px-4 pb-12 sm:pb-16 md:pb-20">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8">
+          {/* Main Content */}
+          <div className="lg:col-span-7 space-y-4 sm:space-y-6">
+            <div className="space-y-3 sm:space-y-4">
+              <div className="relative aspect-[16/9] sm:aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden group bg-muted">
+                <img
+                  src={galleryImages[currentImageIndex] || "/placeholder.svg"}
+                  alt={getText(destination.name, language)}
+                  className="w-full h-full object-cover"
+                />
+
+                <button
+                  onClick={prevImage}
+                  className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2 sm:p-3 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 touch-manipulation"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
+                </button>
+                <button
+                  onClick={nextImage}
+                  className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white p-2 sm:p-3 rounded-full backdrop-blur-sm transition-all opacity-0 group-hover:opacity-100 touch-manipulation"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
+                </button>
+
+                <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 bg-black/60 backdrop-blur-sm text-white px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium">
+                  {currentImageIndex + 1} / {galleryImages.length}
+                </div>
+              </div>
+
+              <div className="grid grid-cols-4 gap-2 sm:gap-3">
+                {galleryImages.map((img, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`aspect-[4/3] rounded-lg overflow-hidden transition-all touch-manipulation ${
+                      currentImageIndex === index
+                        ? "ring-2 sm:ring-4 ring-primary scale-105"
+                        : "ring-1 sm:ring-2 ring-transparent hover:ring-primary/50 opacity-70 hover:opacity-100"
+                    }`}
+                  >
+                    <img
+                      src={img || "/placeholder.svg"}
+                      alt={`${getText(destination.name, language)} ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
 
-            {/* Image Modal */}
-            <ImageModal
-              isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
-              images={galleryImages}
-              currentIndex={currentImageIndex}
-              onNavigate={setCurrentImageIndex}
-              destinationName={getText(destination.name, language)}
-            />
-
-            {/* Destination Header */}
             <div>
-              <div className="flex flex-wrap items-center gap-2 mb-3">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-2 sm:mb-3">
                 {destination.themes.map((theme) => (
-                  <Badge key={theme} variant="secondary" className="capitalize text-xs font-semibold px-3 py-1">
+                  <Badge
+                    key={theme}
+                    variant="secondary"
+                    className="capitalize text-xs sm:text-sm font-semibold px-2 sm:px-3 py-1 sm:py-1.5 rounded-full"
+                  >
                     {theme}
                   </Badge>
                 ))}
               </div>
 
-              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2 leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 sm:mb-3 text-balance">
                 {getText(destination.name, language)}
               </h1>
-
-              <p className="text-lg md:text-xl text-muted-foreground italic mb-5 font-light">
+              <p className="text-sm sm:text-base md:text-lg text-muted-foreground italic mb-3 sm:mb-4 text-pretty">
                 {getText(destination.tagline, language)}
               </p>
-
-              <div className="flex flex-wrap items-center gap-4 text-sm">
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-primary" />
-                  <span className="font-semibold">
-                    {getText(destination.city, language)}, {getText(destination.country, language)}
-                  </span>
-                </div>
-                {destination.duration.specificDates && (
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-primary" />
-                    <span className="font-semibold">{getText(destination.duration.specificDates, language)}</span>
-                  </div>
-                )}
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-primary" />
-                  <span className="font-semibold">
-                    {destination.duration.minNights === destination.duration.maxNights
-                      ? `${destination.duration.minNights} ${language === "en" ? "nights" : "netë"}`
-                      : `${destination.duration.minNights}-${destination.duration.maxNights} ${language === "en" ? "nights" : "netë"}`}
-                  </span>
-                </div>
-              </div>
+              <p className="text-sm sm:text-base text-foreground/90 leading-relaxed text-pretty">
+                {getText(destination.descriptionLong, language)}
+              </p>
             </div>
 
-            {/* About Section */}
             <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
-                <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
-                  {language === "en" ? "About This Destination" : "Rreth Destinacionit"}
+              <CardContent className="p-4 sm:p-6">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-3 sm:mb-4 text-balance">
+                  {language === "en" ? "Trip Details" : "Detajet e Udhëtimit"}
                 </h2>
-                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                  {getText(destination.descriptionLong, language)}
-                </p>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="flex items-start gap-3 p-3 sm:p-4 bg-accent/40 rounded-xl border border-border">
+                    <div className="bg-primary/15 p-2 sm:p-2.5 rounded-xl flex-shrink-0">
+                      <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-0.5">
+                        {language === "en" ? "Duration" : "Kohëzgjatja"}
+                      </p>
+                      <p className="font-bold text-foreground text-sm sm:text-base text-balance">
+                        {destination.duration.minNights} {language === "en" ? "Nights" : "Netë"}
+                      </p>
+                      {destination.duration.specificDates && (
+                        <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                          {getText(destination.duration.specificDates, language)}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  {destination.mealPlan && (
+                    <div className="flex items-start gap-3 p-3 sm:p-4 bg-accent/40 rounded-xl border border-border">
+                      <div className="bg-primary/15 p-2 sm:p-2.5 rounded-xl flex-shrink-0">
+                        <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                      </div>
+                      <div>
+                        <p className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide mb-0.5">
+                          {language === "en" ? "Meal Plan" : "Planifikimi i Ushqimit"}
+                        </p>
+                        <p className="font-bold text-foreground text-sm sm:text-base text-balance">
+                          {getText(destination.mealPlan, language)}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </CardContent>
             </Card>
 
-            {/* Highlights */}
-            {destination.highlights && getArray(destination.highlights, language).length > 0 && (
+            {destination.highlights && (
               <Card className="border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-2.5 mb-4">
-                    <div className="bg-primary/10 p-2 rounded-xl">
-                      <Star className="h-4 w-4 text-primary" />
-                    </div>
-                    <h2 className="text-xl md:text-2xl font-bold text-foreground">
-                      {language === "en" ? "Trip Highlights" : "Thekset e Udhëtimit"}
-                    </h2>
-                  </div>
+                <CardContent className="p-4 sm:p-6">
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-3 sm:mb-4 text-balance">
+                    {language === "en" ? "Highlights" : "Pikat Kryesore"}
+                  </h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                     {getArray(destination.highlights, language).map((highlight, index) => (
-                      <div
-                        key={index}
-                        className="flex items-start p-3 rounded-xl border border-border hover:border-primary/30 hover:bg-accent/50 transition-all duration-300 group"
-                      >
-                        <div className="bg-primary/10 p-1.5 rounded-lg mr-2.5 mt-0.5 flex-shrink-0 group-hover:bg-primary/20 transition-colors">
-                          <Check className="h-3.5 w-3.5 text-primary" />
+                      <div key={index} className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
+                        <div className="bg-primary/15 p-1.5 sm:p-2 rounded-lg flex-shrink-0">
+                          <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
                         </div>
-                        <span className="text-xs md:text-sm text-foreground leading-relaxed font-medium">
-                          {highlight}
-                        </span>
+                        <span className="text-foreground/90 text-balance">{highlight}</span>
                       </div>
                     ))}
                   </div>
@@ -237,26 +235,20 @@ export function DestinationPageClient({ slug }: { slug: string }) {
               </Card>
             )}
 
-            {/* What's Included */}
-            {destination.included && getArray(destination.included, language).length > 0 && (
+            {destination.included && (
               <Card className="border-0 shadow-lg">
-                <CardContent className="p-6">
-                  <h2 className="text-xl md:text-2xl font-bold text-foreground mb-4">
+                <CardContent className="p-4 sm:p-6">
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-3 sm:mb-4 text-balance">
                     {language === "en" ? "What's Included" : "Çfarë Përfshihet"}
                   </h2>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="space-y-2 sm:space-y-3">
                     {getArray(destination.included, language).map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex items-start p-3 rounded-xl border border-green-200 dark:border-green-900/50 bg-green-50 dark:bg-green-900/20 hover:bg-green-100 dark:hover:bg-green-900/30 transition-all duration-300 group"
-                      >
-                        <div className="bg-green-500/20 p-1.5 rounded-lg mr-2.5 mt-0.5 flex-shrink-0 group-hover:bg-green-500/30 transition-colors">
-                          <Check className="h-3.5 w-3.5 text-green-600 dark:text-green-400" />
+                      <div key={index} className="flex items-center gap-2 sm:gap-3 text-sm sm:text-base">
+                        <div className="bg-green-500/15 p-1.5 sm:p-2 rounded-lg flex-shrink-0">
+                          <Check className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-green-600" />
                         </div>
-                        <span className="capitalize leading-relaxed text-foreground text-xs md:text-sm font-medium">
-                          {item.replace(/-/g, " ")}
-                        </span>
+                        <span className="text-foreground/90 capitalize text-balance">{item.replace(/-/g, " ")}</span>
                       </div>
                     ))}
                   </div>
@@ -264,43 +256,67 @@ export function DestinationPageClient({ slug }: { slug: string }) {
               </Card>
             )}
 
-            {/* Departure Cities */}
             <Card className="border-0 shadow-lg">
-              <CardContent className="p-6">
-                <h2 className="text-xl md:text-2xl font-bold text-foreground mb-4">
+              <CardContent className="p-4 sm:p-6">
+                <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-3 sm:mb-4 text-balance">
                   {language === "en" ? "Available Departures" : "Nisjet e Disponueshme"}
                 </h2>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                   {departures.map((departure) => (
                     <div
                       key={departure.id}
-                      className="flex items-center p-4 bg-accent/40 rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all duration-300 group cursor-pointer"
+                      className="flex items-center p-3 sm:p-4 bg-accent/40 rounded-xl border border-border hover:border-primary/50 hover:shadow-md transition-all duration-300 group cursor-pointer"
                     >
-                      <div className="bg-primary/15 p-2.5 rounded-xl mr-3 group-hover:bg-primary/25 transition-colors">
-                        <Plane className="h-5 w-5 text-primary" />
+                      <div className="bg-primary/15 p-2 sm:p-2.5 rounded-xl mr-2.5 sm:mr-3 group-hover:bg-primary/25 transition-colors flex-shrink-0">
+                        <Plane className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                       </div>
                       <div>
-                        <p className="font-bold text-foreground text-base">{getText(departure.city, language)}</p>
-                        <p className="text-xs text-muted-foreground font-semibold">{departure.airportCode}</p>
+                        <p className="font-bold text-foreground text-sm sm:text-base text-balance">
+                          {getText(departure.city, language)}
+                        </p>
+                        <p className="text-[10px] sm:text-xs text-muted-foreground font-semibold">
+                          {departure.airportCode}
+                        </p>
                       </div>
                     </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
+
+            <Card className="lg:hidden border-0 shadow-xl overflow-hidden bg-gradient-to-br from-card via-card to-accent/20">
+              <CardContent className="p-4 sm:p-5">
+                <h3 className="text-sm sm:text-base font-bold text-foreground mb-3 text-center uppercase tracking-wide">
+                  {language === "en" ? "Your Destination" : "Destinacioni Juaj"}
+                </h3>
+                <div className="aspect-square w-full max-w-[320px] sm:max-w-[380px] mx-auto">
+                  <InteractiveGlobe
+                    targetLat={destination.coordinates?.lat || 0}
+                    targetLon={destination.coordinates?.lon || 0}
+                    autoAnimate={true}
+                    destinationName={getText(destination.name, language)}
+                    className="w-full h-full"
+                  />
+                </div>
+                <p className="text-xs sm:text-sm text-muted-foreground text-center mt-3 leading-tight text-pretty">
+                  {language === "en"
+                    ? "Watch as the globe locates your destination"
+                    : "Shikoni ndërsa globi gjen destinacionin tuaj"}
+                </p>
+              </CardContent>
+            </Card>
           </div>
 
-          {/* Right Column - Sticky Sidebar (5/12 width for compact look) */}
-          <div className="lg:col-span-5">
-            <div className="sticky top-24 space-y-4">
-              {/* Globe Animation - Compact Version */}
+          <div className="hidden lg:block lg:col-span-5">
+            <div className="lg:sticky lg:top-24 space-y-3 sm:space-y-4">
+              {/* Globe Animation */}
               <Card className="border-0 shadow-xl overflow-hidden bg-gradient-to-br from-card via-card to-accent/20">
-                <CardContent className="p-4">
-                  <h3 className="text-sm font-bold text-foreground mb-2 text-center uppercase tracking-wide">
+                <CardContent className="p-3 sm:p-4">
+                  <h3 className="text-xs sm:text-sm font-bold text-foreground mb-2 text-center uppercase tracking-wide">
                     {language === "en" ? "Your Destination" : "Destinacioni Juaj"}
                   </h3>
-                  <div className="aspect-square w-full max-w-[280px] mx-auto">
+                  <div className="aspect-square w-full max-w-[280px] sm:max-w-[320px] mx-auto">
                     <InteractiveGlobe
                       targetLat={destination.coordinates?.lat || 0}
                       targetLon={destination.coordinates?.lon || 0}
@@ -309,7 +325,7 @@ export function DestinationPageClient({ slug }: { slug: string }) {
                       className="w-full h-full"
                     />
                   </div>
-                  <p className="text-[10px] text-muted-foreground text-center mt-2 leading-tight">
+                  <p className="text-[10px] sm:text-xs text-muted-foreground text-center mt-2 leading-tight text-pretty">
                     {language === "en"
                       ? "Watch as the globe locates your destination"
                       : "Shikoni ndërsa globi gjen destinacionin tuaj"}
@@ -317,14 +333,14 @@ export function DestinationPageClient({ slug }: { slug: string }) {
                 </CardContent>
               </Card>
 
-              {/* Booking Card - More Compact */}
+              {/* Booking Card */}
               <Card className="border-0 shadow-xl overflow-hidden">
-                <div className="bg-gradient-to-br from-primary via-primary to-primary/90 p-5 text-center relative overflow-hidden">
+                <div className="bg-gradient-to-br from-primary via-primary to-primary/90 p-4 sm:p-5 text-center relative overflow-hidden">
                   <div className="absolute inset-0 bg-[url('/noise.png')] opacity-10"></div>
                   <p className="text-[10px] font-bold text-primary-foreground/90 mb-1 uppercase tracking-wider relative z-10">
                     {language === "en" ? "Starting From" : "Duke filluar nga"}
                   </p>
-                  <p className="text-4xl font-bold text-primary-foreground mb-1 relative z-10 drop-shadow-lg">
+                  <p className="text-3xl sm:text-4xl font-bold text-primary-foreground mb-1 relative z-10 drop-shadow-lg">
                     {destinationsData.meta.currency}
                     {destination.pricing.from}
                   </p>
@@ -334,88 +350,140 @@ export function DestinationPageClient({ slug }: { slug: string }) {
                     </p>
                   )}
                   {destination.pricing.note && (
-                    <p className="text-[10px] text-primary-foreground/90 mt-2 leading-relaxed font-medium relative z-10">
+                    <p className="text-[10px] text-primary-foreground/90 mt-2 leading-relaxed font-medium relative z-10 text-pretty">
                       {getText(destination.pricing.note, language)}
                     </p>
                   )}
                 </div>
 
-                <CardContent className="p-4 space-y-3">
-                  {/* Trip Details - Compact */}
-                  <div className="space-y-2">
-                    <div className="flex items-center justify-between p-3 bg-accent/60 rounded-lg">
-                      <span className="text-muted-foreground flex items-center font-semibold text-xs">
-                        <Calendar className="h-3.5 w-3.5 mr-2 text-primary" />
-                        {language === "en" ? "Duration" : "Kohëzgjatja"}
-                      </span>
-                      <span className="font-bold text-foreground text-xs">
-                        {destination.duration.minNights === destination.duration.maxNights
-                          ? `${destination.duration.minNights} ${language === "en" ? "nights" : "netë"}`
-                          : `${destination.duration.minNights}-${destination.duration.maxNights} ${language === "en" ? "nights" : "netë"}`}
+                <CardContent className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+                  <div className="space-y-3 pb-4 border-b border-border">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-muted-foreground">
+                        <Calendar className="h-4 w-4" />
+                        <span className="text-sm font-medium">{language === "en" ? "Duration" : "Kohëzgjatja"}</span>
+                      </div>
+                      <span className="text-sm font-bold text-foreground">
+                        {destination.duration.minNights} {language === "en" ? "nights" : "netë"}
                       </span>
                     </div>
 
                     {destination.mealPlan && (
-                      <div className="flex items-center justify-between p-3 bg-accent/60 rounded-lg">
-                        <span className="text-muted-foreground flex items-center font-semibold text-xs">
-                          <Utensils className="h-3.5 w-3.5 mr-2 text-primary" />
-                          {language === "en" ? "Meals" : "Ushqimi"}
-                        </span>
-                        <span className="font-bold text-foreground text-xs">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2 text-muted-foreground">
+                          <Users className="h-4 w-4" />
+                          <span className="text-sm font-medium">{language === "en" ? "Meals" : "Ushqimi"}</span>
+                        </div>
+                        <span className="text-sm font-bold text-foreground">
                           {getText(destination.mealPlan, language)}
                         </span>
                       </div>
                     )}
 
-                    {destination.pricing.priceCategory && (
-                      <div className="flex items-center justify-between p-3 bg-accent/60 rounded-lg">
-                        <span className="text-muted-foreground flex items-center font-semibold text-xs">
-                          <Users className="h-3.5 w-3.5 mr-2 text-primary" />
-                          {language === "en" ? "Category" : "Kategoria"}
-                        </span>
-                        <span className="font-bold text-foreground text-xs capitalize">
-                          {destination.pricing.priceCategory}
-                        </span>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 text-muted-foreground">
+                        <Users className="h-4 w-4" />
+                        <span className="text-sm font-medium">{language === "en" ? "Category" : "Kategoria"}</span>
                       </div>
-                    )}
+                      <span className="text-sm font-bold text-foreground capitalize">{destination.category}</span>
+                    </div>
                   </div>
 
-                  <div className="space-y-2 pt-3">
-                    <Button className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary text-primary-foreground py-5 text-sm font-bold shadow-lg hover:shadow-xl transition-all duration-300 rounded-lg">
-                      {language === "en" ? "Book This Trip" : "Rezervo këtë Udhëtim"}
-                    </Button>
+                  <Button
+                    size="lg"
+                    className="w-full bg-foreground hover:bg-foreground/90 text-background text-base sm:text-lg font-bold py-5 sm:py-6 rounded-xl shadow-lg hover:shadow-xl transition-all touch-manipulation"
+                  >
+                    {language === "en" ? "Book This Trip" : "Rezervo Këtë Udhëtim"}
+                  </Button>
 
-                    <a href={`tel:${siteData.footer.contact.phone}`}>
-                      <Button
-                        variant="outline"
-                        className="w-full py-4 text-xs border-2 hover:bg-accent font-semibold rounded-lg transition-all bg-transparent"
-                      >
-                        <Phone className="h-3.5 w-3.5 mr-2" />
-                        {language === "en" ? "Call to Book" : "Telefono për Rezervim"}
-                      </Button>
-                    </a>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="w-full font-semibold py-4 sm:py-5 rounded-xl transition-all touch-manipulation hover:bg-accent bg-transparent"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="mr-2"
+                    >
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                    {language === "en" ? "Call to Book" : "Telefono për Rezervim"}
+                  </Button>
 
-                    <a href={`mailto:${siteData.footer.contact.email}`}>
-                      <Button
-                        variant="outline"
-                        className="w-full py-4 text-xs border-2 hover:bg-accent font-semibold rounded-lg transition-all bg-transparent"
-                      >
-                        <Mail className="h-3.5 w-3.5 mr-2" />
-                        {language === "en" ? "Email Inquiry" : "Dërgo Email"}
-                      </Button>
-                    </a>
-                  </div>
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="w-full font-semibold py-4 sm:py-5 rounded-xl transition-all touch-manipulation hover:bg-accent bg-transparent"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="mr-2"
+                    >
+                      <rect width="20" height="16" x="2" y="4" rx="2" />
+                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                    </svg>
+                    {language === "en" ? "Email Inquiry" : "Pyetje me Email"}
+                  </Button>
 
-                  <div className="pt-4 border-t border-border text-center">
-                    <p className="text-[10px] text-muted-foreground mb-2 font-semibold uppercase tracking-wide">
+                  <div className="pt-4 border-t border-border text-center space-y-2">
+                    <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                       {language === "en" ? "Questions? We're here to help" : "Pyetje? Jemi këtu për t'ju ndihmuar"}
                     </p>
-                    <p className="font-bold text-foreground text-sm mb-1">{siteData.footer.contact.phone}</p>
-                    <p className="text-muted-foreground text-xs font-medium">{siteData.footer.contact.email}</p>
+                    <div className="space-y-1">
+                      <p className="text-lg font-bold text-foreground">044 66 33 44</p>
+                      <p className="text-sm text-muted-foreground">info@fluturo.co</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-muted-foreground pt-2">
+                    <Clock className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                    <span className="text-balance">
+                      {language === "en" ? "Instant confirmation" : "Konfirmim i menjëhershëm"}
+                    </span>
                   </div>
                 </CardContent>
               </Card>
             </div>
+          </div>
+        </div>
+
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-background via-background to-transparent pt-4 pb-safe">
+          <div className="container mx-auto px-4">
+            <Card className="border-0 shadow-2xl">
+              <CardContent className="p-3 flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                    {language === "en" ? "From" : "Nga"}
+                  </p>
+                  <p className="text-xl sm:text-2xl font-bold text-foreground">
+                    {destinationsData.meta.currency}
+                    {destination.pricing.from}
+                  </p>
+                </div>
+                <Button
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-white font-bold px-6 sm:px-8 py-5 sm:py-6 rounded-xl shadow-lg hover:shadow-xl transition-all touch-manipulation flex-shrink-0"
+                >
+                  {language === "en" ? "Book Now" : "Rezervo"}
+                </Button>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>

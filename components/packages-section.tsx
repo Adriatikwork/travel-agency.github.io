@@ -57,17 +57,17 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
   const visiblePackages = getVisiblePackages()
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-4">{ui.title[language]}</h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">{ui.subtitle[language]}</p>
+    <section className="py-12 sm:py-16 md:py-20 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="text-center mb-8 sm:mb-12">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-balance">{ui.title[language]}</h2>
+          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto text-pretty">{ui.subtitle[language]}</p>
         </div>
 
         <div className="relative max-w-6xl mx-auto">
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-all hover:scale-110"
+            className="hidden md:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-all hover:scale-110"
             aria-label="Previous package"
           >
             <ChevronLeft className="w-6 h-6 text-[#38b6ff]" />
@@ -75,20 +75,20 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
 
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-all hover:scale-110"
+            className="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-all hover:scale-110"
             aria-label="Next package"
           >
             <ChevronRight className="w-6 h-6 text-[#38b6ff]" />
           </button>
 
-          <div className="overflow-hidden px-4">
-            <div className="flex gap-6 transition-transform duration-500">
+          <div className="overflow-hidden px-2 sm:px-4">
+            <div className="flex gap-4 sm:gap-6 transition-transform duration-500">
               {visiblePackages.map((pkg, idx) => (
                 <div
                   key={`${pkg.id}-${idx}`}
-                  className="flex-shrink-0 w-full md:w-[calc(33.333%-16px)] group relative bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-[#38b6ff] shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+                  className="flex-shrink-0 w-[calc(100%-2rem)] sm:w-[calc(50%-12px)] md:w-[calc(33.333%-16px)] group relative bg-white rounded-2xl overflow-hidden border border-gray-200 hover:border-[#38b6ff] shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
                 >
-                  <div className="relative h-56 overflow-hidden">
+                  <div className="relative h-48 sm:h-56 overflow-hidden">
                     <img
                       src={getImagePath(pkg.image || "/placeholder.svg")}
                       alt={pkg.title[language]}
@@ -116,7 +116,7 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
                     </div>
                   </div>
 
-                  <div className="p-5 space-y-3">
+                  <div className="p-4 sm:p-5 space-y-2 sm:space-y-3">
                     <p className="text-gray-600 text-sm leading-relaxed line-clamp-2">{pkg.summary[language]}</p>
 
                     <div className="space-y-2">
@@ -162,13 +162,13 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
             </div>
           </div>
 
-          <div className="flex justify-center gap-2 mt-8">
+          <div className="flex justify-center gap-2 mt-6 sm:mt-8">
             {packages.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  idx === currentIndex ? "bg-[#38b6ff] w-8" : "bg-gray-300"
+                className={`h-2 sm:h-2.5 rounded-full transition-all touch-manipulation ${
+                  idx === currentIndex ? "bg-[#38b6ff] w-8 sm:w-10" : "bg-gray-300 w-2 sm:w-2.5"
                 }`}
                 aria-label={`Go to package ${idx + 1}`}
               />

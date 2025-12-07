@@ -220,4 +220,3 @@ export const packagesData = {
 } as const
 
 export default packagesData
-

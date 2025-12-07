@@ -1,127 +1,126 @@
 {
-    "placeholder": {
-      "en": "Search destinations, cities, themes...",
-      "sq": "Kërkoni destinacione, qytete, tema..."
+  "placeholder": {
+    "en": "Search destinations, cities, themes...",
+    "sq": "Kërkoni destinacione, qytete, tema..."
+  },
+  "sortBy": {
+    "label": {
+      "en": "Sort by",
+      "sq": "Rendit sipas"
     },
-    "sortBy": {
-      "label": {
-        "en": "Sort by",
-        "sq": "Rendit sipas"
+    "options": {
+      "popularity": {
+        "en": "Most Popular",
+        "sq": "Më të Popullarizuarat"
       },
-      "options": {
-        "popularity": {
-          "en": "Most Popular",
-          "sq": "Më të Popullarizuarat"
-        },
-        "priceLow": {
-          "en": "Price: Low to High",
-          "sq": "Çmimi: Ulët në të Lartë"
-        },
-        "priceHigh": {
-          "en": "Price: High to Low",
-          "sq": "Çmimi: Lartë në të Ulët"
-        },
-        "rating": {
-          "en": "Highest Rated",
-          "sq": "Më të Vlerësuarat"
-        },
-        "name": {
-          "en": "A-Z",
-          "sq": "A-Z"
-        }
-      }
-    },
-    "filters": {
-      "button": {
-        "en": "Filters",
-        "sq": "Filtrat"
+      "priceLow": {
+        "en": "Price: Low to High",
+        "sq": "Çmimi: Ulët në të Lartë"
       },
-      "title": {
-        "en": "Filters",
-        "sq": "Filtrat"
+      "priceHigh": {
+        "en": "Price: High to Low",
+        "sq": "Çmimi: Lartë në të Ulët"
       },
-      "resetAll": {
-        "en": "Reset All",
-        "sq": "Rivendos të Gjitha"
+      "rating": {
+        "en": "Highest Rated",
+        "sq": "Më të Vlerësuarat"
       },
-      "priceRange": {
-        "en": "Price Range (EUR)",
-        "sq": "Gama e Çmimeve (EUR)"
-      },
-      "duration": {
-        "en": "Duration (nights)",
-        "sq": "Kohëzgjatja (netë)"
-      },
-      "minRating": {
-        "en": "Minimum Rating",
-        "sq": "Vlerësimi Minimal"
-      },
-      "anyRating": {
-        "en": "Any rating",
-        "sq": "Çdo vlerësim"
-      },
-      "stars": {
-        "en": "Stars",
-        "sq": "Yje"
-      },
-      "departureCity": {
-        "en": "Departure City",
-        "sq": "Qyteti i Nisjes"
-      },
-      "anyDeparture": {
-        "en": "Any departure",
-        "sq": "Çdo nisje"
-      },
-      "themes": {
-        "en": "Themes",
-        "sq": "Temat"
-      },
-      "themeOptions": {
-        "beach": {
-          "en": "Beach",
-          "sq": "Plazh"
-        },
-        "luxury": {
-          "en": "Luxury",
-          "sq": "Luksoz"
-        },
-        "adventure": {
-          "en": "Adventure",
-          "sq": "Aventurë"
-        },
-        "cityBreak": {
-          "en": "City-break",
-          "sq": "Pushim Qyteti"
-        },
-        "romantic": {
-          "en": "Romantic",
-          "sq": "Romantik"
-        },
-        "honeymoon": {
-          "en": "Honeymoon",
-          "sq": "Muaji i Mjaltit"
-        },
-        "family": {
-          "en": "Family",
-          "sq": "Familjar"
-        },
-        "culture": {
-          "en": "Culture",
-          "sq": "Kulturë"
-        }
-      },
-      "featuredOnly": {
-        "en": "Show featured destinations only",
-        "sq": "Trego vetëm destinacionet e veçanta"
-      },
-      "min": {
-        "en": "Min",
-        "sq": "Min"
-      },
-      "max": {
-        "en": "Max",
-        "sq": "Maks"
+      "name": {
+        "en": "A-Z",
+        "sq": "A-Z"
       }
     }
+  },
+  "filters": {
+    "button": {
+      "en": "Filters",
+      "sq": "Filtrat"
+    },
+    "title": {
+      "en": "Filters",
+      "sq": "Filtrat"
+    },
+    "resetAll": {
+      "en": "Reset All",
+      "sq": "Rivendos të Gjitha"
+    },
+    "priceRange": {
+      "en": "Price Range (EUR)",
+      "sq": "Gama e Çmimeve (EUR)"
+    },
+    "duration": {
+      "en": "Duration (nights)",
+      "sq": "Kohëzgjatja (netë)"
+    },
+    "minRating": {
+      "en": "Minimum Rating",
+      "sq": "Vlerësimi Minimal"
+    },
+    "anyRating": {
+      "en": "Any rating",
+      "sq": "Çdo vlerësim"
+    },
+    "stars": {
+      "en": "Stars",
+      "sq": "Yje"
+    },
+    "departureCity": {
+      "en": "Departure City",
+      "sq": "Qyteti i Nisjes"
+    },
+    "anyDeparture": {
+      "en": "Any departure",
+      "sq": "Çdo nisje"
+    },
+    "themes": {
+      "en": "Themes",
+      "sq": "Temat"
+    },
+    "themeOptions": {
+      "beach": {
+        "en": "Beach",
+        "sq": "Plazh"
+      },
+      "luxury": {
+        "en": "Luxury",
+        "sq": "Luksoz"
+      },
+      "adventure": {
+        "en": "Adventure",
+        "sq": "Aventurë"
+      },
+      "cityBreak": {
+        "en": "City-break",
+        "sq": "Pushim Qyteti"
+      },
+      "romantic": {
+        "en": "Romantic",
+        "sq": "Romantik"
+      },
+      "honeymoon": {
+        "en": "Honeymoon",
+        "sq": "Muaji i Mjaltit"
+      },
+      "family": {
+        "en": "Family",
+        "sq": "Familjar"
+      },
+      "culture": {
+        "en": "Culture",
+        "sq": "Kulturë"
+      }
+    },
+    "featuredOnly": {
+      "en": "Show featured destinations only",
+      "sq": "Trego vetëm destinacionet e veçanta"
+    },
+    "min": {
+      "en": "Min",
+      "sq": "Min"
+    },
+    "max": {
+      "en": "Max",
+      "sq": "Maks"
+    }
   }
-  
+}
