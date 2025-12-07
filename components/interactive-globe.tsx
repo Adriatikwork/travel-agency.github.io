@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { usePathname } from "next/navigation"
 import * as d3 from "d3"
 import { feature } from "topojson-client"
 
@@ -39,10 +40,12 @@ export function InteractiveGlobe({
   destinationName,
   className = "",
 }: InteractiveGlobeProps) {
+  const pathname = usePathname()
   const svgRef = useRef<SVGSVGElement>(null)
   const animationFrameRef = useRef<number | null>(null)
   const timeoutsRef = useRef<number[]>([])
   const isMountedRef = useRef(true)
+  const initialPathnameRef = useRef(pathname)
   const [progress, setProgress] = useState(0)
   const [worldData, setWorldData] = useState<GeoFeature[]>([])
   const [rotation, setRotation] = useState([0, 0])
@@ -53,6 +56,30 @@ export function InteractiveGlobe({
 
   const width = 600
   const height = 600
+
+  // Immediately stop animations on any navigation attempt
+  useEffect(() => {
+    const handleNavigation = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      // Check if click is on a link or within a link
+      const link = target.closest('a')
+      if (link && link.href) {
+        // User is navigating away - immediately stop animations
+        isMountedRef.current = false
+        if (animationFrameRef.current) {
+          cancelAnimationFrame(animationFrameRef.current)
+          animationFrameRef.current = null
+        }
+        timeoutsRef.current.forEach(timeout => clearTimeout(timeout))
+        timeoutsRef.current = []
+      }
+    }
+
+    document.addEventListener('click', handleNavigation, true)
+    return () => {
+      document.removeEventListener('click', handleNavigation, true)
+    }
+  }, [])
 
   useEffect(() => {
     const loadWorldData = async () => {
