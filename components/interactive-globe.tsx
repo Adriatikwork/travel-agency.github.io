@@ -40,6 +40,8 @@ export function InteractiveGlobe({
   className = "",
 }: InteractiveGlobeProps) {
   const svgRef = useRef<SVGSVGElement>(null)
+  const animationFrameRef = useRef<number | null>(null)
+  const timeoutRef = useRef<number | null>(null)
   const [progress, setProgress] = useState(0)
   const [worldData, setWorldData] = useState<GeoFeature[]>([])
   const [rotation, setRotation] = useState([0, 0])
@@ -101,7 +103,7 @@ export function InteractiveGlobe({
         setRotation([spinRotation, 0])
 
         if (t < 1) {
-          requestAnimationFrame(spinAnimation)
+          animationFrameRef.current = requestAnimationFrame(spinAnimation)
         } else {
           setAnimationPhase("rotating")
           const rotateStart = Date.now()
@@ -122,7 +124,7 @@ export function InteractiveGlobe({
             setRotation(currentRotation)
 
             if (t < 1) {
-              requestAnimationFrame(rotateAnimation)
+              animationFrameRef.current = requestAnimationFrame(rotateAnimation)
             } else {
               setAnimationPhase("zooming")
               const zoomStart = Date.now()
@@ -139,9 +141,9 @@ export function InteractiveGlobe({
                 setScale(currentScale)
 
                 if (t < 1) {
-                  requestAnimationFrame(zoomAnimation)
+                  animationFrameRef.current = requestAnimationFrame(zoomAnimation)
                 } else {
-                  setTimeout(() => {
+                  timeoutRef.current = window.setTimeout(() => {
                     setAnimationPhase("unfolding")
                     const unfoldStart = Date.now()
                     const unfoldDuration = 2000
@@ -156,10 +158,10 @@ export function InteractiveGlobe({
                       setScale(unfoldScale)
 
                       if (t < 1) {
-                        requestAnimationFrame(unfoldAnimation)
+                        animationFrameRef.current = requestAnimationFrame(unfoldAnimation)
                       } else {
                         setAnimationPhase("complete")
-                        setTimeout(() => {
+                        timeoutRef.current = window.setTimeout(() => {
                           setProgress(0)
                           setRotation([0, 0])
                           setScale(250)
@@ -185,6 +187,18 @@ export function InteractiveGlobe({
     }
 
     sequence()
+
+    // Cleanup function to cancel animations on unmount
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+        animationFrameRef.current = null
+      }
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+        timeoutRef.current = null
+      }
+    }
   }, [autoAnimate, worldData, targetLat, targetLon, animationPhase])
 
   useEffect(() => {
