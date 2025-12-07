@@ -59,19 +59,35 @@ export function InteractiveGlobe({
 
   // Immediately stop animations on any navigation attempt
   useEffect(() => {
+    const stopAnimations = () => {
+      isMountedRef.current = false
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+        animationFrameRef.current = null
+      }
+      timeoutsRef.current.forEach(timeout => clearTimeout(timeout))
+      timeoutsRef.current = []
+    }
+
     const handleNavigation = (e: MouseEvent) => {
       const target = e.target as HTMLElement
+      
       // Check if click is on a link or within a link
       const link = target.closest('a')
       if (link && link.href) {
-        // User is navigating away - immediately stop animations
-        isMountedRef.current = false
-        if (animationFrameRef.current) {
-          cancelAnimationFrame(animationFrameRef.current)
-          animationFrameRef.current = null
+        stopAnimations()
+        return
+      }
+
+      // Check if click is on a button that might trigger navigation
+      const button = target.closest('button')
+      if (button) {
+        // Check if button is in navbar (likely navigation) or has navigation-related text
+        const isNavButton = button.closest('nav') !== null
+        if (isNavButton) {
+          stopAnimations()
+          return
         }
-        timeoutsRef.current.forEach(timeout => clearTimeout(timeout))
-        timeoutsRef.current = []
       }
     }
 
