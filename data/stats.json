@@ -41,6 +41,16 @@
       "icon": "handshake"
     }
   ],
+  "ui": {
+    "title": {
+      "en": "Our Numbers",
+      "sq": "Numrat Tanë"
+    },
+    "subtitle": {
+      "en": "Trusted by thousands of travelers worldwide",
+      "sq": "I besuar nga mijëra udhëtarë në mbarë botën"
+    }
+  },
   "whyChoose": [
     {
       "title": {

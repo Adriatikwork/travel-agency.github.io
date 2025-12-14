@@ -1,97 +1,25 @@
 {
-  "hero": {
-    "title": {
-      "en": "Fly",
-      "sq": "Fluturoni"
-    },
-    "rotatingTexts": {
-      "en": ["further.", "higher.", "beyond.", "away."],
-      "sq": ["më larg.", "më lart.", "përtej.", "tutje."]
-    },
-    "subtitle": {
-      "en": "Fluturo takes care of flights, stays and experiences, so you just enjoy the journey.",
-      "sq": "Fluturo kujdeset për fluturimet, qëndrimet dhe përvojat, që ju thjesht të shijoni udhëtimin."
-    },
-    "ctaText": {
-      "en": "Start Planning",
-      "sq": "Filloni Planifikimin"
-    },
-    "startJourney": {
-      "en": "Start your journey",
-      "sq": "Filloni udhëtimin"
-    },
-    "viewTopDeals": {
-      "en": "View top deals",
-      "sq": "Shikoni ofertat kryesore"
-    },
-    "nextDepartures": {
-      "en": "Next Departures",
-      "sq": "Nisjet e Ardhshme"
-    },
-    "premiumAgency": {
-      "en": "PREMIUM TRAVEL AGENCY",
-      "sq": "AGJENCI UDHËTIMI PREMIUM"
-    },
-    "feelLighter": {
-      "en": "Feel lighter.",
-      "sq": "Ndihuni më lehtë."
-    },
-    "destinations": {
-      "en": "120+ destinations",
-      "sq": "120+ destinacione"
-    },
-    "localExperts": {
-      "en": "Local experts",
-      "sq": "Ekspertë lokal"
-    },
-    "support247": {
-      "en": "24/7 support",
-      "sq": "Mbështetje 24/7"
-    }
-  },
   "company": {
-    "name": "Fluturo Travel Agency",
-    "founded": "2023-06-24",
     "description": {
       "en": "Premium travel agency based in Kosovo, specializing in European destinations and unforgettable travel experiences.",
       "sq": "Agjenci udhëtimi premium me bazë në Kosovë, e specializuar në destinacione europiane dhe përvoja udhëtimi të paharrueshme."
-    }
+    },
+    "founded": "2023-06-24",
+    "name": "Fluturo Travel Agency"
   },
   "footer": {
-    "tagline": {
-      "en": "Making travel dreams come true, one journey at a time",
-      "sq": "Duke i bërë ëndrrat e udhëtimit realitet, një udhëtim në një kohë"
-    },
     "contact": {
-      "email": "info@fluturo.co",
-      "phone": "044 66 33 44",
       "address": {
         "en": "Fehmi Agani 43, Pristina, Kosovo",
         "sq": "Fehmi Agani 43, Prishtinë, Kosovë"
-      }
+      },
+      "email": "info@fluturo.co",
+      "phone": "044 66 33 44"
     },
-    "social": [
-      {
-        "name": "Facebook",
-        "url": "https://facebook.com/fluturo",
-        "icon": "facebook"
-      },
-      {
-        "name": "Instagram",
-        "url": "https://instagram.com/fluturo",
-        "icon": "instagram"
-      },
-      {
-        "name": "Twitter",
-        "url": "https://twitter.com/fluturo",
-        "icon": "twitter"
-      },
-      {
-        "name": "LinkedIn",
-        "url": "https://linkedin.com/company/fluturo",
-        "icon": "linkedin"
-      }
-    ],
+    "copyright": {
+      "en": "All rights reserved.",
+      "sq": "Të gjitha të drejtat e rezervuara."
+    },
     "legal": [
       {
         "name": {
@@ -122,12 +50,98 @@
         "sq": "Ligjore"
       }
     },
-    "copyright": {
-      "en": "All rights reserved.",
-      "sq": "Të gjitha të drejtat e rezervuara."
+    "social": [
+      {
+        "name": "Facebook",
+        "url": "https://facebook.com/fluturo",
+        "icon": "facebook"
+      },
+      {
+        "name": "Instagram",
+        "url": "https://instagram.com/fluturo",
+        "icon": "instagram"
+      },
+      {
+        "name": "Twitter",
+        "url": "https://twitter.com/fluturo",
+        "icon": "twitter"
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://linkedin.com/company/fluturo",
+        "icon": "linkedin"
+      }
+    ],
+    "tagline": {
+      "en": "Making travel dreams come true, one journey at a time",
+      "sq": "Duke i bërë ëndrrat e udhëtimit realitet, një udhëtim në një kohë"
+    }
+  },
+  "hero": {
+    "ctaText": {
+      "en": "Start Planning",
+      "sq": "Filloni Planifikimin"
+    },
+    "destinations": {
+      "en": "120+ destinations",
+      "sq": "120+ destinacione"
+    },
+    "feelLighter": {
+      "en": "Feel lighter.",
+      "sq": "Ndihuni më lehtë."
+    },
+    "localExperts": {
+      "en": "Local experts",
+      "sq": "Ekspertë lokal"
+    },
+    "nextDepartures": {
+      "en": "Next Departures",
+      "sq": "Nisjet e Ardhshme"
+    },
+    "premiumAgency": {
+      "en": "PREMIUM TRAVEL AGENCY",
+      "sq": "AGJENCI UDHËTIMI PREMIUM"
+    },
+    "rotatingTexts": {
+      "en": [
+        "further.",
+        "higher.",
+        "beyond.",
+        "away."
+      ],
+      "sq": [
+        "më larg.",
+        "më lart.",
+        "përtej.",
+        "tutje."
+      ]
+    },
+    "startJourney": {
+      "en": "Start your journey",
+      "sq": "Filloni udhëtimin"
+    },
+    "subtitle": {
+      "en": "Fluturo takes care of flights, stays and experiences, so you just enjoy the journey.",
+      "sq": "Fluturo kujdeset për fluturimet, qëndrimet dhe përvojat, që ju thjesht të shijoni udhëtimin."
+    },
+    "support247": {
+      "en": "24/7 support",
+      "sq": "Mbështetje 24/7"
+    },
+    "title": {
+      "en": "Fly",
+      "sq": "Fluturoni"
+    },
+    "viewTopDeals": {
+      "en": "View top deals",
+      "sq": "Shikoni ofertat kryesore"
     }
   },
   "nav": {
+    "about": {
+      "en": "About",
+      "sq": "Rreth Nesh"
+    },
     "destinations": {
       "en": "Destinations",
       "sq": "Destinacionet"
@@ -136,21 +150,17 @@
       "en": "Packages",
       "sq": "Paketat"
     },
+    "planTrip": {
+      "en": "Plan a trip",
+      "sq": "Planifikoni udhëtimin"
+    },
     "services": {
       "en": "Services",
       "sq": "Shërbimet"
     },
-    "about": {
-      "en": "About",
-      "sq": "Rreth Nesh"
-    },
     "team": {
       "en": "Team",
       "sq": "Ekipi"
-    },
-    "planTrip": {
-      "en": "Plan a trip",
-      "sq": "Planifikoni udhëtimin"
     }
   }
 }
