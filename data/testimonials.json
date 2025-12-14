@@ -1,72 +1,16 @@
 {
   "testimonials": [
     {
-      "id": "test-001",
-      "name": "Sarah & James Miller",
-      "location": "London, UK",
-      "destinationId": "dest-maldives-01",
-      "tripType": "honeymoon",
-      "themes": ["beach", "luxury", "romantic"],
-      "rating": 5,
-      "reviewShort": {
-        "en": "Our Maldives honeymoon was absolutely magical! Every detail was perfectly planned.",
-        "sq": "Muaji ynë i mjaltit në Maldive ishte absolutisht magjik! Çdo detaj ishte planifikuar në mënyrë perfekte."
-      },
-      "reviewLong": {
-        "en": "Fluturo made our honeymoon to the Maldives absolutely magical! From the overwater villa to the private sunset dinner, every detail was perfectly planned. We didn't have to worry about a thing and could just focus on enjoying our time together. The seaplane transfer was an experience in itself. Highly recommend!",
-        "sq": "Fluturo e bëri muajin tonë të mjaltit në Maldive absolutisht magjik! Nga vila mbi ujë deri te darka private në perëndim dielli, çdo detaj ishte planifikuar në mënyrë perfekte. Nuk na u desh të shqetësoheshim për asgjë dhe thjesht mund të fokusoheshim në shijimin e kohës së përbashkët. Transferta me hidroplan ishte një përvojë në vetvete. E rekomandojmë shumë!"
-      },
-      "image": "/placeholder.svg?height=100&width=100",
-      "travelDate": "2024-12",
-      "featured": true
-    },
-    {
-      "id": "test-002",
-      "name": "Michael Chen",
-      "location": "Toronto, Canada",
-      "destinationId": "dest-paris-01",
-      "tripType": "romantic",
-      "themes": ["city-break", "culture", "romantic"],
-      "rating": 5,
-      "reviewShort": {
-        "en": "Best travel agency ever! Paris was even more beautiful than we imagined.",
-        "sq": "Agjencia më e mirë e udhëtimit! Parisi ishte edhe më i bukur se sa e kishim imagjinuar."
-      },
-      "reviewLong": {
-        "en": "Best travel agency I've ever worked with. Their attention to detail and personalized service made our Paris getaway unforgettable. The Seine cruise at sunset and the gourmet dinner recommendations were highlights. Will definitely book again!",
-        "sq": "Agjencia më e mirë e udhëtimit me të cilën kam punuar ndonjëherë. Vëmendja e tyre ndaj detajeve dhe shërbimi i personalizuar e bënë arratisjen tonë në Paris të paharrueshme. Lundrimi në Seinë në perëndim dielli dhe rekomandimet për darkë gourmet ishin pika kulmore. Definitivisht do të rezervojmë përsëri!"
-      },
-      "image": "/placeholder.svg?height=100&width=100",
-      "travelDate": "2024-10",
-      "featured": true
-    },
-    {
-      "id": "test-003",
-      "name": "Emma & Luis Rodriguez",
-      "location": "Madrid, Spain",
-      "destinationId": "dest-bali-01",
-      "tripType": "family",
-      "themes": ["family", "beach", "culture"],
-      "rating": 5,
-      "reviewShort": {
-        "en": "Perfect family vacation! The kids loved the temple visits and beach activities.",
-        "sq": "Pushim perfekt familjar! Fëmijët e donin vizitat në tempuj dhe aktivitetet në plazh."
-      },
-      "reviewLong": {
-        "en": "From booking to landing, everything was seamless. The team at Fluturo went above and beyond to ensure our family vacation to Bali was perfect. The kids loved the temple visits and the beach, while we enjoyed the spa and cultural experiences. Thank you!",
-        "sq": "Nga rezervimi deri në ulje, gjithçka ishte e qetë. Ekipi në Fluturo shkoi përtej pritshmërive për të siguruar që pushimi ynë familjar në Bali të ishte perfekt. Fëmijët i donin vizitat në tempuj dhe plazhin, ndërsa ne shijonim spa-n dhe përvojat kulturore. Faleminderit!"
-      },
-      "image": "/placeholder.svg?height=100&width=100",
-      "travelDate": "2024-11",
-      "featured": true
-    },
-    {
       "id": "test-004",
       "name": "David Kim",
       "location": "Seoul, South Korea",
       "destinationId": "dest-dubai-01",
       "tripType": "adventure",
-      "themes": ["adventure", "luxury", "city-break"],
+      "themes": [
+        "adventure",
+        "luxury",
+        "city-break"
+      ],
       "rating": 5,
       "reviewShort": {
         "en": "Dubai exceeded all expectations! The desert safari was incredible.",
@@ -81,24 +25,28 @@
       "featured": true
     },
     {
-      "id": "test-005",
-      "name": "Sofia & Alex Papadopoulos",
-      "location": "Athens, Greece",
-      "destinationId": "dest-santorini-01",
-      "tripType": "honeymoon",
-      "themes": ["romantic", "beach", "honeymoon"],
+      "id": "test-003",
+      "name": "Emma & Luis Rodriguez",
+      "location": "Madrid, Spain",
+      "destinationId": "dest-bali-01",
+      "tripType": "family",
+      "themes": [
+        "family",
+        "beach",
+        "culture"
+      ],
       "rating": 5,
       "reviewShort": {
-        "en": "Santorini sunsets and caldera views made our honeymoon unforgettable!",
-        "sq": "Perëndimet e diellit në Santorini dhe pamjet e kalderës e bënë muajin tonë të mjaltit të paharrueshëm!"
+        "en": "Perfect family vacation! The kids loved the temple visits and beach activities.",
+        "sq": "Pushim perfekt familjar! Fëmijët e donin vizitat në tempuj dhe aktivitetet në plazh."
       },
       "reviewLong": {
-        "en": "Our honeymoon in Santorini was a dream come true! The caldera view hotel was breathtaking, and the wine tasting tour was so romantic. Fluturo handled everything perfectly, from airport transfers to restaurant reservations. We felt like VIPs the entire trip!",
-        "sq": "Muaji ynë i mjaltit në Santorini ishte një ëndërr e bërë realitet! Hoteli me pamje nga kaldera ishte mahnitës, dhe turi i degustimit të verës ishte kaq romantik. Fluturo i menaxhoi të gjitha në mënyrë perfekte, nga transfertat në aeroport deri te rezervimet në restorante. U ndihem si VIP gjatë gjithë udhëtimit!"
+        "en": "From booking to landing, everything was seamless. The team at Fluturo went above and beyond to ensure our family vacation to Bali was perfect. The kids loved the temple visits and the beach, while we enjoyed the spa and cultural experiences. Thank you!",
+        "sq": "Nga rezervimi deri në ulje, gjithçka ishte e qetë. Ekipi në Fluturo shkoi përtej pritshmërive për të siguruar që pushimi ynë familjar në Bali të ishte perfekt. Fëmijët i donin vizitat në tempuj dhe plazhin, ndërsa ne shijonim spa-n dhe përvojat kulturore. Faleminderit!"
       },
       "image": "/placeholder.svg?height=100&width=100",
-      "travelDate": "2024-09",
-      "featured": false
+      "travelDate": "2024-11",
+      "featured": true
     },
     {
       "id": "test-006",
@@ -106,7 +54,11 @@
       "location": "Melbourne, Australia",
       "destinationId": "dest-maldives-02",
       "tripType": "family",
-      "themes": ["family", "beach", "luxury"],
+      "themes": [
+        "family",
+        "beach",
+        "luxury"
+      ],
       "rating": 5,
       "reviewShort": {
         "en": "Amazing family resort! Kids club was excellent, we got to relax while kids had fun.",
@@ -118,6 +70,78 @@
       },
       "image": "/placeholder.svg?height=100&width=100",
       "travelDate": "2024-12",
+      "featured": false
+    },
+    {
+      "id": "test-002",
+      "name": "Michael Chen",
+      "location": "Toronto, Canada",
+      "destinationId": "dest-paris-01",
+      "tripType": "romantic",
+      "themes": [
+        "city-break",
+        "culture",
+        "romantic"
+      ],
+      "rating": 5,
+      "reviewShort": {
+        "en": "Best travel agency ever! Paris was even more beautiful than we imagined.",
+        "sq": "Agjencia më e mirë e udhëtimit! Parisi ishte edhe më i bukur se sa e kishim imagjinuar."
+      },
+      "reviewLong": {
+        "en": "Best travel agency I've ever worked with. Their attention to detail and personalized service made our Paris getaway unforgettable. The Seine cruise at sunset and the gourmet dinner recommendations were highlights. Will definitely book again!",
+        "sq": "Agjencia më e mirë e udhëtimit me të cilën kam punuar ndonjëherë. Vëmendja e tyre ndaj detajeve dhe shërbimi i personalizuar e bënë arratisjen tonë në Paris të paharrueshme. Lundrimi në Seinë në perëndim dielli dhe rekomandimet për darkë gourmet ishin pika kulmore. Definitivisht do të rezervojmë përsëri!"
+      },
+      "image": "/placeholder.svg?height=100&width=100",
+      "travelDate": "2024-10",
+      "featured": true
+    },
+    {
+      "id": "test-001",
+      "name": "Sarah & James Miller",
+      "location": "London, UK",
+      "destinationId": "dest-maldives-01",
+      "tripType": "honeymoon",
+      "themes": [
+        "beach",
+        "luxury",
+        "romantic"
+      ],
+      "rating": 5,
+      "reviewShort": {
+        "en": "Our Maldives honeymoon was absolutely magical! Every detail was perfectly planned.",
+        "sq": "Muaji ynë i mjaltit në Maldive ishte absolutisht magjik! Çdo detaj ishte planifikuar në mënyrë perfekte."
+      },
+      "reviewLong": {
+        "en": "Fluturo made our honeymoon to the Maldives absolutely magical! From the overwater villa to the private sunset dinner, every detail was perfectly planned. We didn't have to worry about a thing and could just focus on enjoying our time together. The seaplane transfer was an experience in itself. Highly recommend!",
+        "sq": "Fluturo e bëri muajin tonë të mjaltit në Maldive absolutisht magjik! Nga vila mbi ujë deri te darka private në perëndim dielli, çdo detaj ishte planifikuar në mënyrë perfekte. Nuk na u desh të shqetësoheshim për asgjë dhe thjesht mund të fokusoheshim në shijimin e kohës së përbashkët. Transferta me hidroplan ishte një përvojë në vetvete. E rekomandojmë shumë!"
+      },
+      "image": "/placeholder.svg?height=100&width=100",
+      "travelDate": "2024-12",
+      "featured": true
+    },
+    {
+      "id": "test-005",
+      "name": "Sofia & Alex Papadopoulos",
+      "location": "Athens, Greece",
+      "destinationId": "dest-santorini-01",
+      "tripType": "honeymoon",
+      "themes": [
+        "romantic",
+        "beach",
+        "honeymoon"
+      ],
+      "rating": 5,
+      "reviewShort": {
+        "en": "Santorini sunsets and caldera views made our honeymoon unforgettable!",
+        "sq": "Perëndimet e diellit në Santorini dhe pamjet e kalderës e bënë muajin tonë të mjaltit të paharrueshëm!"
+      },
+      "reviewLong": {
+        "en": "Our honeymoon in Santorini was a dream come true! The caldera view hotel was breathtaking, and the wine tasting tour was so romantic. Fluturo handled everything perfectly, from airport transfers to restaurant reservations. We felt like VIPs the entire trip!",
+        "sq": "Muaji ynë i mjaltit në Santorini ishte një ëndërr e bërë realitet! Hoteli me pamje nga kaldera ishte mahnitës, dhe turi i degustimit të verës ishte kaq romantik. Fluturo i menaxhoi të gjitha në mënyrë perfekte, nga transfertat në aeroport deri te rezervimet në restorante. U ndihem si VIP gjatë gjithë udhëtimit!"
+      },
+      "image": "/placeholder.svg?height=100&width=100",
+      "travelDate": "2024-09",
       "featured": false
     }
   ],
