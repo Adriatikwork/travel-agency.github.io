@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import RotatingText from "./rotating-text"
-import { Plane, Globe, Clock, MessageCircle } from "lucide-react"
+import { Plane, Globe, Clock, MessageCircle, ArrowRight } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { DeparturesModal } from "./departures-modal"
+import departuresData from "@/data/departures.json"
 
 interface HeroData {
   title: { en: string; sq: string }
@@ -33,6 +35,7 @@ export function HeroSection({ data }: { data: HeroData }) {
   const basePath = getBasePath()
   const [scrollY, setScrollY] = useState(0)
   const { language } = useLanguage()
+  const [showDeparturesModal, setShowDeparturesModal] = useState(false)
 
   // Lightweight parallax effect
   useEffect(() => {
@@ -150,37 +153,34 @@ export function HeroSection({ data }: { data: HeroData }) {
             </div>
 
             <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-4 max-w-md shadow-2xl border border-white/20 mt-6">
-              <h3 className="text-[#30b2f5] font-semibold text-sm uppercase tracking-wide mb-3">
-                {data.nextDepartures[language]}
-              </h3>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-[#30b2f5] font-semibold text-sm uppercase tracking-wide">
+                  {data.nextDepartures[language]}
+                </h3>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowDeparturesModal(true)}
+                  className="text-[#30b2f5] hover:text-[#2aa1e0] hover:bg-[#30b2f5]/10 -mr-2"
+                >
+                  {language === "sq" ? "Shiko të gjitha" : "View All"}
+                  <ArrowRight className="h-4 w-4 ml-1" />
+                </Button>
+              </div>
               <div className="space-y-2.5">
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2">
-                    <Plane className="h-4 w-4 text-[#30b2f5]" />
-                    <span className="text-gray-700 font-medium">
-                      {language === "sq" ? "Prishtinë" : "Prishtina"} → Paris
+                {departuresData.departures.slice(0, 3).map((departure) => (
+                  <div key={departure.id} className="flex items-center justify-between text-sm">
+                    <div className="flex items-center gap-2">
+                      <Plane className="h-4 w-4 text-[#30b2f5]" />
+                      <span className="text-gray-700 font-medium">
+                        {departure.from[language]} → {departure.to[language]}
+                      </span>
+                    </div>
+                    <span className="text-[#30b2f5] font-bold">
+                      {language === "sq" ? "nga" : "from"} €{departure.price}
                     </span>
                   </div>
-                  <span className="text-[#30b2f5] font-bold">{language === "sq" ? "nga" : "from"} €199</span>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2">
-                    <Plane className="h-4 w-4 text-[#30b2f5]" />
-                    <span className="text-gray-700 font-medium">
-                      {language === "sq" ? "Shkup" : "Skopje"} → {language === "sq" ? "Vjenë" : "Vienna"}
-                    </span>
-                  </div>
-                  <span className="text-[#30b2f5] font-bold">{language === "sq" ? "nga" : "from"} €89</span>
-                </div>
-                <div className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2">
-                    <Plane className="h-4 w-4 text-[#30b2f5]" />
-                    <span className="text-gray-700 font-medium">
-                      {language === "sq" ? "Tiranë" : "Tirana"} → {language === "sq" ? "Londër" : "London"}
-                    </span>
-                  </div>
-                  <span className="text-[#30b2f5] font-bold">{language === "sq" ? "nga" : "from"} €149</span>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -219,6 +219,12 @@ export function HeroSection({ data }: { data: HeroData }) {
           </div>
         </div>
       </div>
+
+      <DeparturesModal
+        open={showDeparturesModal}
+        onOpenChange={setShowDeparturesModal}
+        departures={departuresData.departures}
+      />
     </section>
   )
 }
