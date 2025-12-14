@@ -112,12 +112,17 @@ export const packagesData = {
   ],
   ui: {
     title: { en: "Travel Packages", sq: "Paketat e Udhëtimit" },
+    subtitle: { en: "All-inclusive experiences crafted for unforgettable journeys", sq: "Përvoja gjithëpërfshirëse të krijuara për udhëtime të paharrueshme" },
     featured: { en: "Featured", sq: "Të Veçanta" },
     onSale: { en: "On Sale", sq: "Në Ofertë" },
     perPerson: { en: "per person", sq: "për person" },
     nights: { en: "nights", sq: "netë" },
     viewPackage: { en: "View Package", sq: "Shiko Paketën" },
     bookNow: { en: "Book Now", sq: "Rezervo Tani" },
+    bookPackage: { en: "Book Package", sq: "Rezervo Paketën" },
+    from: { en: "From", sq: "Nga" },
+    whatsIncluded: { en: "What's Included:", sq: "Çfarë Përfshihet:" },
+    moreInclusions: { en: "more inclusions", sq: "përfshirje të tjera" },
   },
 } as const
 
