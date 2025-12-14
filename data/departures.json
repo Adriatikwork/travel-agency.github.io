@@ -1,0 +1,107 @@
+{
+    "departures": [
+      {
+        "id": "prs-par-001",
+        "from": {
+          "en": "Prishtina",
+          "sq": "Prishtinë"
+        },
+        "to": {
+          "en": "Paris",
+          "sq": "Paris"
+        },
+        "price": 199,
+        "date": "2024-12-20",
+        "airline": "Air France",
+        "duration": "2h 30m",
+        "type": "Direct",
+        "availableSeats": 15
+      },
+      {
+        "id": "skp-vie-002",
+        "from": {
+          "en": "Skopje",
+          "sq": "Shkup"
+        },
+        "to": {
+          "en": "Vienna",
+          "sq": "Vjenë"
+        },
+        "price": 89,
+        "date": "2024-12-18",
+        "airline": "Austrian Airlines",
+        "duration": "1h 45m",
+        "type": "Direct",
+        "availableSeats": 8
+      },
+      {
+        "id": "tia-lon-003",
+        "from": {
+          "en": "Tirana",
+          "sq": "Tiranë"
+        },
+        "to": {
+          "en": "London",
+          "sq": "Londër"
+        },
+        "price": 149,
+        "date": "2024-12-22",
+        "airline": "British Airways",
+        "duration": "3h 15m",
+        "type": "Direct",
+        "availableSeats": 22
+      },
+      {
+        "id": "prs-ber-004",
+        "from": {
+          "en": "Prishtina",
+          "sq": "Prishtinë"
+        },
+        "to": {
+          "en": "Berlin",
+          "sq": "Berlin"
+        },
+        "price": 129,
+        "date": "2024-12-25",
+        "airline": "Lufthansa",
+        "duration": "2h 10m",
+        "type": "Direct",
+        "availableSeats": 12
+      },
+      {
+        "id": "skp-rom-005",
+        "from": {
+          "en": "Skopje",
+          "sq": "Shkup"
+        },
+        "to": {
+          "en": "Rome",
+          "sq": "Romë"
+        },
+        "price": 119,
+        "date": "2024-12-23",
+        "airline": "Alitalia",
+        "duration": "1h 55m",
+        "type": "Direct",
+        "availableSeats": 18
+      },
+      {
+        "id": "tia-mad-006",
+        "from": {
+          "en": "Tirana",
+          "sq": "Tiranë"
+        },
+        "to": {
+          "en": "Madrid",
+          "sq": "Madrid"
+        },
+        "price": 169,
+        "date": "2024-12-24",
+        "airline": "Iberia",
+        "duration": "2h 45m",
+        "type": "Direct",
+        "availableSeats": 10
+      }
+    ]
+  }
+  
