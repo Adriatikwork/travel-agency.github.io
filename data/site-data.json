@@ -1,1 +1,156 @@
-{}
+{
+  "hero": {
+    "title": {
+      "en": "Fly",
+      "sq": "Fluturoni"
+    },
+    "rotatingTexts": {
+      "en": ["further.", "higher.", "beyond.", "away."],
+      "sq": ["më larg.", "më lart.", "përtej.", "tutje."]
+    },
+    "subtitle": {
+      "en": "Fluturo takes care of flights, stays and experiences, so you just enjoy the journey.",
+      "sq": "Fluturo kujdeset për fluturimet, qëndrimet dhe përvojat, që ju thjesht të shijoni udhëtimin."
+    },
+    "ctaText": {
+      "en": "Start Planning",
+      "sq": "Filloni Planifikimin"
+    },
+    "startJourney": {
+      "en": "Start your journey",
+      "sq": "Filloni udhëtimin"
+    },
+    "viewTopDeals": {
+      "en": "View top deals",
+      "sq": "Shikoni ofertat kryesore"
+    },
+    "nextDepartures": {
+      "en": "Next Departures",
+      "sq": "Nisjet e Ardhshme"
+    },
+    "premiumAgency": {
+      "en": "PREMIUM TRAVEL AGENCY",
+      "sq": "AGJENCI UDHËTIMI PREMIUM"
+    },
+    "feelLighter": {
+      "en": "Feel lighter.",
+      "sq": "Ndihuni më lehtë."
+    },
+    "destinations": {
+      "en": "120+ destinations",
+      "sq": "120+ destinacione"
+    },
+    "localExperts": {
+      "en": "Local experts",
+      "sq": "Ekspertë lokal"
+    },
+    "support247": {
+      "en": "24/7 support",
+      "sq": "Mbështetje 24/7"
+    }
+  },
+  "company": {
+    "name": "Fluturo Travel Agency",
+    "founded": "2023-06-24",
+    "description": {
+      "en": "Premium travel agency based in Kosovo, specializing in European destinations and unforgettable travel experiences.",
+      "sq": "Agjenci udhëtimi premium me bazë në Kosovë, e specializuar në destinacione europiane dhe përvoja udhëtimi të paharrueshme."
+    }
+  },
+  "footer": {
+    "tagline": {
+      "en": "Making travel dreams come true, one journey at a time",
+      "sq": "Duke i bërë ëndrrat e udhëtimit realitet, një udhëtim në një kohë"
+    },
+    "contact": {
+      "email": "info@fluturo.co",
+      "phone": "044 66 33 44",
+      "address": {
+        "en": "Fehmi Agani 43, Pristina, Kosovo",
+        "sq": "Fehmi Agani 43, Prishtinë, Kosovë"
+      }
+    },
+    "social": [
+      {
+        "name": "Facebook",
+        "url": "https://facebook.com/fluturo",
+        "icon": "facebook"
+      },
+      {
+        "name": "Instagram",
+        "url": "https://instagram.com/fluturo",
+        "icon": "instagram"
+      },
+      {
+        "name": "Twitter",
+        "url": "https://twitter.com/fluturo",
+        "icon": "twitter"
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://linkedin.com/company/fluturo",
+        "icon": "linkedin"
+      }
+    ],
+    "legal": [
+      {
+        "name": {
+          "en": "Privacy Policy",
+          "sq": "Politika e Privatësisë"
+        },
+        "url": "/privacy"
+      },
+      {
+        "name": {
+          "en": "Terms of Service",
+          "sq": "Kushtet e Shërbimit"
+        },
+        "url": "/terms"
+      }
+    ],
+    "sections": {
+      "contactUs": {
+        "en": "Contact Us",
+        "sq": "Na Kontaktoni"
+      },
+      "followUs": {
+        "en": "Follow Us",
+        "sq": "Na Ndiqni"
+      },
+      "legal": {
+        "en": "Legal",
+        "sq": "Ligjore"
+      }
+    },
+    "copyright": {
+      "en": "All rights reserved.",
+      "sq": "Të gjitha të drejtat e rezervuara."
+    }
+  },
+  "nav": {
+    "destinations": {
+      "en": "Destinations",
+      "sq": "Destinacionet"
+    },
+    "packages": {
+      "en": "Packages",
+      "sq": "Paketat"
+    },
+    "services": {
+      "en": "Services",
+      "sq": "Shërbimet"
+    },
+    "about": {
+      "en": "About",
+      "sq": "Rreth Nesh"
+    },
+    "team": {
+      "en": "Team",
+      "sq": "Ekipi"
+    },
+    "planTrip": {
+      "en": "Plan a trip",
+      "sq": "Planifikoni udhëtimin"
+    }
+  }
+}

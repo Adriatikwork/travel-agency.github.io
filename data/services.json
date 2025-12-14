@@ -1,30 +1,6 @@
 {
   "services": [
     {
-      "id": "corporate",
-      "title": {
-        "en": "Corporate Travel",
-        "sq": "Udhëtime Korporative"
-      },
-      "description": {
-        "en": "Business trips & team retreats organized",
-        "sq": "Udhëtime biznesi & pushime ekipore të organizuara"
-      },
-      "icon": "Briefcase",
-      "features": {
-        "en": [
-          "Team Building",
-          "Professional Venues",
-          "Full Coordination"
-        ],
-        "sq": [
-          "Ndërtim Ekipi",
-          "Vende Profesionale",
-          "Koordinim i Plotë"
-        ]
-      }
-    },
-    {
       "id": "flights",
       "title": {
         "en": "Flights Worldwide",
@@ -36,40 +12,8 @@
       },
       "icon": "Plane",
       "features": {
-        "en": [
-          "Global Routes",
-          "Best Prices",
-          "24/7 Support"
-        ],
-        "sq": [
-          "Rrugë Globale",
-          "Çmimet më të Mira",
-          "Mbështetje 24/7"
-        ]
-      }
-    },
-    {
-      "id": "transfers",
-      "title": {
-        "en": "Private Transfers",
-        "sq": "Transferta Private"
-      },
-      "description": {
-        "en": "Luxury vehicles, professional drivers",
-        "sq": "Automjete luksoze, shoferë profesionistë"
-      },
-      "icon": "Car",
-      "features": {
-        "en": [
-          "Luxury Vehicles",
-          "Professional Drivers",
-          "Door-to-Door"
-        ],
-        "sq": [
-          "Automjete Luksoze",
-          "Shoferë Profesionistë",
-          "Derë-më-Derë"
-        ]
+        "en": ["Global Routes", "Best Prices", "24/7 Support"],
+        "sq": ["Rrugë Globale", "Çmimet më të Mira", "Mbështetje 24/7"]
       }
     },
     {
@@ -84,16 +28,40 @@
       },
       "icon": "Users",
       "features": {
-        "en": [
-          "Custom Itineraries",
-          "All-Inclusive",
-          "Local Experiences"
-        ],
-        "sq": [
-          "Itinerare të Personalizuara",
-          "Gjithëpërfshirëse",
-          "Përvoja Lokale"
-        ]
+        "en": ["Custom Itineraries", "All-Inclusive", "Local Experiences"],
+        "sq": ["Itinerare të Personalizuara", "Gjithëpërfshirëse", "Përvoja Lokale"]
+      }
+    },
+    {
+      "id": "corporate",
+      "title": {
+        "en": "Corporate Travel",
+        "sq": "Udhëtime Korporative"
+      },
+      "description": {
+        "en": "Business trips & team retreats organized",
+        "sq": "Udhëtime biznesi & pushime ekipore të organizuara"
+      },
+      "icon": "Briefcase",
+      "features": {
+        "en": ["Team Building", "Professional Venues", "Full Coordination"],
+        "sq": ["Ndërtim Ekipi", "Vende Profesionale", "Koordinim i Plotë"]
+      }
+    },
+    {
+      "id": "transfers",
+      "title": {
+        "en": "Private Transfers",
+        "sq": "Transferta Private"
+      },
+      "description": {
+        "en": "Luxury vehicles, professional drivers",
+        "sq": "Automjete luksoze, shoferë profesionistë"
+      },
+      "icon": "Car",
+      "features": {
+        "en": ["Luxury Vehicles", "Professional Drivers", "Door-to-Door"],
+        "sq": ["Automjete Luksoze", "Shoferë Profesionistë", "Derë-më-Derë"]
       }
     },
     {
@@ -108,27 +76,27 @@
       },
       "icon": "Sparkles",
       "features": {
-        "en": [
-          "Spa Retreats",
-          "Medical Tourism",
-          "Wellness Programs"
-        ],
-        "sq": [
-          "Pushime Spa",
-          "Turizëm Mjekësor",
-          "Programe Wellness"
-        ]
+        "en": ["Spa Retreats", "Medical Tourism", "Wellness Programs"],
+        "sq": ["Pushime Spa", "Turizëm Mjekësor", "Programe Wellness"]
       }
     }
   ],
   "ui": {
+    "sectionLabel": {
+      "en": "Services",
+      "sq": "Shërbimet"
+    },
     "title": {
-      "en": "Our Services",
-      "sq": "Shërbimet Tona"
+      "en": "What We Offer",
+      "sq": "Çfarë Ofrojmë"
     },
     "subtitle": {
-      "en": "Comprehensive travel services tailored to your needs",
-      "sq": "Shërbime gjithëpërfshirëse udhëtimi të përshtatura për nevojat tuaja"
+      "en": "Comprehensive travel solutions for every journey",
+      "sq": "Zgjidhje gjithëpërfshirëse udhëtimi për çdo udhëtim"
+    },
+    "learnMore": {
+      "en": "Learn More",
+      "sq": "Mësoni Më Shumë"
     }
   }
 }

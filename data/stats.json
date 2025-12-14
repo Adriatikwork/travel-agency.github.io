@@ -41,14 +41,52 @@
       "icon": "handshake"
     }
   ],
-  "ui": {
-    "title": {
-      "en": "Our Numbers",
-      "sq": "Numrat Tanë"
+  "whyChoose": [
+    {
+      "title": {
+        "en": "Personalized Travel Experiences",
+        "sq": "Përvoja Udhëtimi të Personalizuara"
+      },
+      "description": {
+        "en": "Every journey is tailored to your preferences, from relaxing holidays and beach getaways to concerts and special events.",
+        "sq": "Çdo udhëtim është i përshtatur sipas preferencave tuaja, nga pushimet relaksuese dhe arratisjet në plazh deri te koncertet dhe ngjarjet speciale."
+      }
     },
-    "subtitle": {
-      "en": "Trusted by thousands of travelers worldwide",
-      "sq": "I besuar nga mijëra udhëtarë në mbarë botën"
+    {
+      "title": {
+        "en": "Expertise You Can Trust",
+        "sq": "Ekspertizë në të Cilën Mund të Besoni"
+      },
+      "description": {
+        "en": "Our founders bring years of hands-on experience in the travel industry, ensuring seamless and memorable trips.",
+        "sq": "Themeluesit tanë sjellin vite përvojë praktike në industrinë e udhëtimit, duke siguruar udhëtime pa probleme dhe të paharrueshme."
+      }
+    },
+    {
+      "title": {
+        "en": "Global & Local Reach",
+        "sq": "Rreze Globale & Lokale"
+      },
+      "description": {
+        "en": "We provide travel solutions for destinations worldwide while offering deep local knowledge of the Balkans and coastal regions.",
+        "sq": "Ne ofrojmë zgjidhje udhëtimi për destinacione në mbarë botën duke ofruar njohuri të thella lokale për Ballkanin dhe rajonet bregdetare."
+      }
+    },
+    {
+      "title": {
+        "en": "Stress-Free Planning",
+        "sq": "Planifikim Pa Stres"
+      },
+      "description": {
+        "en": "From flights to accommodations and transfers, we handle every detail so you can enjoy a smooth, worry-free travel experience.",
+        "sq": "Nga fluturimet te akomodimet dhe transfertat, ne menaxhojmë çdo detaj që ju të shijoni një përvojë udhëtimi të qetë dhe pa shqetësime."
+      }
+    }
+  ],
+  "section": {
+    "title": {
+      "en": "Why Choose Fluturo?",
+      "sq": "Pse të Zgjidhni Fluturo?"
     }
   }
 }
