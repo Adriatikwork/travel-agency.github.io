@@ -6,7 +6,7 @@
 
 export const packagesData = {
   meta: {
-    lastUpdated: "2025-12-14",
+    lastUpdated: "2025-12-16",
   },
   packages: [
     {

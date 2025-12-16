@@ -8,7 +8,7 @@
 export const destinationsData = {
   meta: {
     currency: "EUR",
-    lastUpdated: "2025-12-14",
+    lastUpdated: "2025-12-16",
   },
   departures: [
     {
@@ -34,58 +34,6 @@ export const destinationsData = {
     }
   ],
   destinations: [
-    {
-      id: "dest-bansko-jan-01",
-      slug: "bansko-family-vacation",
-      name: "Bansko",
-      city: "Bansko",
-      country: { en: "Bulgaria", sq: "Bullgari" },
-      coordinates: {
-        lat: 41.8381,
-        lon: 23.4878,
-      },
-      continent: "Europe",
-      tagline: { en: "Family Winter Wonderland", sq: "Përrallë Dimërore Familjare" },
-      descriptionShort: { en: "Start the year with family relaxation, snow and fun in Bansko!", sq: "Filloni vitin me relaksim familjar, borë dhe argëtim në Bansko!" },
-      descriptionLong: { en: "5 nights of relaxation, snow and entertainment for the whole family! Comfortable accommodation, ski slopes very close and activities for everyone. A perfect start to the new year.", sq: "5 netë relaksim, borë dhe argëtim për të gjithë familjen! Akomodim komod, pista skijimi shumë afër dhe aktivitete për të gjithë." },
-      primaryImage: "https://images.unsplash.com/photo-1551524164-687a55dd1126?w=1200&h=800&fit=crop",
-      gallery: ["https://images.unsplash.com/photo-1551524164-687a55dd1126?w=1200&h=800&fit=crop", "https://images.unsplash.com/photo-1605540436563-5bca919ae766?w=1200&h=800&fit=crop", "https://images.unsplash.com/photo-1483664852095-d6cc6870702d?w=1200&h=800&fit=crop"],
-      pricing: {
-        from: 1085,
-        currency: "EUR",
-        perPerson: false,
-        priceCategory: "mid-range",
-        note: { en: "Package for 2+2 (children under 10 years)", sq: "Paketa për 2+2 (fëmijë nën 10 vjeç)" },
-      },
-      duration: {
-        minNights: 5,
-        maxNights: 5,
-        specificDates: { en: "January 1-5", sq: "1-5 Janar" },
-      },
-      mealPlan: { en: "Half Board - breakfast & dinner", sq: "Gjysmë Bordi - mëngjes & darkë" },
-      popularityScore: 90,
-      featured: true,
-      isNew: true,
-      themes: ["family", "winter", "ski"],
-      travelStyles: ["relaxation", "adventure"],
-      seasonality: {
-        best: ["winter"],
-        avoid: [],
-      },
-      availableDepartureIds: ["dep-prn", "dep-tia"],
-      tags: {
-        en: ["skiing", "family-friendly", "half-board", "limited-spots"],
-        sq: ["skijim", "për-familje", "gjysmë-bordi", "vende-të-kufizuara"],
-      },
-      included: {
-        en: ["accommodation", "half-board", "ski-access"],
-        sq: ["akomodim", "gjysmë-bordi", "qasje-në-ski"],
-      },
-      highlights: {
-        en: ["Comfortable accommodation", "Ski slopes nearby", "Activities for all family", "Snow & relaxation"],
-        sq: ["Akomodim i rehatshëm", "Pista skijimi afër", "Aktivitete për gjithë familjen", "Borë & relaksim"],
-      },
-    },
     {
       id: "dest-barcelona-dec-01",
       slug: "barcelona-december-escape",
@@ -140,7 +88,7 @@ export const destinationsData = {
     {
       id: "dest-prague-dec-01",
       slug: "prague-christmas-getaway",
-      name: "Prague",
+      name: "PragueTesting",
       city: "Prague",
       country: { en: "Czech Republic", sq: "Republika Çeke" },
       coordinates: {
