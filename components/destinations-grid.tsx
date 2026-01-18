@@ -1,12 +1,12 @@
 "use client"
 
-import { Star, MapPin, Clock, ArrowRight, Info } from "lucide-react"
+import { MapPin, ArrowRight, Info, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { getImagePath } from "@/lib/image-path"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import Link from "next/link"
 import { useLanguage } from "@/lib/language-context"
 import destinationsData from "@/data/destinations"
+import { UnifiedCard } from "@/components/unified-card"
 
 interface Destination {
   id: string
@@ -53,7 +53,8 @@ interface DestinationsGridProps {
 }
 
 export function DestinationsGrid({ destinations, departures, currency }: DestinationsGridProps) {
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
   const { language } = useLanguage()
   const ui = destinationsData.ui
 
@@ -66,141 +67,167 @@ export function DestinationsGrid({ destinations, departures, currency }: Destina
     )
   }
 
-  return (
-    <>
-      <div className="grid grid-cols-1 min-[500px]:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 justify-items-center max-w-7xl mx-auto px-2 sm:px-0">
-        {destinations.map((destination) => (
-          <div
-            key={destination.id}
-            className="group relative bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 w-full max-w-[340px]"
-            onMouseEnter={() => setHoveredCard(destination.id)}
-            onMouseLeave={() => setHoveredCard(null)}
-          >
-            <div className="relative h-56 sm:h-64 overflow-hidden">
-              <img
-                src={getImagePath(destination.primaryImage || "/placeholder.svg")}
-                alt={destination.name}
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+  const nextSlide = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current
+      const scrollAmount = container.offsetWidth * 0.85
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" })
+    }
+    setCurrentIndex((prev) => Math.min(prev + 1, destinations.length - 1))
+  }
 
-              {/* Badges - Use translated text */}
-              <div className="absolute top-4 left-4 flex gap-2">
-                {destination.featured && (
-                  <span className="px-3 py-1 bg-yellow-400 text-gray-900 text-xs font-semibold rounded-full">
-                    {ui.featured[language]}
-                  </span>
-                )}
-                {destination.isNew && (
-                  <span className="px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full">
-                    {ui.new[language]}
-                  </span>
-                )}
-              </div>
+  const prevSlide = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current
+      const scrollAmount = container.offsetWidth * 0.85
+      container.scrollBy({ left: -scrollAmount, behavior: "smooth" })
+    }
+    setCurrentIndex((prev) => Math.max(prev - 1, 0))
+  }
 
-              {/* Rating */}
-              {destination.rating && (
-                <div className="absolute top-4 right-4 flex items-center gap-1 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  <span className="text-sm font-semibold text-gray-900">{destination.rating}</span>
-                </div>
-              )}
+  const renderCard = (destination: Destination) => {
+    const badges = []
+    if (destination.featured) {
+      badges.push({ text: ui.featured[language], color: "yellow" as const })
+    }
+    if (destination.isNew) {
+      badges.push({ text: ui.new[language], color: "green" as const })
+    }
 
-              {/* Location - Use translated country */}
-              <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white">
-                <MapPin className="w-4 h-4" />
-                <span className="text-sm font-medium">
-                  {destination.city}, {destination.country[language]}
+    return (
+      <UnifiedCard
+        image={destination.primaryImage || "/placeholder.svg"}
+        imageAlt={destination.name}
+        badges={badges}
+        rating={destination.rating || undefined}
+        location={
+          <>
+            <MapPin className="w-4 h-4 inline mr-1.5" />
+            {destination.city}, {destination.country[language]}
+          </>
+        }
+        title={destination.name}
+        subtitle={destination.tagline[language]}
+        description={destination.descriptionShort[language]}
+        tags={destination.themes}
+        duration={destination.duration.minNights}
+        durationLabel={ui.nights[language]}
+        price={destination.pricing.from}
+        currency={currency}
+        priceLabel={ui.from[language]}
+        hoverContent={
+          <div className="w-full h-full flex flex-col items-center justify-center px-6 sm:px-8 py-4 sm:py-6 text-center">
+            <div className="flex-1 flex flex-col items-center justify-center space-y-2 sm:space-y-4 max-w-[280px]">
+              <h4 className="text-2xl sm:text-3xl font-bold text-white leading-tight text-balance">
+                {destination.name}
+              </h4>
+              <p className="text-xs sm:text-sm text-white/95 leading-relaxed line-clamp-3 text-pretty">
+                {destination.descriptionLong[language]}
+              </p>
+              <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-white/90">
+                <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+                <span className="text-pretty">
+                  {ui.availableFrom[language]} {destination.availableDepartureIds.length} {ui.airports[language]}
                 </span>
               </div>
             </div>
 
-            <div className="p-4 sm:p-5 space-y-2 sm:space-y-3">
-              <div>
-                <h3 className="text-lg sm:text-xl font-bold mb-1 group-hover:text-sky-600 transition-colors text-balance">
-                  {destination.name}
-                </h3>
-                <p className="text-[10px] sm:text-xs text-gray-500 italic mb-2 line-clamp-1">
-                  {destination.tagline[language]}
-                </p>
-                <p className="text-gray-600 text-xs sm:text-sm line-clamp-2 leading-relaxed text-pretty">
-                  {destination.descriptionShort[language]}
-                </p>
-              </div>
-
-              {/* Themes */}
-              <div className="flex flex-wrap gap-1.5">
-                {destination.themes.slice(0, 3).map((theme) => (
-                  <span
-                    key={theme}
-                    className="px-2 sm:px-2.5 py-0.5 bg-sky-100 text-sky-700 text-[10px] sm:text-xs font-medium rounded-full capitalize"
-                  >
-                    {theme}
-                  </span>
-                ))}
-              </div>
-
-              {/* Duration and Price */}
-              <div className="flex items-center justify-between pt-2 sm:pt-3 border-t border-gray-200">
-                <div className="flex items-center gap-1.5 text-xs sm:text-sm text-gray-600">
-                  <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                  <span className="text-[10px] sm:text-xs">
-                    {destination.duration.minNights === destination.duration.maxNights
-                      ? `${destination.duration.minNights} ${ui.nights[language]}`
-                      : `${destination.duration.minNights}-${destination.duration.maxNights} ${ui.nights[language]}`}
-                  </span>
-                </div>
-                <div className="text-right">
-                  <div className="text-[10px] sm:text-xs text-gray-500">{ui.from[language]}</div>
-                  <div className="text-lg sm:text-xl font-bold text-sky-600">
-                    {currency}
-                    {destination.pricing.from}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="absolute inset-0 bg-gradient-to-t from-sky-600/95 to-sky-500/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-              <div className="w-full h-full flex flex-col items-center justify-center px-6 sm:px-8 py-4 sm:py-6 text-center">
-                <div className="flex-1 flex flex-col items-center justify-center space-y-2 sm:space-y-4 max-w-[280px]">
-                  <h4 className="text-2xl sm:text-3xl font-bold text-white leading-tight text-balance">
-                    {destination.name}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-white/95 leading-relaxed line-clamp-3 text-pretty">
-                    {destination.descriptionLong[language]}
-                  </p>
-                  <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-white/90">
-                    <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
-                    <span className="text-pretty">
-                      {ui.availableFrom[language]} {destination.availableDepartureIds.length} {ui.airports[language]}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex gap-2 sm:gap-3 w-full max-w-[280px] mt-auto pt-3 sm:pt-4">
-                  <Button
-                    className="flex-1 bg-white text-sky-600 hover:bg-white/90 font-semibold rounded-xl shadow-lg h-10 sm:h-11 text-xs sm:text-sm touch-manipulation"
-                    asChild
-                  >
-                    <Link href={`/destinations/${destination.slug}`}>
-                      <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
-                      {ui.viewDetails[language]}
-                    </Link>
-                  </Button>
-                  <Button
-                    className="flex-1 bg-sky-700 text-white hover:bg-sky-800 font-semibold rounded-xl shadow-lg border-2 border-white/20 h-10 sm:h-11 text-xs sm:text-sm touch-manipulation"
-                    asChild
-                  >
-                    <Link href={`/destinations/${destination.slug}`}>
-                      <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
-                      {ui.bookNow[language]}
-                    </Link>
-                  </Button>
-                </div>
-              </div>
+            <div className="flex gap-2 sm:gap-3 w-full max-w-[280px] mt-auto pt-3 sm:pt-4">
+              <Button
+                className="flex-1 bg-white text-sky-600 hover:bg-white/90 font-semibold rounded-xl shadow-lg h-10 sm:h-11 text-xs sm:text-sm touch-manipulation"
+                asChild
+              >
+                <Link href={`/destinations/${destination.slug}`}>
+                  <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
+                  {ui.viewDetails[language]}
+                </Link>
+              </Button>
+              <Button
+                className="flex-1 bg-sky-700 text-white hover:bg-sky-800 font-semibold rounded-xl shadow-lg border-2 border-white/20 h-10 sm:h-11 text-xs sm:text-sm touch-manipulation"
+                asChild
+              >
+                <Link href={`/destinations/${destination.slug}`}>
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
+                  {ui.bookNow[language]}
+                </Link>
+              </Button>
             </div>
           </div>
-        ))}
+        }
+        className="w-full h-full"
+      />
+    )
+  }
+
+  return (
+    <>
+      {/* Mobile/Tablet Carousel (< lg) */}
+      <div className="lg:hidden relative max-w-7xl mx-auto px-4">
+        {destinations.length > 1 && (
+          <>
+            <button
+              onClick={prevSlide}
+              disabled={currentIndex === 0}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-xl rounded-full p-2.5 hover:bg-gray-50 transition-all hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed"
+              aria-label="Previous destination"
+            >
+              <ChevronLeft className="w-5 h-5 text-[#38b6ff]" />
+            </button>
+
+            <button
+              onClick={nextSlide}
+              disabled={currentIndex >= destinations.length - 1}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-xl rounded-full p-2.5 hover:bg-gray-50 transition-all hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed"
+              aria-label="Next destination"
+            >
+              <ChevronRight className="w-5 h-5 text-[#38b6ff]" />
+            </button>
+          </>
+        )}
+
+        <div
+          ref={scrollContainerRef}
+          className="overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          <div className="flex gap-4 pb-4">
+            {destinations.map((destination) => (
+              <div key={destination.id} className="flex-shrink-0 w-[85%] sm:w-[70%] snap-center">
+                {renderCard(destination)}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Pagination Dots */}
+        {destinations.length > 1 && (
+          <div className="flex justify-center gap-2 mt-6">
+            {destinations.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`h-2 rounded-full transition-all ${
+                  idx === currentIndex ? "bg-[#38b6ff] w-8" : "bg-gray-300 w-2"
+                }`}
+                aria-label={`Go to destination ${idx + 1}`}
+              />
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Desktop Grid (>= lg) */}
+      <div className="hidden lg:block max-w-7xl mx-auto px-6">
+        <div className="flex flex-wrap justify-center gap-6">
+          {destinations.map((destination) => (
+            <div
+              key={destination.id}
+              className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]"
+            >
+              {renderCard(destination)}
+            </div>
+          ))}
+        </div>
       </div>
     </>
   )

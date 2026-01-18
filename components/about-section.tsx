@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { CheckCircle } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
-import aboutData from "@/data/about.json"
-import statsData from "@/data/stats.json"
+import siteData from "@/data/site-data.json"
 
 interface Stat {
   id: string
@@ -75,15 +74,15 @@ export function AboutSection({ stats, whyChoose }: AboutSectionProps) {
           <div className="text-center mb-8 sm:mb-12">
             <div className="inline-block px-4 py-1 bg-[#38b6ff]/10 rounded-full mb-3">
               <span className="text-xs font-bold text-[#38b6ff] uppercase tracking-wider">
-                {aboutData.section.label[language]}
+                {siteData.about.section.label[language]}
               </span>
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 text-balance">
-              {aboutData.section.title[language]}{" "}
-              <span className="text-[#38b6ff]">{aboutData.section.titleHighlight[language]}</span>
+              {siteData.about.section.title[language]}{" "}
+              <span className="text-[#38b6ff]">{siteData.about.section.titleHighlight[language]}</span>
             </h2>
             <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto text-pretty">
-              {aboutData.section.subtitle[language]}
+              {siteData.about.section.subtitle[language]}
             </p>
           </div>
 
@@ -105,7 +104,7 @@ export function AboutSection({ stats, whyChoose }: AboutSectionProps) {
 
           <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-sm border border-gray-100">
             <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center text-balance">
-              {statsData.section.title[language]}
+              {siteData.whyChoose.section.title[language]}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {whyChoose.map((item, idx) => (

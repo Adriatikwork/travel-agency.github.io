@@ -17,7 +17,6 @@ import { useLanguage } from "@/lib/language-context"
 import siteData from "@/data/site-data.json"
 import destinationsData from "@/data/destinations"
 import packagesData from "@/data/packages"
-import statsData from "@/data/stats.json"
 import testimonialsData from "@/data/testimonials.json"
 import ComingSoonPage from "@/app/coming-soon/page"
 
@@ -189,6 +188,7 @@ export default function HomePage() {
           onFilter={handleFilter}
           onSort={handleSort}
           departures={destinationsData.departures}
+          destinations={destinationsData.destinations}
         />
 
         <section className="py-16 bg-white">
@@ -220,7 +220,7 @@ export default function HomePage() {
       </div>
 
       <div id="about">
-        <AboutSection stats={statsData.stats} whyChoose={statsData.whyChoose} />
+        <AboutSection stats={siteData.stats.numbers} whyChoose={siteData.whyChoose.reasons} />
       </div>
 
       <div id="team">

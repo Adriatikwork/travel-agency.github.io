@@ -58,11 +58,26 @@ export function Navbar() {
   }
 
   const navLinks = [
-    { name: siteData.nav.destinations[language], id: "destinations" },
-    { name: siteData.nav.packages[language], id: "packages" },
-    { name: siteData.nav.services[language], id: "services" },
-    { name: siteData.nav.about[language], id: "about" },
-    { name: siteData.nav.team[language], id: "team" },
+    { 
+      name: language === "en" ? "Destinations" : "Destinacionet", 
+      id: "destinations" 
+    },
+    { 
+      name: language === "en" ? "Packages" : "Paketat", 
+      id: "packages" 
+    },
+    { 
+      name: language === "en" ? "Services" : "Shërbimet", 
+      id: "services" 
+    },
+    { 
+      name: language === "en" ? "About" : "Rreth Nesh", 
+      id: "about" 
+    },
+    { 
+      name: language === "en" ? "Team" : "Ekipi", 
+      id: "team" 
+    },
   ]
 
   return (
@@ -97,7 +112,7 @@ export function Navbar() {
               onClick={() => scrollToSection("contact")}
               className="bg-white hover:bg-white/90 text-[#38b6ff] rounded-full px-7 py-5 font-bold text-base border-2 border-white/30 shadow-lg hover:shadow-xl transition-all hover:scale-105"
             >
-              {siteData.nav.planTrip[language]}
+              {language === "en" ? "Plan a trip" : "Planifikoni udhëtimin"}
             </Button>
           </div>
 
@@ -139,7 +154,7 @@ export function Navbar() {
                   onClick={() => scrollToSection("contact")}
                   className="w-full bg-white hover:bg-white/90 text-[#38b6ff] rounded-xl font-bold text-base py-6 shadow-lg hover:shadow-xl transition-all active:scale-95 touch-manipulation"
                 >
-                  {siteData.nav.planTrip[language]}
+                  {language === "en" ? "Plan a trip" : "Planifikoni udhëtimin"}
                 </Button>
               </div>
             </div>

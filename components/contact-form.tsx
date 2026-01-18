@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CheckCircle } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
-import contactData from "@/data/contact.json"
+import siteData from "@/data/site-data.json"
 
 interface ContactFormProps {
   destinations: Array<{ id: string; name: string }>
@@ -19,7 +19,7 @@ interface ContactFormProps {
 
 export function ContactForm({ destinations, departures }: ContactFormProps) {
   const { language } = useLanguage()
-  const { section, form, success } = contactData
+  const { section, form, success } = siteData.contact
   const [submitted, setSubmitted] = useState(false)
   const [formData, setFormData] = useState({
     name: "",

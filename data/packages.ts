@@ -6,7 +6,7 @@
 
 export const packagesData = {
   meta: {
-    lastUpdated: "2025-12-16",
+    lastUpdated: "2026-01-18",
   },
   packages: [
     {
@@ -14,7 +14,7 @@ export const packagesData = {
       title: { en: "Prague Christmas Magic Package", sq: "Paketa Magjike e Krishtlindjeve në Pragë" },
       destinationId: "dest-prague-dec-01",
       summary: { en: "2 nights with Christmas market tours, castle visit, and traditional Czech dinner.", sq: "2 netë me turne në tregjet e Krishtlindjeve, vizitë në kështjellë dhe darkë tradicionale çeke." },
-      image: "/placeholder.svg?height=300&width=500",
+      image: "public/images/packages/placeholder.svg?height=300&width=500",
       price: 349,
       duration: 2,
       inclusions: {
@@ -34,7 +34,7 @@ export const packagesData = {
       title: { en: "St. Moritz Luxury Ski Package", sq: "Paketa Luksoze e Skijimit në St. Moritz" },
       destinationId: "dest-st-moritz-jan-01",
       summary: { en: "5 nights with premium ski access, spa treatments, and gourmet dining.", sq: "5 netë me qasje premium në ski, trajtime spa dhe kuzhinë gourmet." },
-      image: "/placeholder.svg?height=300&width=500",
+      image: "public/images/packages/placeholder.svg?height=300&width=500",
       price: 3299,
       duration: 5,
       inclusions: {
@@ -54,7 +54,7 @@ export const packagesData = {
       title: { en: "Vienna Cultural Experience", sq: "Përvoja Kulturore në Vienë" },
       destinationId: "dest-vienna-jan-01",
       summary: { en: "2 nights with palace tours, classical concert, and traditional café visits.", sq: "2 netë me turne në pallate, koncert klasik dhe vizita në kafene tradicionale." },
-      image: "/placeholder.svg?height=300&width=500",
+      image: "public/images/packages/placeholder.svg?height=300&width=500",
       price: 199,
       duration: 2,
       inclusions: {

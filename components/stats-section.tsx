@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Globe, Users, Handshake, Award, Check } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
-import statsData from "@/data/stats.json"
+import siteData from "@/data/site-data.json"
 
 interface Stat {
   id: string
@@ -106,7 +106,7 @@ export function StatsSection({ stats, whyChoose }: StatsSectionProps) {
 
         {/* Why Choose Section - Use translated content */}
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">{statsData.section.title[language]}</h2>
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-12">{siteData.whyChoose.section.title[language]}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {whyChoose.map((item, index) => (
               <div

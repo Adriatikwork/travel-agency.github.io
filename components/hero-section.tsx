@@ -3,10 +3,9 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import RotatingText from "./rotating-text"
-import { Plane, Globe, Clock, MessageCircle, ArrowRight } from "lucide-react"
+import { Globe, MessageCircle } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
-import { DeparturesModal } from "./departures-modal"
-import departuresData from "@/data/departures.json"
+import { HeroCinematicAnimation } from "./hero-cinematic-animation"
 
 interface HeroData {
   title: { en: string; sq: string }
@@ -15,12 +14,10 @@ interface HeroData {
   ctaText: { en: string; sq: string }
   startJourney: { en: string; sq: string }
   viewTopDeals: { en: string; sq: string }
-  nextDepartures: { en: string; sq: string }
   premiumAgency: { en: string; sq: string }
   feelLighter: { en: string; sq: string }
   destinations: { en: string; sq: string }
   localExperts: { en: string; sq: string }
-  support247: { en: string; sq: string }
 }
 
 // Helper to get base path, handling v0.dev edge cases
@@ -35,7 +32,6 @@ export function HeroSection({ data }: { data: HeroData }) {
   const basePath = getBasePath()
   const [scrollY, setScrollY] = useState(0)
   const { language } = useLanguage()
-  const [showDeparturesModal, setShowDeparturesModal] = useState(false)
 
   // Lightweight parallax effect
   useEffect(() => {
@@ -152,38 +148,6 @@ export function HeroSection({ data }: { data: HeroData }) {
               </Button>
             </div>
 
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-4 max-w-md shadow-2xl border border-white/20 mt-6">
-              <div className="flex items-center justify-between mb-3">
-                <h3 className="text-[#30b2f5] font-semibold text-sm uppercase tracking-wide">
-                  {data.nextDepartures[language]}
-                </h3>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setShowDeparturesModal(true)}
-                  className="text-[#30b2f5] hover:text-[#2aa1e0] hover:bg-[#30b2f5]/10 -mr-2"
-                >
-                  {language === "sq" ? "Shiko të gjitha" : "View All"}
-                  <ArrowRight className="h-4 w-4 ml-1" />
-                </Button>
-              </div>
-              <div className="space-y-2.5">
-                {departuresData.departures.slice(0, 3).map((departure) => (
-                  <div key={departure.id} className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2">
-                      <Plane className="h-4 w-4 text-[#30b2f5]" />
-                      <span className="text-gray-700 font-medium">
-                        {departure.from[language]} → {departure.to[language]}
-                      </span>
-                    </div>
-                    <span className="text-[#30b2f5] font-bold">
-                      {language === "sq" ? "nga" : "from"} €{departure.price}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             <div className="flex flex-wrap gap-6 md:gap-8 text-white pt-4">
               <div className="flex items-center gap-2.5">
                 <Globe className="h-6 w-6" />
@@ -193,38 +157,27 @@ export function HeroSection({ data }: { data: HeroData }) {
                 <MessageCircle className="h-6 w-6" />
                 <span className="text-base md:text-lg font-semibold">{data.localExperts[language]}</span>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Clock className="h-6 w-6" />
-                <span className="text-base md:text-lg font-semibold">{data.support247[language]}</span>
-              </div>
             </div>
           </div>
 
+          {/* Cinematic Animation - Desktop */}
           <div className="relative hidden lg:block -ml-16 xl:-ml-24">
-            <img
-              src={`${basePath}/images/AirplaneFinal.png`}
-              alt="Fluturo Airplane"
-              style={{ transform: `translateY(${scrollY * 0.1}px) scale(1.15)` }}
-              className="w-full max-w-4xl h-auto object-contain drop-shadow-2xl relative z-10 -mr-40 transition-transform duration-100"
-            />
+            <div
+              style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+              className="w-full max-w-4xl h-[500px] relative z-10 -mr-40 transition-transform duration-100"
+            >
+              <HeroCinematicAnimation className="w-full h-full" />
+            </div>
           </div>
 
-          {/* Mobile: Airplane as watermark */}
-          <div className="absolute lg:hidden top-1/2 -translate-y-1/2 right-0 w-full opacity-15 pointer-events-none">
-            <img
-              src={`${basePath}/images/AirplaneFinal.png`}
-              alt="Fluturo Airplane"
-              className="w-full h-auto object-contain"
-            />
+          {/* Cinematic Animation - Mobile (subtle background) */}
+          <div className="absolute lg:hidden top-1/2 -translate-y-1/2 right-0 w-full opacity-20 pointer-events-none">
+            <div className="w-full h-[400px]">
+              <HeroCinematicAnimation className="w-full h-full" />
+            </div>
           </div>
         </div>
       </div>
-
-      <DeparturesModal
-        open={showDeparturesModal}
-        onOpenChange={setShowDeparturesModal}
-        departures={departuresData.departures}
-      />
     </section>
   )
 }

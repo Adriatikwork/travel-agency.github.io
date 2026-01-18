@@ -76,40 +76,6 @@
       "en": "Themes",
       "sq": "Temat"
     },
-    "themeOptions": {
-      "beach": {
-        "en": "Beach",
-        "sq": "Plazh"
-      },
-      "luxury": {
-        "en": "Luxury",
-        "sq": "Luksoz"
-      },
-      "adventure": {
-        "en": "Adventure",
-        "sq": "Aventurë"
-      },
-      "cityBreak": {
-        "en": "City-break",
-        "sq": "Pushim Qyteti"
-      },
-      "romantic": {
-        "en": "Romantic",
-        "sq": "Romantik"
-      },
-      "honeymoon": {
-        "en": "Honeymoon",
-        "sq": "Muaji i Mjaltit"
-      },
-      "family": {
-        "en": "Family",
-        "sq": "Familjar"
-      },
-      "culture": {
-        "en": "Culture",
-        "sq": "Kulturë"
-      }
-    },
     "featuredOnly": {
       "en": "Show featured destinations only",
       "sq": "Trego vetëm destinacionet e veçanta"

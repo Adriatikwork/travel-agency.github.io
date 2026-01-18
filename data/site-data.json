@@ -1,4 +1,24 @@
 {
+  "about": {
+    "section": {
+      "label": {
+        "en": "About Us",
+        "sq": "Rreth Nesh"
+      },
+      "subtitle": {
+        "en": "Since 2023, turning travel dreams into reality with flights, packages, and wellness journeys",
+        "sq": "Që nga 2023, duke i kthyer ëndrrat e udhëtimit në realitet me fluturime, paketa dhe udhëtime wellness"
+      },
+      "title": {
+        "en": "Your Journey, Our",
+        "sq": "Udhëtimi Juaj,"
+      },
+      "titleHighlight": {
+        "en": "Passion",
+        "sq": "Pasioni Ynë"
+      }
+    }
+  },
   "company": {
     "description": {
       "en": "Premium travel agency based in Kosovo, specializing in European destinations and unforgettable travel experiences.",
@@ -6,6 +26,124 @@
     },
     "founded": "2023-06-24",
     "name": "Fluturo Travel Agency"
+  },
+  "contact": {
+    "form": {
+      "additionalInfo": {
+        "en": "Additional Information",
+        "sq": "Informacion Shtesë"
+      },
+      "additionalInfoPlaceholder": {
+        "en": "Tell us about your preferences, special requests, or any questions you have...",
+        "sq": "Na tregoni për preferencat tuaja, kërkesat speciale ose çdo pyetje që keni..."
+      },
+      "dateFrom": {
+        "en": "Travel Date From",
+        "sq": "Data e Udhëtimit Nga"
+      },
+      "dateTo": {
+        "en": "Travel Date To",
+        "sq": "Data e Udhëtimit Deri"
+      },
+      "departureCity": {
+        "en": "Departure City",
+        "sq": "Qyteti i Nisjes"
+      },
+      "destination": {
+        "en": "Desired Destination",
+        "sq": "Destinacioni i Dëshiruar"
+      },
+      "email": {
+        "en": "Email",
+        "sq": "Email"
+      },
+      "fullName": {
+        "en": "Full Name",
+        "sq": "Emri i Plotë"
+      },
+      "people": {
+        "en": "People",
+        "sq": "Persona"
+      },
+      "person": {
+        "en": "Person",
+        "sq": "Person"
+      },
+      "phone": {
+        "en": "Phone",
+        "sq": "Telefoni"
+      },
+      "selectDeparture": {
+        "en": "Select departure",
+        "sq": "Zgjidhni nisjen"
+      },
+      "selectDestination": {
+        "en": "Select destination",
+        "sq": "Zgjidhni destinacionin"
+      },
+      "selectType": {
+        "en": "Select type",
+        "sq": "Zgjidhni llojin"
+      },
+      "submit": {
+        "en": "Submit Inquiry",
+        "sq": "Dërgoni Kërkesën"
+      },
+      "travelers": {
+        "en": "Number of Travelers",
+        "sq": "Numri i Udhëtarëve"
+      },
+      "tripType": {
+        "en": "Trip Type",
+        "sq": "Lloji i Udhëtimit"
+      },
+      "tripTypes": {
+        "adventure": {
+          "en": "Adventure",
+          "sq": "Aventurë"
+        },
+        "family": {
+          "en": "Family Vacation",
+          "sq": "Pushim Familjar"
+        },
+        "group": {
+          "en": "Group Travel",
+          "sq": "Udhëtim në Grup"
+        },
+        "honeymoon": {
+          "en": "Honeymoon",
+          "sq": "Muaji i Mjaltit"
+        },
+        "luxury": {
+          "en": "Luxury Experience",
+          "sq": "Përvojë Luksoze"
+        },
+        "romantic": {
+          "en": "Romantic Getaway",
+          "sq": "Arratisje Romantike"
+        }
+      }
+    },
+    "section": {
+      "subtitle": {
+        "en": "Tell us about your dream vacation and we'll make it happen",
+        "sq": "Na tregoni për pushimin tuaj ëndërror dhe ne do ta bëjmë realitet"
+      },
+      "title": {
+        "en": "Plan Your Trip",
+        "sq": "Planifikoni Udhëtimin Tuaj"
+      }
+    },
+    "success": {
+      "message": {
+        "en": "Your inquiry has been received. Our travel experts will contact you shortly to plan your perfect trip.",
+        "sq": "Kërkesa juaj është pranuar. Ekspertët tanë të udhëtimit do t'ju kontaktojnë së shpejti për të planifikuar udhëtimin tuaj perfekt."
+      },
+      "title": {
+        "en": "Thank You!",
+        "sq": "Faleminderit!"
+      }
+    }
   },
   "footer": {
     "contact": {
@@ -200,6 +338,110 @@
       "whatsIncluded": {
         "en": "What's Included:",
         "sq": "Çfarë Përfshihet:"
+      }
+    }
+  },
+  "stats": {
+    "numbers": [
+      {
+        "id": "stat-destinations",
+        "label": {
+          "en": "Destinations",
+          "sq": "Destinacione"
+        },
+        "value": 120,
+        "suffix": "+",
+        "icon": "globe"
+      },
+      {
+        "id": "stat-travelers",
+        "label": {
+          "en": "Happy Travelers",
+          "sq": "Udhëtarë të Kënaqur"
+        },
+        "value": 5000,
+        "suffix": "+",
+        "icon": "users"
+      },
+      {
+        "id": "stat-rating",
+        "label": {
+          "en": "Traveler Rating",
+          "sq": "Vlerësimi i Udhëtarëve"
+        },
+        "value": 4.9,
+        "suffix": "/5",
+        "icon": "award"
+      },
+      {
+        "id": "stat-experience",
+        "label": {
+          "en": "Years in Operation",
+          "sq": "Vite në Operim"
+        },
+        "value": 1,
+        "suffix": "+",
+        "icon": "handshake"
+      }
+    ],
+    "ui": {
+      "subtitle": {
+        "en": "Trusted by thousands of travelers worldwide",
+        "sq": "I besuar nga mijëra udhëtarë në mbarë botën"
+      },
+      "title": {
+        "en": "Our Numbers",
+        "sq": "Numrat Tanë"
+      }
+    }
+  },
+  "whyChoose": {
+    "reasons": [
+      {
+        "title": {
+          "en": "Personalized Travel Experiences",
+          "sq": "Përvoja Udhëtimi të Personalizuara"
+        },
+        "description": {
+          "en": "Every journey is tailored to your preferences, from relaxing holidays and beach getaways to concerts and special events.",
+          "sq": "Çdo udhëtim është i përshtatur sipas preferencave tuaja, nga pushimet relaksuese dhe arratisjet në plazh deri te koncertet dhe ngjarjet speciale."
+        }
+      },
+      {
+        "title": {
+          "en": "Expertise You Can Trust",
+          "sq": "Ekspertizë në të Cilën Mund të Besoni"
+        },
+        "description": {
+          "en": "Our founders bring years of hands-on experience in the travel industry, ensuring seamless and memorable trips.",
+          "sq": "Themeluesit tanë sjellin vite përvojë praktike në industrinë e udhëtimit, duke siguruar udhëtime pa probleme dhe të paharrueshme."
+        }
+      },
+      {
+        "title": {
+          "en": "Global & Local Reach",
+          "sq": "Rreze Globale & Lokale"
+        },
+        "description": {
+          "en": "We provide travel solutions for destinations worldwide while offering deep local knowledge of the Balkans and coastal regions.",
+          "sq": "Ne ofrojmë zgjidhje udhëtimi për destinacione në mbarë botën duke ofruar njohuri të thella lokale për Ballkanin dhe rajonet bregdetare."
+        }
+      },
+      {
+        "title": {
+          "en": "Stress-Free Planning",
+          "sq": "Planifikim Pa Stres"
+        },
+        "description": {
+          "en": "From flights to accommodations and transfers, we handle every detail so you can enjoy a smooth, worry-free travel experience.",
+          "sq": "Nga fluturimet te akomodimet dhe transfertat, ne menaxhojmë çdo detaj që ju të shijoni një përvojë udhëtimi të qetë dhe pa shqetësime."
+        }
+      }
+    ],
+    "section": {
+      "title": {
+        "en": "Why Choose Fluturo?",
+        "sq": "Pse të Zgjidhni Fluturo?"
       }
     }
   }
