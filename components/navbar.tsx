@@ -23,6 +23,7 @@ export function Navbar() {
   const pathname = usePathname()
   const router = useRouter()
   const isHomePage = pathname === "/"
+  const isDestinationPage = pathname.startsWith("/destinations/")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -58,32 +59,38 @@ export function Navbar() {
   }
 
   const navLinks = [
-    { 
-      name: language === "en" ? "Destinations" : "Destinacionet", 
-      id: "destinations" 
+    {
+      name: language === "en" ? "Destinations" : "Destinacionet",
+      id: "destinations"
     },
-    { 
-      name: language === "en" ? "Packages" : "Paketat", 
-      id: "packages" 
+    {
+      name: language === "en" ? "Travel Packages" : "Paketat",
+      id: "packages"
     },
-    { 
-      name: language === "en" ? "Services" : "Shërbimet", 
-      id: "services" 
+    {
+      name: language === "en" ? "Our Services" : "Shërbimet",
+      id: "services"
     },
-    { 
-      name: language === "en" ? "About" : "Rreth Nesh", 
-      id: "about" 
+    {
+      name: language === "en" ? "About Us" : "Rreth Nesh",
+      id: "about"
     },
-    { 
-      name: language === "en" ? "Team" : "Ekipi", 
-      id: "team" 
+    {
+      name: language === "en" ? "Contact" : "Kontakt",
+      id: "contact"
     },
   ]
 
   return (
     <nav
       className={`fixed top-0 left-0 z-50 transition-all duration-300 w-[100vw] ${
-        isScrolled ? "bg-[#38b6ff]/95 backdrop-blur-md shadow-xl" : "bg-[#38b6ff]"
+        isDestinationPage
+          ? "bg-background/40 backdrop-blur-xl shadow-lg border-b border-border/20"
+          : isScrolled
+          ? "bg-[#38b6ff]/95 backdrop-blur-md shadow-xl"
+          : isHomePage
+          ? "bg-transparent"
+          : "bg-[#38b6ff]"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -96,29 +103,43 @@ export function Navbar() {
             />
           </Link>
 
-          <div className="hidden md:flex items-center gap-6 lg:gap-8">
+          <div className="hidden md:flex items-center gap-5 lg:gap-7">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="text-white/90 hover:text-white font-semibold text-base transition-all hover:scale-105 relative group"
+                className={`font-semibold text-sm transition-all hover:scale-105 relative group leading-relaxed py-1 ${
+                  isDestinationPage
+                    ? "text-foreground/80 hover:text-foreground"
+                    : "text-white/90 hover:text-white"
+                }`}
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all group-hover:w-full"></span>
+                <span className={`absolute bottom-0 left-0 w-0 h-0.5 transition-all group-hover:w-full ${
+                  isDestinationPage ? "bg-brand" : "bg-white"
+                }`}></span>
               </button>
             ))}
             <LanguageSwitcher />
             <Button
               onClick={() => scrollToSection("contact")}
-              className="bg-white hover:bg-white/90 text-[#38b6ff] rounded-full px-7 py-5 font-bold text-base border-2 border-white/30 shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              className={`rounded-full px-6 py-4 font-bold text-sm border-2 shadow-lg hover:shadow-xl transition-all hover:scale-105 ${
+                isDestinationPage
+                  ? "bg-brand hover:bg-brand-dark text-primary-foreground border-brand/30"
+                  : "bg-white hover:bg-white/90 text-[#38b6ff] border-white/30"
+              }`}
             >
-              {language === "en" ? "Plan a trip" : "Planifikoni udhëtimin"}
+              {language === "en" ? "Book Now" : "Rezervoni Tani"}
             </Button>
           </div>
 
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2.5 text-white hover:bg-white/20 rounded-lg transition-all hover:scale-105 active:scale-95"
+            className={`md:hidden p-2.5 rounded-lg transition-all hover:scale-105 active:scale-95 ${
+              isDestinationPage
+                ? "text-foreground hover:bg-foreground/10"
+                : "text-white hover:bg-white/20"
+            }`}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
           >
             {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -127,34 +148,50 @@ export function Navbar() {
 
         {isMobileMenuOpen && (
           <div className="md:hidden overflow-hidden">
-            <div className="py-4 border-t border-white/30 space-y-2 animate-in slide-in-from-top duration-300">
+            <div className={`py-4 space-y-2 animate-in slide-in-from-top duration-300 ${
+              isDestinationPage ? "border-t border-border/30" : "border-t border-white/30"
+            }`}>
               {navLinks.map((link, index) => (
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="block w-full text-left py-3.5 px-4 text-white/95 hover:text-white hover:bg-white/15 active:bg-white/25 font-semibold text-base rounded-xl transition-all duration-200 group animate-in slide-in-from-top"
+                  className={`block w-full text-left py-3 px-4 font-semibold text-sm rounded-xl transition-all duration-200 group animate-in slide-in-from-top leading-relaxed ${
+                    isDestinationPage
+                      ? "text-foreground/90 hover:text-foreground hover:bg-foreground/10 active:bg-foreground/20"
+                      : "text-white/95 hover:text-white hover:bg-white/15 active:bg-white/25"
+                  }`}
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
                   <span className="flex items-center justify-between">
                     {link.name}
-                    <span className="text-white/40 group-hover:text-white/70 group-hover:translate-x-1 transition-all">
+                    <span className={`group-hover:translate-x-1 transition-all ${
+                      isDestinationPage ? "text-foreground/40 group-hover:text-foreground/70" : "text-white/40 group-hover:text-white/70"
+                    }`}>
                       →
                     </span>
                   </span>
                 </button>
               ))}
 
-              <div className="pt-3 pb-2 px-4 flex items-center justify-between border-t border-white/20 mt-3">
-                <span className="text-white/80 text-sm font-medium">Language</span>
+              <div className={`pt-3 pb-2 px-4 flex items-center justify-between mt-3 ${
+                isDestinationPage ? "border-t border-border/30" : "border-t border-white/20"
+              }`}>
+                <span className={`text-sm font-medium ${
+                  isDestinationPage ? "text-foreground/80" : "text-white/80"
+                }`}>Language</span>
                 <LanguageSwitcher />
               </div>
 
               <div className="pt-2 px-4">
                 <Button
                   onClick={() => scrollToSection("contact")}
-                  className="w-full bg-white hover:bg-white/90 text-[#38b6ff] rounded-xl font-bold text-base py-6 shadow-lg hover:shadow-xl transition-all active:scale-95 touch-manipulation"
+                  className={`w-full rounded-xl font-bold text-sm py-6 shadow-lg hover:shadow-xl transition-all active:scale-95 touch-manipulation leading-normal ${
+                    isDestinationPage
+                      ? "bg-brand hover:bg-brand-dark text-primary-foreground"
+                      : "bg-white hover:bg-white/90 text-[#38b6ff]"
+                  }`}
                 >
-                  {language === "en" ? "Plan a trip" : "Planifikoni udhëtimin"}
+                  {language === "en" ? "Book Your Trip" : "Rezervoni Udhëtimin"}
                 </Button>
               </div>
             </div>

@@ -116,39 +116,39 @@ export function DestinationsGrid({ destinations, departures, currency }: Destina
         currency={currency}
         priceLabel={ui.from[language]}
         hoverContent={
-          <div className="w-full h-full flex flex-col items-center justify-center px-6 sm:px-8 py-4 sm:py-6 text-center">
-            <div className="flex-1 flex flex-col items-center justify-center space-y-2 sm:space-y-4 max-w-[280px]">
-              <h4 className="text-2xl sm:text-3xl font-bold text-white leading-tight text-balance">
+          <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-between px-4 sm:px-6 py-6 sm:py-8 text-center">
+            <div className="flex-1 flex flex-col items-center justify-center space-y-2 sm:space-y-3 w-full max-w-[90%]">
+              <h4 className="text-xl sm:text-2xl font-bold text-white leading-tight text-balance">
                 {destination.name}
               </h4>
-              <p className="text-xs sm:text-sm text-white/95 leading-relaxed line-clamp-3 text-pretty">
+              <p className="text-xs sm:text-sm text-white/95 leading-relaxed line-clamp-2 sm:line-clamp-3 text-pretty">
                 {destination.descriptionLong[language]}
               </p>
-              <div className="flex items-center justify-center gap-2 text-xs sm:text-sm text-white/90">
-                <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" />
+              <div className="flex items-center justify-center gap-2 text-xs text-white/90">
+                <Info className="w-3.5 h-3.5 flex-shrink-0" />
                 <span className="text-pretty">
                   {ui.availableFrom[language]} {destination.availableDepartureIds.length} {ui.airports[language]}
                 </span>
               </div>
             </div>
 
-            <div className="flex gap-2 sm:gap-3 w-full max-w-[280px] mt-auto pt-3 sm:pt-4">
+            <div className="flex flex-col gap-2 w-full max-w-[90%] pt-3">
               <Button
-                className="flex-1 bg-white text-sky-600 hover:bg-white/90 font-semibold rounded-xl shadow-lg h-10 sm:h-11 text-xs sm:text-sm touch-manipulation"
+                className="w-full bg-white text-sky-600 hover:bg-white/90 font-semibold rounded-lg shadow-lg h-9 sm:h-10 text-xs sm:text-sm touch-manipulation"
                 asChild
               >
                 <Link href={`/destinations/${destination.slug}`}>
-                  <Info className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
-                  {ui.viewDetails[language]}
+                  <Info className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
+                  <span>{ui.viewDetails[language]}</span>
                 </Link>
               </Button>
               <Button
-                className="flex-1 bg-sky-700 text-white hover:bg-sky-800 font-semibold rounded-xl shadow-lg border-2 border-white/20 h-10 sm:h-11 text-xs sm:text-sm touch-manipulation"
+                className="w-full bg-sky-700 text-white hover:bg-sky-800 font-semibold rounded-lg shadow-lg border-2 border-white/20 h-9 sm:h-10 text-xs sm:text-sm touch-manipulation"
                 asChild
               >
                 <Link href={`/destinations/${destination.slug}`}>
-                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 mr-1.5 sm:mr-2" />
-                  {ui.bookNow[language]}
+                  <ArrowRight className="w-3.5 h-3.5 mr-1.5 flex-shrink-0" />
+                  <span>{ui.bookNow[language]}</span>
                 </Link>
               </Button>
             </div>

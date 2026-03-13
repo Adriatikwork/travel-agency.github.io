@@ -1,7 +1,6 @@
 "use client"
 
 import { Plane, Users, Briefcase, Car, Sparkles } from "lucide-react"
-import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/lib/language-context"
 import servicesData from "@/data/services.json"
 
@@ -25,48 +24,46 @@ export function ServicesSection() {
   }
 
   return (
-    <section id="services" className="py-12 sm:py-16 bg-gradient-to-br from-[#38b6ff] to-[#2a9de6]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-block px-4 py-1 bg-white/20 backdrop-blur-sm rounded-full mb-3">
-              <span className="text-xs font-bold text-white uppercase tracking-wider">{ui.sectionLabel[language]}</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 text-balance">
+    <section id="services" className="py-16 sm:py-20 bg-brand relative overflow-hidden">
+      {/* Subtle pattern overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(255,255,255,0.08)_0%,transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.05)_0%,transparent_40%)]" />
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-10 sm:mb-14">
+            <span className="inline-flex items-center px-4 py-1.5 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/15 rounded-full text-primary-foreground/90 text-xs font-semibold tracking-widest uppercase mb-4">
+              {ui.sectionLabel[language]}
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground mb-3 text-balance">
               {ui.title[language]}
             </h2>
-            <p className="text-sm sm:text-base text-white/90 text-pretty">{ui.subtitle[language]}</p>
+            <p className="text-base sm:text-lg text-primary-foreground/75 max-w-xl mx-auto text-pretty">{ui.subtitle[language]}</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {servicesData.services.map((service) => {
               const Icon = iconMap[service.icon as keyof typeof iconMap] || Plane
               return (
-                <div
+                <button
                   key={service.id}
-                  className="group relative bg-white rounded-xl p-4 sm:p-5 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
+                  onClick={scrollToContact}
+                  className="group relative bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/10 rounded-2xl p-5 sm:p-6 hover:bg-primary-foreground/20 transition-all duration-300 hover:-translate-y-1 text-left"
                 >
-                  <div className="flex flex-col items-center text-center space-y-2 sm:space-y-3">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#38b6ff] rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" strokeWidth={2} />
+                  <div className="flex flex-col items-center text-center gap-3">
+                    <div className="w-12 h-12 bg-primary-foreground/15 rounded-xl flex items-center justify-center group-hover:bg-primary-foreground/25 transition-colors">
+                      <Icon className="h-6 w-6 text-primary-foreground" strokeWidth={1.5} />
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-900 text-xs sm:text-sm mb-1 text-balance">
+                      <h3 className="font-bold text-primary-foreground text-sm mb-1.5 text-balance">
                         {service.title[language]}
                       </h3>
-                      <p className="text-[10px] sm:text-xs text-gray-600 leading-relaxed text-pretty">
+                      <p className="text-xs text-primary-foreground/65 leading-relaxed text-pretty">
                         {service.description[language]}
                       </p>
                     </div>
-                    <Button
-                      onClick={scrollToContact}
-                      className="group/btn bg-white hover:bg-gray-50 text-[#38b6ff] rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 border border-[#38b6ff]/20 touch-manipulation"
-                    >
-                      {ui.learnMore[language]}
-                      <Icon className="ml-1.5 sm:ml-2 h-3 w-3 sm:h-4 sm:w-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Button>
                   </div>
-                </div>
+                </button>
               )
             })}
           </div>

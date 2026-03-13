@@ -68,57 +68,57 @@ export function AboutSection({ stats, whyChoose }: AboutSectionProps) {
   }, [isVisible, stats])
 
   return (
-    <section ref={sectionRef} id="about" className="py-12 sm:py-16 bg-gray-50">
+    <section ref={sectionRef} id="about" className="py-16 sm:py-20 bg-background">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-block px-4 py-1 bg-[#38b6ff]/10 rounded-full mb-3">
-              <span className="text-xs font-bold text-[#38b6ff] uppercase tracking-wider">
-                {siteData.about.section.label[language]}
-              </span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 text-balance">
+          <div className="text-center mb-10 sm:mb-14">
+            <span className="inline-flex items-center px-4 py-1.5 bg-brand-light rounded-full text-brand-darker text-xs font-semibold tracking-widest uppercase mb-4">
+              {siteData.about.section.label[language]}
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-3 text-balance">
               {siteData.about.section.title[language]}{" "}
-              <span className="text-[#38b6ff]">{siteData.about.section.titleHighlight[language]}</span>
+              <span className="text-brand">{siteData.about.section.titleHighlight[language]}</span>
             </h2>
-            <p className="text-sm sm:text-base text-gray-600 max-w-2xl mx-auto text-pretty">
+            <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">
               {siteData.about.section.subtitle[language]}
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-4 sm:gap-6 mb-8 sm:mb-12">
+          {/* Stats grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-12 sm:mb-16">
             {stats.map((stat) => (
-              <div key={stat.id} className="text-center">
-                <div className="text-2xl sm:text-3xl font-bold text-[#38b6ff]">
+              <div key={stat.id} className="text-center p-4 rounded-2xl bg-surface-sunken border border-border/50">
+                <div className="text-3xl sm:text-4xl font-bold text-brand mb-1">
                   {stat.id === "stat-rating"
                     ? (counts[stat.id] || 0).toFixed(1)
                     : counts[stat.id]?.toLocaleString() || 0}
                   {stat.suffix}
                 </div>
-                <div className="text-[10px] sm:text-xs text-gray-600 font-medium mt-1 text-balance">
+                <div className="text-xs text-muted-foreground font-medium text-balance">
                   {stat.label[language]}
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow-sm border border-gray-100">
-            <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center text-balance">
+          {/* Why Choose Us */}
+          <div className="bg-card rounded-2xl p-6 sm:p-8 md:p-10 shadow-sm border border-border/50">
+            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-6 sm:mb-8 text-center text-balance">
               {siteData.whyChoose.section.title[language]}
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
               {whyChoose.map((item, idx) => (
-                <div key={idx} className="flex gap-2 sm:gap-3">
+                <div key={idx} className="flex gap-3 p-3 rounded-xl hover:bg-surface-sunken transition-colors">
                   <div className="flex-shrink-0">
-                    <div className="w-5 h-5 sm:w-6 sm:h-6 bg-[#38b6ff] rounded-full flex items-center justify-center">
-                      <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 text-white" strokeWidth={2.5} />
+                    <div className="w-7 h-7 bg-brand rounded-lg flex items-center justify-center">
+                      <CheckCircle className="h-4 w-4 text-primary-foreground" strokeWidth={2.5} />
                     </div>
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-900 text-xs sm:text-sm mb-1 text-balance">
+                    <h4 className="font-bold text-foreground text-sm mb-1 text-balance">
                       {item.title[language]}
                     </h4>
-                    <p className="text-[10px] sm:text-xs text-gray-600 leading-relaxed text-pretty">
+                    <p className="text-xs text-muted-foreground leading-relaxed text-pretty">
                       {item.description[language]}
                     </p>
                   </div>

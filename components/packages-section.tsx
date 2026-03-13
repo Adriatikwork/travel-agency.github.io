@@ -1,11 +1,10 @@
 "use client"
 
-import { Check, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
+import { Check, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/lib/language-context"
 import packagesData from "@/data/packages"
 import { UnifiedCard } from "@/components/unified-card"
-import { useState, useRef } from "react"
 
 interface Package {
   id: string
@@ -29,31 +28,11 @@ interface PackagesSectionProps {
 }
 
 export function PackagesSection({ packages, currency }: PackagesSectionProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
   const { language } = useLanguage()
   const ui = packagesData.ui
 
   if (packages.length === 0) {
     return null
-  }
-
-  const nextSlide = () => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current
-      const scrollAmount = container.offsetWidth * 0.85
-      container.scrollBy({ left: scrollAmount, behavior: "smooth" })
-    }
-    setCurrentIndex((prev) => Math.min(prev + 1, packages.length - 1))
-  }
-
-  const prevSlide = () => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current
-      const scrollAmount = container.offsetWidth * 0.85
-      container.scrollBy({ left: -scrollAmount, behavior: "smooth" })
-    }
-    setCurrentIndex((prev) => Math.max(prev - 1, 0))
   }
 
   const renderCard = (pkg: Package) => {
@@ -73,19 +52,19 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
         location={pkg.destinationName}
         title={pkg.title[language]}
         description={
-          <div className="space-y-3">
-            <p className="text-sm leading-relaxed line-clamp-2">{pkg.summary[language]}</p>
-            <div className="space-y-2">
-              <div className="text-xs font-semibold text-foreground">{ui.whatsIncluded[language]}</div>
-              <div className="space-y-1.5">
+          <div className="space-y-2.5">
+            <p className="text-xs leading-relaxed line-clamp-2">{pkg.summary[language]}</p>
+            <div className="space-y-1.5">
+              <div className="text-[10px] font-bold text-card-foreground uppercase tracking-wider">{ui.whatsIncluded[language]}</div>
+              <div className="space-y-1">
                 {pkg.inclusions[language].slice(0, 3).map((inclusion, i) => (
-                  <div key={i} className="flex items-start gap-1.5 text-xs text-foreground/80">
-                    <Check className="w-3.5 h-3.5 text-sky-600 mt-0.5 flex-shrink-0" />
+                  <div key={i} className="flex items-start gap-1.5 text-[11px] text-card-foreground/70">
+                    <Check className="w-3 h-3 text-brand mt-0.5 flex-shrink-0" />
                     <span className="line-clamp-1">{inclusion}</span>
                   </div>
                 ))}
                 {pkg.inclusions[language].length > 3 && (
-                  <div className="text-xs text-muted-foreground ml-5">
+                  <div className="text-[10px] text-muted-foreground ml-4">
                     +{pkg.inclusions[language].length - 3} {ui.moreInclusions[language]}
                   </div>
                 )}
@@ -99,7 +78,7 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
         currency={currency}
         priceLabel={ui.from[language]}
         ctaButton={
-          <Button className="w-full bg-[#38b6ff] hover:bg-[#2a9de8] text-white rounded-xl shadow-lg py-2 text-sm transition-colors">
+          <Button className="w-full bg-brand hover:bg-brand-dark text-primary-foreground rounded-xl shadow-sm py-2.5 text-xs font-semibold transition-all">
             {ui.bookPackage[language]}
             <ArrowRight className="w-3.5 h-3.5 ml-2" />
           </Button>
@@ -109,74 +88,17 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
   }
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 bg-white">
+    <section className="py-16 sm:py-20 bg-surface-sunken">
       <div className="container mx-auto px-4 sm:px-6">
-        <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-balance">{ui.title[language]}</h2>
-          <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto text-pretty">{ui.subtitle[language]}</p>
+        <div className="text-center mb-10 sm:mb-14">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 text-foreground text-balance">{ui.title[language]}</h2>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">{ui.subtitle[language]}</p>
         </div>
 
-        <div className="lg:hidden relative max-w-7xl mx-auto px-4">
-          {packages.length > 1 && (
-            <>
-              <button
-                onClick={prevSlide}
-                disabled={currentIndex === 0}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-xl rounded-full p-2.5 hover:bg-gray-50 transition-all hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed"
-                aria-label="Previous package"
-              >
-                <ChevronLeft className="w-5 h-5 text-[#38b6ff]" />
-              </button>
-
-              <button
-                onClick={nextSlide}
-                disabled={currentIndex >= packages.length - 1}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-xl rounded-full p-2.5 hover:bg-gray-50 transition-all hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed"
-                aria-label="Next package"
-              >
-                <ChevronRight className="w-5 h-5 text-[#38b6ff]" />
-              </button>
-            </>
-          )}
-
-          <div
-            ref={scrollContainerRef}
-            className="overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            <div className="flex gap-4 pb-4">
-              {packages.map((pkg) => (
-                <div key={pkg.id} className="flex-shrink-0 w-[85%] sm:w-[70%] snap-center">
-                  {renderCard(pkg)}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Pagination Dots */}
-          {packages.length > 1 && (
-            <div className="flex justify-center gap-2 mt-6">
-              {packages.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`h-2 rounded-full transition-all ${
-                    idx === currentIndex ? "bg-[#38b6ff] w-8" : "bg-gray-300 w-2"
-                  }`}
-                  aria-label={`Go to package ${idx + 1}`}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-
-        <div className="hidden lg:block max-w-7xl mx-auto px-6">
-          <div className="flex flex-wrap justify-center gap-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
             {packages.map((pkg) => (
-              <div
-                key={pkg.id}
-                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]"
-              >
+              <div key={pkg.id}>
                 {renderCard(pkg)}
               </div>
             ))}
