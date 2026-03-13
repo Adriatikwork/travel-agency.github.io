@@ -8,7 +8,7 @@
 export const destinationsData = {
   meta: {
     currency: "EUR",
-    lastUpdated: "2026-01-18",
+    lastUpdated: "2026-01-19",
   },
   departures: [
     {
@@ -62,7 +62,7 @@ export const destinationsData = {
         lat: 52.3676,
         lon: 4.9041,
       },
-      gallery: ["https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=1200&h=800&fit=crop", "https://images.unsplash.com/photo-1583211892116-1a38db612244?w=1200&h=800&fit=crop"],
+      gallery: ["https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=1200&h=800&fit=crop", "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/81/30/3f/caption.jpg?w=1400&h=1400&s=1&cx=1846&cy=1833&chk=v1_6ae0a81ae3361e988707", "https://images.unsplash.com/photo-1584003564911-a7a321c84e1c?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&ixid=M3w4NTkyNDR8MHwxfHNlYXJjaHwyfHxBbXN0ZXJkYW18ZW58MHwwfHx8MTc2ODc1Mzg0NHww&ixlib=rb-4.1.0&q=80&w=1200&h=800", "https://images.unsplash.com/photo-1459679749680-18eb1eb37418?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&ixid=M3w4NTkyNDR8MHwxfHNlYXJjaHwzfHxBbXN0ZXJkYW18ZW58MHwwfHx8MTc2ODc1Mzg0NHww&ixlib=rb-4.1.0&q=80&w=1200&h=800", "https://images.unsplash.com/photo-1468436385273-8abca6dfd8d3?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&ixid=M3w4NTkyNDR8MHwxfHNlYXJjaHw3fHxBbXN0ZXJkYW18ZW58MHwwfHx8MTc2ODc1Mzg0NHww&ixlib=rb-4.1.0&q=80&w=1200&h=800"],
       mealPlan: { en: "Breakfast included", sq: "Mëngjesi i përfshirë" },
       popularityScore: 89,
       isNew: true,
@@ -79,8 +79,8 @@ export const destinationsData = {
         sq: ["fluturim-vajtje-ardhje", "akomodim-në-hotel", "mëngjes", "tour-i-kanalit"],
       },
       highlights: {
-        en: ["Canal cruises", "Van Gogh Museum", "Anne Frank House", "Bicycle tours"],
-        sq: ["Lundrime në kanale", "Muzeu Van Gogh", "Shtëpia e Anne Frank", "Ture me biçikletë"],
+        en: ["Canal cruises", "Van Gogh Museum", "Anne Frank House", "Bicycle tours", "lake views"],
+        sq: ["Lundrime në kanale", "Muzeu Van Gogh", "Shtëpia e Anne Frank", "Ture me biçikletë", "pamje liqeni"],
       },
     },
     {
