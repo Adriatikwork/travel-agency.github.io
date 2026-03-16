@@ -1,8 +1,7 @@
 "use client"
 
-import { MapPin, ArrowRight, Info, ChevronLeft, ChevronRight, Plane, Facebook, Instagram } from "lucide-react"
+import { MapPin, ArrowRight, Info, Plane, Facebook, Instagram } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useState, useRef } from "react"
 import Link from "next/link"
 import { useLanguage } from "@/lib/language-context"
 import destinationsData from "@/data/destinations"
@@ -54,8 +53,6 @@ interface DestinationsGridProps {
 }
 
 export function DestinationsGrid({ destinations, departures, currency }: DestinationsGridProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
   const { language } = useLanguage()
   const ui = destinationsData.ui
 
@@ -122,24 +119,6 @@ export function DestinationsGrid({ destinations, departures, currency }: Destina
         </div>
       </div>
     )
-  }
-
-  const nextSlide = () => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current
-      const scrollAmount = container.offsetWidth * 0.85
-      container.scrollBy({ left: scrollAmount, behavior: "smooth" })
-    }
-    setCurrentIndex((prev) => Math.min(prev + 1, destinations.length - 1))
-  }
-
-  const prevSlide = () => {
-    if (scrollContainerRef.current) {
-      const container = scrollContainerRef.current
-      const scrollAmount = container.offsetWidth * 0.85
-      container.scrollBy({ left: -scrollAmount, behavior: "smooth" })
-    }
-    setCurrentIndex((prev) => Math.max(prev - 1, 0))
   }
 
   const renderCard = (destination: Destination) => {
@@ -217,75 +196,27 @@ export function DestinationsGrid({ destinations, departures, currency }: Destina
   }
 
   return (
-    <>
-      {/* Mobile/Tablet Carousel (< lg) */}
-      <div className="lg:hidden relative max-w-7xl mx-auto px-4">
-        {destinations.length > 1 && (
-          <>
-            <button
-              onClick={prevSlide}
-              disabled={currentIndex === 0}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-xl rounded-full p-2.5 hover:bg-gray-50 transition-all hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed"
-              aria-label="Previous destination"
-            >
-              <ChevronLeft className="w-5 h-5 text-[#38b6ff]" />
-            </button>
-
-            <button
-              onClick={nextSlide}
-              disabled={currentIndex >= destinations.length - 1}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-xl rounded-full p-2.5 hover:bg-gray-50 transition-all hover:scale-110 disabled:opacity-30 disabled:cursor-not-allowed"
-              aria-label="Next destination"
-            >
-              <ChevronRight className="w-5 h-5 text-[#38b6ff]" />
-            </button>
-          </>
-        )}
-
-        <div
-          ref={scrollContainerRef}
-          className="overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          <div className="flex gap-4 pb-4">
-            {destinations.map((destination) => (
-              <div key={destination.id} className="flex-shrink-0 w-[85%] sm:w-[70%] snap-center">
-                {renderCard(destination)}
-              </div>
-            ))}
+    <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      {/* Mobile & Tablet: 2-column grid */}
+      <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:hidden">
+        {destinations.map((destination) => (
+          <div key={destination.id} className="flex flex-col">
+            {renderCard(destination)}
           </div>
-        </div>
-
-        {/* Pagination Dots */}
-        {destinations.length > 1 && (
-          <div className="flex justify-center gap-2 mt-6">
-            {destinations.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setCurrentIndex(idx)}
-                className={`h-2 rounded-full transition-all ${
-                  idx === currentIndex ? "bg-[#38b6ff] w-8" : "bg-gray-300 w-2"
-                }`}
-                aria-label={`Go to destination ${idx + 1}`}
-              />
-            ))}
-          </div>
-        )}
+        ))}
       </div>
 
-      {/* Desktop Grid (>= lg) */}
-      <div className="hidden lg:block max-w-7xl mx-auto px-6">
-        <div className="flex flex-wrap justify-center gap-6">
-          {destinations.map((destination) => (
-            <div
-              key={destination.id}
-              className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]"
-            >
-              {renderCard(destination)}
-            </div>
-          ))}
-        </div>
+      {/* Desktop: centered flex grid */}
+      <div className="hidden lg:flex flex-wrap justify-center gap-6">
+        {destinations.map((destination) => (
+          <div
+            key={destination.id}
+            className="w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]"
+          >
+            {renderCard(destination)}
+          </div>
+        ))}
       </div>
-    </>
+    </div>
   )
 }
