@@ -8,13 +8,11 @@ import "./globals.css"
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ""
-
 export const metadata: Metadata = {
+  metadataBase: new URL("https://fluturo.co"),
   title: "Fluturo Travel Agency - Discover Your Next Adventure | Premium Travel Experiences",
   description:
     "Experience the world with Fluturo - Your trusted travel partner for unforgettable memories. Premium travel packages, expert planning, and personalized adventures worldwide. Plan your dream vacation today.",
-  generator: "fluturo.co",
   keywords: [
     "travel agency",
     "vacation planning",
@@ -26,7 +24,13 @@ export const metadata: Metadata = {
     "tour packages",
     "holiday planning",
     "destination travel",
+    "Kosovo travel agency",
+    "Balkans travel",
+    "European vacation packages",
   ],
+  alternates: {
+    canonical: "https://fluturo.co",
+  },
   openGraph: {
     title: "Fluturo Travel Agency - Discover Your Next Adventure",
     description:
@@ -37,12 +41,19 @@ export const metadata: Metadata = {
     url: "https://fluturo.co",
     images: [
       {
-        url: "/images/logo_landscape.png",
+        url: "https://fluturo.co/images/logo_landscape.png",
         width: 1200,
         height: 630,
-        alt: "Fluturo Travel Agency Logo",
+        alt: "Fluturo Travel Agency - Premium Travel Experiences",
       },
     ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fluturo Travel Agency - Discover Your Next Adventure",
+    description:
+      "Experience the world with Fluturo - Your trusted travel partner for unforgettable memories.",
+    images: ["https://fluturo.co/images/logo_landscape.png"],
   },
   robots: {
     index: true,
@@ -72,26 +83,12 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="canonical" href="https://fluturo.co" />
 
         {/* Microsoft specific meta tags */}
         <meta name="theme-color" content="#0ea5e9" />
         <meta name="msapplication-TileColor" content="#0ea5e9" />
-        <meta name="msapplication-TileImage" content="/images/logo_landscape.png" />
+        <meta name="msapplication-TileImage" content="https://fluturo.co/images/logo_landscape.png" />
         <meta name="msapplication-config" content="/browserconfig.xml" />
-
-        {/* Open Graph and Twitter Card images */}
-        <meta property="og:image" content="/images/logo_landscape.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="Fluturo Travel Agency - Premium Travel Experiences" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="/images/logo_landscape.png" />
-        <meta name="twitter:title" content="Fluturo Travel Agency - Discover Your Next Adventure" />
-        <meta
-          name="twitter:description"
-          content="Experience the world with Fluturo - Your trusted travel partner for unforgettable memories."
-        />
 
         {/* Structured Data - Schema.org */}
         <script
@@ -100,20 +97,47 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "TravelAgency",
+              "@id": "https://fluturo.co/#organization",
               name: "Fluturo Travel Agency",
               description:
-                "Premium travel agency offering personalized vacation packages and adventure travel experiences worldwide.",
+                "Premium travel agency based in Kosovo, specializing in European destinations and unforgettable travel experiences worldwide.",
               url: "https://fluturo.co",
-              logo: "https://fluturo.co/images/logo_landscape.png",
+              logo: {
+                "@type": "ImageObject",
+                url: "https://fluturo.co/images/logo_landscape.png",
+                width: 1200,
+                height: 630,
+              },
               image: "https://fluturo.co/images/logo_landscape.png",
               email: "info@fluturo.co",
+              telephone: "+38344663344",
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: "Fehmi Agani 43",
+                addressLocality: "Pristina",
+                addressCountry: "XK",
+              },
               priceRange: "$$-$$$",
+              currenciesAccepted: "EUR",
               serviceArea: {
                 "@type": "Place",
                 name: "Worldwide",
               },
               areaServed: "Worldwide",
               slogan: "Discover Your Next Adventure",
+              foundingDate: "2023",
+              sameAs: [
+                "https://facebook.com/fluturo",
+                "https://instagram.com/fluturo",
+                "https://tiktok.com/@fluturo",
+              ],
+              aggregateRating: {
+                "@type": "AggregateRating",
+                ratingValue: "4.9",
+                bestRating: "5",
+                worstRating: "1",
+                ratingCount: "5000",
+              },
             }),
           }}
         />

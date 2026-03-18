@@ -21,9 +21,6 @@ interface SearchFilterBarProps {
     country: string | { en: string; sq: string }
     airportCode: string
   }>
-  destinations?: Array<{
-    themes: string[]
-  }>
 }
 
 export interface FilterState {
@@ -37,7 +34,7 @@ export interface FilterState {
   departureId: string
 }
 
-export function SearchFilterBar({ onSearch, onFilter, onSort, departures, destinations = [] }: SearchFilterBarProps) {
+export function SearchFilterBar({ onSearch, onFilter, onSort, departures }: SearchFilterBarProps) {
   const { language } = useLanguage()
   const { placeholder, sortBy, filters: filtersText } = searchData
   const [searchQuery, setSearchQuery] = useState("")
@@ -54,21 +51,16 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures, destin
   })
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
-  // Dynamically generate theme options from ALL destinations
-  const allThemes = Array.from(
-    new Set(destinations.flatMap((dest) => dest.themes))
-  ).sort()
-  
-  const themeKeys = allThemes.map((theme) => {
-    // Auto-generate labels from theme keys
-    return {
-      key: theme,
-      label: {
-        en: theme.charAt(0).toUpperCase() + theme.slice(1).replace(/-/g, ' '),
-        sq: theme.charAt(0).toUpperCase() + theme.slice(1).replace(/-/g, ' ')
-      }
-    }
-  })
+  const themeKeys = [
+    { key: "beach", label: filtersText.themeOptions.beach },
+    { key: "luxury", label: filtersText.themeOptions.luxury },
+    { key: "adventure", label: filtersText.themeOptions.adventure },
+    { key: "city-break", label: filtersText.themeOptions.cityBreak },
+    { key: "romantic", label: filtersText.themeOptions.romantic },
+    { key: "honeymoon", label: filtersText.themeOptions.honeymoon },
+    { key: "family", label: filtersText.themeOptions.family },
+    { key: "culture", label: filtersText.themeOptions.culture },
+  ]
 
   useEffect(() => {
     onSearch(searchQuery)
@@ -113,7 +105,7 @@ export function SearchFilterBar({ onSearch, onFilter, onSort, departures, destin
     (filters.departureId ? 1 : 0)
 
   return (
-    <div className="sticky top-20 z-40 bg-white shadow-sm border-b border-gray-100">
+    <div className="sticky top-20 z-30 bg-white shadow-sm border-b border-gray-100">
       <div className="container mx-auto px-4 py-6">
         <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center max-w-5xl mx-auto">
           <div className="flex-1 relative">

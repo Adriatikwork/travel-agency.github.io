@@ -6,7 +6,7 @@
 
 export const packagesData = {
   meta: {
-    lastUpdated: "2026-03-13",
+    lastUpdated: "2026-01-18",
   },
   packages: [
     {
@@ -83,6 +83,12 @@ export const packagesData = {
     from: { en: "From", sq: "Nga" },
     whatsIncluded: { en: "What's Included:", sq: "Çfarë Përfshihet:" },
     moreInclusions: { en: "more inclusions", sq: "përfshirje të tjera" },
+    emptyTitle: { en: "Exciting Packages Coming Soon", sq: "Paketa Interesante Se Shpejti" },
+    emptySubtitle: {
+      en: "We're crafting amazing all-inclusive travel packages for you. Follow us on social media to be first to know about exclusive deals and new offerings!",
+      sq: "Po krijojmë paketa të mrekullueshme udhëtimi gjithëpërfshirëse për ju. Na ndiqni në rrjetet sociale për të qenë të parët që mësoni për ofertat ekskluzive dhe paketat e reja!",
+    },
+    emptyFollowUs: { en: "Stay in the loop", sq: "Qëndroni të Informuar" },
   },
 } as const
 

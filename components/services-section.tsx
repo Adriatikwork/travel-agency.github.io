@@ -18,55 +18,70 @@ export function ServicesSection() {
 
   const scrollToContact = () => {
     const element = document.getElementById("contact")
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
+    if (element) element.scrollIntoView({ behavior: "smooth" })
   }
 
   return (
-    <section id="services" className="py-16 sm:py-20 bg-brand relative overflow-hidden">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(255,255,255,0.08)_0%,transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.05)_0%,transparent_40%)]" />
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="services" className="py-16 sm:py-24 bg-[#38b6ff]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-10 sm:mb-14">
-            <span className="inline-flex items-center px-4 py-1.5 bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/15 rounded-full text-primary-foreground/90 text-xs font-semibold tracking-widest uppercase mb-4">
+
+          {/* Header */}
+          <div className="mb-10 sm:mb-14">
+            <p className="text-white/60 text-xs font-semibold tracking-widest uppercase mb-3">
               {ui.sectionLabel[language]}
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary-foreground mb-3 text-balance">
+            </p>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-balance leading-tight">
               {ui.title[language]}
             </h2>
-            <p className="text-base sm:text-lg text-primary-foreground/75 max-w-xl mx-auto text-pretty">{ui.subtitle[language]}</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {servicesData.services.map((service) => {
+          {/* Cards grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10">
+            {servicesData.services.map((service, index) => {
               const Icon = iconMap[service.icon as keyof typeof iconMap] || Plane
+              const isLast = index === servicesData.services.length - 1
+              const isLastOdd = isLast && servicesData.services.length % 3 !== 0
+
               return (
                 <button
                   key={service.id}
                   onClick={scrollToContact}
-                  className="group relative bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/10 rounded-2xl p-5 sm:p-6 hover:bg-primary-foreground/20 transition-all duration-300 hover:-translate-y-1 text-left"
+                  className={`group bg-white/[0.07] hover:bg-white/[0.14] transition-colors duration-200 text-left p-7 sm:p-8 flex flex-col gap-5 ${
+                    isLastOdd ? "sm:col-span-2 lg:col-span-1" : ""
+                  }`}
                 >
-                  <div className="flex flex-col items-center text-center gap-3">
-                    <div className="w-12 h-12 bg-primary-foreground/15 rounded-xl flex items-center justify-center group-hover:bg-primary-foreground/25 transition-colors">
-                      <Icon className="h-6 w-6 text-primary-foreground" strokeWidth={1.5} />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-primary-foreground text-sm mb-1.5 text-balance">
-                        {service.title[language]}
-                      </h3>
-                      <p className="text-xs text-primary-foreground/65 leading-relaxed text-pretty">
-                        {service.description[language]}
-                      </p>
-                    </div>
+                  {/* Icon */}
+                  <div className="w-11 h-11 flex items-center justify-center rounded-xl bg-white/10 group-hover:bg-white/20 transition-colors">
+                    <Icon className="h-5 w-5 text-white" strokeWidth={1.5} />
+                  </div>
+
+                  {/* Text */}
+                  <div className="flex-1">
+                    <h3 className="text-base font-semibold text-white mb-2 leading-snug">
+                      {service.title[language]}
+                    </h3>
+                    <p className="text-white/55 text-sm leading-relaxed">
+                      {service.description[language]}
+                    </p>
+                  </div>
+
+                  {/* Features */}
+                  <div className="flex flex-wrap gap-1.5 mt-auto">
+                    {service.features[language].map((feature) => (
+                      <span
+                        key={feature}
+                        className="text-[11px] font-medium text-white/50 bg-white/8 border border-white/10 rounded-md px-2 py-0.5 group-hover:text-white/70 group-hover:border-white/20 transition-colors"
+                      >
+                        {feature}
+                      </span>
+                    ))}
                   </div>
                 </button>
               )
             })}
           </div>
+
         </div>
       </div>
     </section>

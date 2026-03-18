@@ -4,23 +4,19 @@ import { notFound } from "next/navigation"
 import {
   ArrowLeft,
   Plane,
-  Clock,
   ChevronLeft,
   ChevronRight,
   Calendar,
-  Users,
   Check,
   Phone,
   Mail,
   MapPin,
   Star,
-  Shield,
-  Utensils,
   Tag,
+  Utensils,
+  Shield,
 } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
 import Link from "next/link"
 import { useLanguage } from "@/lib/language-context"
 import { Navbar } from "@/components/navbar"
@@ -55,7 +51,18 @@ export function DestinationPageClient({ slug }: { slug: string }) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isBookingSectionVisible, setIsBookingSectionVisible] = useState(false)
   const [isLightboxOpen, setIsLightboxOpen] = useState(false)
+  const [hasScrolled, setHasScrolled] = useState(false)
   const bookingSectionRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" })
+  }, [slug])
+
+  useEffect(() => {
+    const handleScroll = () => setHasScrolled(window.scrollY > 120)
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const destination = destinationsData.destinations.find((d) => d.slug === slug)
   const departures = destinationsData.departures.filter((dep) => destination?.availableDepartureIds.includes(dep.id))
@@ -66,8 +73,6 @@ export function DestinationPageClient({ slug }: { slug: string }) {
       : [
           `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination?.name, language) + " landscape")}`,
           `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination?.name, language) + " cityscape")}`,
-          `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination?.name, language) + " architecture")}`,
-          `${basePath}/placeholder.svg?height=800&width=1200&query=${encodeURIComponent(getText(destination?.name, language) + " culture")}`,
         ]
 
   const nextImage = () => setCurrentImageIndex((prev) => (prev + 1) % galleryImages.length)
@@ -112,30 +117,45 @@ export function DestinationPageClient({ slug }: { slug: string }) {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero gallery - shorter on mobile so content isn't pushed down */}
-      <div className="relative w-full h-[36vh] sm:h-[45vh] md:h-[55vh] lg:h-[62vh] overflow-hidden bg-foreground/5">
+      {/* Floating back button on mobile after scroll */}
+      <div
+        className={`lg:hidden fixed top-24 left-3 z-30 transition-all duration-300 ${
+          hasScrolled ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-2 pointer-events-none"
+        }`}
+      >
+        <Link
+          href="/"
+          className="flex items-center gap-1.5 bg-white/95 backdrop-blur-md text-gray-800 px-3 py-2 rounded-full text-xs font-semibold shadow-lg border border-gray-200/60 hover:bg-white transition-all active:scale-95"
+        >
+          <ArrowLeft className="h-3.5 w-3.5" />
+          {language === "en" ? "Back" : "Kthehu"}
+        </Link>
+      </div>
+
+      {/* Hero */}
+      <div className="relative w-full h-[40vh] sm:h-[50vh] md:h-[58vh] lg:h-[65vh] overflow-hidden bg-gray-100">
         <img
           src={galleryImages[currentImageIndex] || "/placeholder.svg"}
           alt={getText(destination.name, language)}
-          className="w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-cover cursor-pointer"
           fetchPriority="high"
           onClick={() => openLightbox()}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-foreground/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/10 pointer-events-none" />
 
-        {/* Gallery nav arrows */}
+        {/* Arrows */}
         {galleryImages.length > 1 && (
           <>
             <button
               onClick={prevImage}
-              className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 bg-primary-foreground/20 hover:bg-primary-foreground/40 text-primary-foreground p-2 sm:p-3 rounded-full backdrop-blur-md transition-all"
+              className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 sm:p-2.5 rounded-full backdrop-blur-sm transition-all"
               aria-label="Previous image"
             >
               <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
             </button>
             <button
               onClick={nextImage}
-              className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 bg-primary-foreground/20 hover:bg-primary-foreground/40 text-primary-foreground p-2 sm:p-3 rounded-full backdrop-blur-md transition-all"
+              className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 sm:p-2.5 rounded-full backdrop-blur-sm transition-all"
               aria-label="Next image"
             >
               <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -143,66 +163,60 @@ export function DestinationPageClient({ slug }: { slug: string }) {
           </>
         )}
 
-        {/* Back + rating */}
-        <div className="absolute top-16 sm:top-20 left-3 sm:left-5 z-10">
+        {/* Back button in hero */}
+        <div className="absolute top-24 left-3 sm:left-6 z-10">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 bg-primary-foreground/15 backdrop-blur-md text-primary-foreground px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium hover:bg-primary-foreground/25 transition-all"
+            className="inline-flex items-center gap-1.5 bg-white/15 backdrop-blur-md text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium hover:bg-white/25 transition-all"
           >
             <ArrowLeft className="h-3.5 w-3.5" />
             {language === "en" ? "Back" : "Kthehu"}
           </Link>
         </div>
+
+        {/* Rating */}
         {destination.rating && (
-          <div className="absolute top-16 sm:top-20 right-3 sm:right-5 flex items-center gap-1 bg-primary-foreground/15 backdrop-blur-md px-2.5 py-1.5 rounded-full">
+          <div className="absolute top-24 right-3 sm:right-6 flex items-center gap-1 bg-black/30 backdrop-blur-md px-2.5 py-1.5 rounded-full">
             <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-            <span className="text-xs font-bold text-primary-foreground">{destination.rating}</span>
+            <span className="text-xs font-bold text-white">{destination.rating}</span>
           </div>
         )}
 
-        {/* Bottom overlay info */}
-        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-5 lg:p-8">
+        {/* Bottom overlay: tags, location, title */}
+        <div className="absolute bottom-0 left-0 right-0 px-4 sm:px-6 lg:px-8 pb-5 sm:pb-7">
           <div className="container mx-auto max-w-7xl">
-            {/* Themes */}
-            <div className="flex flex-wrap items-center gap-1 mb-2">
+            <div className="flex flex-wrap gap-1 mb-2">
               {destination.themes.map((theme) => (
-                <Badge
+                <span
                   key={theme}
-                  className="capitalize text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-md bg-primary-foreground/15 text-primary-foreground border-0 backdrop-blur-sm"
+                  className="capitalize text-[9px] sm:text-[10px] font-semibold px-2 py-0.5 rounded-sm bg-white/20 text-white backdrop-blur-sm tracking-wide uppercase"
                 >
                   {theme}
-                </Badge>
+                </span>
               ))}
             </div>
-
-            {/* Location */}
-            <div className="flex items-center gap-1.5 text-primary-foreground/80 text-xs mb-1">
-              <MapPin className="h-3 w-3" />
+            <div className="flex items-center gap-1.5 text-white/70 text-xs mb-1.5">
+              <MapPin className="h-3 w-3 shrink-0" />
               <span>{destination.city}, {getText(destination.country, language)}</span>
             </div>
-
-            {/* Title */}
-            <h1 className="text-2xl sm:text-3xl lg:text-5xl xl:text-6xl font-extrabold text-primary-foreground tracking-tight text-balance leading-tight">
+            <h1 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-white tracking-tight text-balance leading-tight">
               {getText(destination.name, language)}
             </h1>
-
-            {/* Tagline - hide on very small screens to save space */}
             {destination.tagline && (
-              <p className="hidden sm:block text-sm text-primary-foreground/70 mt-1 max-w-2xl italic text-pretty">
+              <p className="hidden sm:block text-sm text-white/60 mt-1 max-w-2xl italic text-pretty">
                 {getText(destination.tagline, language)}
               </p>
             )}
-
-            {/* Thumbnails - smaller on mobile */}
+            {/* Thumbnails */}
             {galleryImages.length > 1 && (
-              <div className="flex gap-1.5 mt-3">
+              <div className="flex gap-1.5 mt-3 items-center">
                 {galleryImages.map((img, index) => (
                   <button
                     key={index}
                     onClick={() => openLightbox(index)}
-                    className={`w-10 h-7 sm:w-16 sm:h-11 rounded-md sm:rounded-lg overflow-hidden transition-all shrink-0 hover:scale-110 ${
+                    className={`w-10 h-7 sm:w-14 sm:h-10 rounded overflow-hidden transition-all shrink-0 ${
                       currentImageIndex === index
-                        ? "ring-2 ring-primary-foreground ring-offset-1 ring-offset-transparent opacity-100"
+                        ? "ring-2 ring-white ring-offset-1 ring-offset-transparent opacity-100"
                         : "opacity-40 hover:opacity-70"
                     }`}
                   >
@@ -214,7 +228,7 @@ export function DestinationPageClient({ slug }: { slug: string }) {
                     />
                   </button>
                 ))}
-                <span className="flex items-center ml-1 text-primary-foreground/50 text-[10px] font-medium">
+                <span className="text-white/40 text-[10px] font-medium ml-1">
                   {currentImageIndex + 1}/{galleryImages.length}
                 </span>
               </div>
@@ -223,115 +237,127 @@ export function DestinationPageClient({ slug }: { slug: string }) {
         </div>
       </div>
 
-      {/* Quick stat pills - compact on mobile, no overlap */}
-      <div className="container mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 mt-3 sm:-mt-7 relative z-10">
-        <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
-          <div className="flex items-center gap-2 bg-card border border-border/50 rounded-xl px-3 py-2 shadow-md shrink-0">
-            <Calendar className="h-3.5 w-3.5 text-brand shrink-0" />
-            <span className="text-xs font-bold text-foreground whitespace-nowrap">{destination.duration.minNights} {language === "en" ? "Nights" : "Net"}</span>
-          </div>
-          <div className="flex items-center gap-2 bg-card border border-border/50 rounded-xl px-3 py-2 shadow-md shrink-0">
-            <Tag className="h-3.5 w-3.5 text-brand shrink-0" />
-            <span className="text-xs font-bold text-foreground whitespace-nowrap">{destinationsData.meta.currency}{destination.pricing.from} <span className="font-normal text-muted-foreground">/ {language === "en" ? "person" : "person"}</span></span>
-          </div>
-          {destination.mealPlan && (
-            <div className="flex items-center gap-2 bg-card border border-border/50 rounded-xl px-3 py-2 shadow-md shrink-0">
-              <Utensils className="h-3.5 w-3.5 text-brand shrink-0" />
-              <span className="text-xs font-bold text-foreground whitespace-nowrap">{getText(destination.mealPlan, language)}</span>
+      {/* Key details strip */}
+      <div className="border-b border-border/60 bg-card">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex gap-6 sm:gap-10 overflow-x-auto scrollbar-hide py-4">
+            <div className="flex items-center gap-2 shrink-0">
+              <Calendar className="h-4 w-4 text-[#38b6ff] shrink-0" />
+              <div>
+                <p className="text-[10px] text-muted-foreground uppercase tracking-wide font-medium">{language === "en" ? "Duration" : "Kohëzgjatja"}</p>
+                <p className="text-sm font-bold text-foreground">{destination.duration.minNights} {language === "en" ? "nights" : "net"}</p>
+              </div>
             </div>
-          )}
-          <div className="flex items-center gap-2 bg-card border border-border/50 rounded-xl px-3 py-2 shadow-md shrink-0">
-            <Shield className="h-3.5 w-3.5 text-brand shrink-0" />
-            <span className="text-xs font-bold text-foreground capitalize whitespace-nowrap">{destination.category}</span>
+            <div className="w-px bg-border/60 shrink-0" />
+            <div className="flex items-center gap-2 shrink-0">
+              <Tag className="h-4 w-4 text-[#38b6ff] shrink-0" />
+              <div>
+                <p className="text-[10px] text-muted-foreground uppercase tracking-wide font-medium">{language === "en" ? "From" : "Nga"}</p>
+                <p className="text-sm font-bold text-foreground">{destinationsData.meta.currency}{destination.pricing.from} <span className="font-normal text-muted-foreground text-xs">/ {language === "en" ? "person" : "person"}</span></p>
+              </div>
+            </div>
+            {destination.mealPlan && (
+              <>
+                <div className="w-px bg-border/60 shrink-0" />
+                <div className="flex items-center gap-2 shrink-0">
+                  <Utensils className="h-4 w-4 text-[#38b6ff] shrink-0" />
+                  <div>
+                    <p className="text-[10px] text-muted-foreground uppercase tracking-wide font-medium">{language === "en" ? "Meals" : "Ushqimi"}</p>
+                    <p className="text-sm font-bold text-foreground">{getText(destination.mealPlan, language)}</p>
+                  </div>
+                </div>
+              </>
+            )}
+            <div className="w-px bg-border/60 shrink-0" />
+            <div className="flex items-center gap-2 shrink-0">
+              <Shield className="h-4 w-4 text-[#38b6ff] shrink-0" />
+              <div>
+                <p className="text-[10px] text-muted-foreground uppercase tracking-wide font-medium">{language === "en" ? "Type" : "Lloji"}</p>
+                <p className="text-sm font-bold text-foreground capitalize">{destination.category}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Main content */}
-      <div className="container mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 py-5 sm:py-8">
-        <div className="flex flex-col xl:grid xl:grid-cols-12 gap-5 sm:gap-8">
+      <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="flex flex-col xl:grid xl:grid-cols-12 gap-8 xl:gap-12">
 
           {/* Left: Content */}
-          <div className="xl:col-span-8 space-y-4 sm:space-y-6">
+          <div className="xl:col-span-7 space-y-10">
 
             {/* About */}
-            <div className="bg-card border border-border/50 rounded-2xl p-4 sm:p-6">
-              <h2 className="text-lg sm:text-xl font-bold text-foreground mb-2.5">
-                {language === "en" ? "About this destination" : "Rreth ketij destinacioni"}
+            <section>
+              <h2 className="text-xl font-bold text-foreground mb-3">
+                {language === "en" ? "About this destination" : "Rreth destinacionit"}
               </h2>
-              <p className="text-foreground/80 leading-relaxed text-sm text-pretty">
+              <p className="text-foreground/75 leading-relaxed text-sm sm:text-base text-pretty">
                 {getText(destination.descriptionLong, language)}
               </p>
-
               {destination.duration.specificDates && (
-                <div className="mt-3 flex items-center gap-2 p-2.5 bg-brand-light rounded-xl">
-                  <Calendar className="h-3.5 w-3.5 text-brand shrink-0" />
-                  <span className="text-xs sm:text-sm text-foreground font-medium">{getText(destination.duration.specificDates, language)}</span>
+                <div className="mt-4 flex items-center gap-2 text-sm text-foreground/70 border-l-2 border-[#38b6ff] pl-3">
+                  <Calendar className="h-4 w-4 text-[#38b6ff] shrink-0" />
+                  <span>{getText(destination.duration.specificDates, language)}</span>
                 </div>
               )}
-            </div>
+            </section>
 
             {/* Highlights */}
-            {destination.highlights && (
-              <div className="bg-card border border-border/50 rounded-2xl p-4 sm:p-6">
-                <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3">
+            {destination.highlights && getArray(destination.highlights, language).length > 0 && (
+              <section>
+                <h2 className="text-xl font-bold text-foreground mb-4">
                   {language === "en" ? "Trip Highlights" : "Pikat Kryesore"}
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {getArray(destination.highlights, language).map((highlight, index) => (
-                    <div key={index} className="flex items-start gap-2.5 p-2.5 bg-surface-sunken rounded-xl">
-                      <div className="bg-brand-light p-1 rounded-md shrink-0 mt-0.5">
-                        <Check className="h-3 w-3 text-brand" />
-                      </div>
-                      <span className="text-xs sm:text-sm text-foreground/80 leading-snug">{highlight}</span>
+                    <div key={index} className="flex items-start gap-3">
+                      <Check className="h-4 w-4 text-[#38b6ff] shrink-0 mt-0.5" />
+                      <span className="text-sm text-foreground/80 leading-snug">{highlight}</span>
                     </div>
                   ))}
                 </div>
-              </div>
+              </section>
             )}
 
             {/* What's Included */}
-            {destination.included && (
-              <div className="bg-card border border-border/50 rounded-2xl p-4 sm:p-6">
-                <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3">
-                  {language === "en" ? "What's Included" : "Cfare Perfshihet"}
+            {destination.included && getArray(destination.included, language).length > 0 && (
+              <section>
+                <h2 className="text-xl font-bold text-foreground mb-4">
+                  {language === "en" ? "What's Included" : "Çfarë Përfshihet"}
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {getArray(destination.included, language).map((item, index) => (
-                    <div key={index} className="flex items-center gap-2 text-xs sm:text-sm">
-                      <div className="bg-emerald-50 p-1 rounded-md shrink-0">
-                        <Check className="h-3 w-3 text-emerald-600" />
-                      </div>
-                      <span className="text-foreground/80 capitalize">{item.replace(/-/g, " ")}</span>
+                    <div key={index} className="flex items-center gap-3">
+                      <Check className="h-4 w-4 text-[#38b6ff] shrink-0" />
+                      <span className="text-sm text-foreground/80 capitalize">{item.replace(/-/g, " ")}</span>
                     </div>
                   ))}
                 </div>
-              </div>
+              </section>
             )}
 
             {/* Departures */}
             {departures.length > 0 && (
-              <div className="bg-card border border-border/50 rounded-2xl p-4 sm:p-6">
-                <h2 className="text-lg sm:text-xl font-bold text-foreground mb-3">
+              <section>
+                <h2 className="text-xl font-bold text-foreground mb-4">
                   {language === "en" ? "Fly from" : "Fluturoni nga"}
                 </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
                   {departures.map((departure) => (
                     <div
                       key={departure.id}
-                      className="flex items-center gap-2.5 p-2.5 sm:p-3 bg-surface-sunken rounded-xl border border-border/30 hover:border-brand/30 transition-all"
+                      className="flex items-center gap-2.5 px-4 py-3 rounded-xl border border-border/60 hover:border-[#38b6ff]/40 transition-all bg-card"
                     >
-                      <div className="bg-brand-light p-2 rounded-lg shrink-0">
-                        <Plane className="h-3.5 w-3.5 text-brand" />
-                      </div>
+                      <Plane className="h-3.5 w-3.5 text-[#38b6ff] shrink-0" />
                       <div className="min-w-0">
-                        <p className="font-bold text-foreground text-xs sm:text-sm truncate">{getText(departure.city, language)}</p>
-                        <p className="text-[9px] sm:text-[10px] text-muted-foreground font-semibold tracking-wide">{departure.airportCode}</p>
+                        <p className="font-semibold text-foreground text-sm truncate">{getText(departure.city, language)}</p>
+                        <p className="text-[10px] text-muted-foreground font-medium tracking-widest">{departure.airportCode}</p>
                       </div>
                     </div>
                   ))}
                 </div>
-              </div>
+              </section>
             )}
 
             {/* Mobile booking card */}
@@ -345,8 +371,8 @@ export function DestinationPageClient({ slug }: { slug: string }) {
           </div>
 
           {/* Right: Sticky Sidebar */}
-          <div className="hidden xl:block xl:col-span-4">
-            <div className="xl:sticky xl:top-24 space-y-4">
+          <div className="hidden xl:block xl:col-span-5">
+            <div className="sticky top-24">
               <BookingCard
                 destination={destination}
                 language={language}
@@ -359,37 +385,36 @@ export function DestinationPageClient({ slug }: { slug: string }) {
 
       {/* Mobile sticky bottom bar */}
       <div
-        className={`xl:hidden fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-xl border-t border-border/50 shadow-2xl transition-transform duration-300 z-50 ${
+        className={`xl:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-xl border-t border-border/50 shadow-2xl transition-transform duration-300 z-30 ${
           isBookingSectionVisible ? "translate-y-full" : "translate-y-0"
         }`}
       >
-        <div className="container mx-auto px-3 py-2.5">
+        <div className="container mx-auto px-4 py-3">
           <div className="flex items-center gap-3">
             <div className="shrink-0 pr-3 border-r border-border/50">
               <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">
                 {language === "en" ? "From" : "Nga"}
               </p>
-              <p className="text-lg font-extrabold text-brand leading-tight">
-                {destinationsData.meta.currency}
-                {destination.pricing.from}
+              <p className="text-lg font-extrabold text-[#38b6ff] leading-tight">
+                {destinationsData.meta.currency}{destination.pricing.from}
               </p>
             </div>
             <div className="flex-1 flex gap-2">
               <Button
                 size="sm"
                 variant="outline"
-                className="flex-1 font-semibold py-2.5 px-2 rounded-lg bg-transparent border-border hover:border-brand text-xs"
+                className="flex-1 font-semibold rounded-lg text-xs bg-transparent"
                 onClick={() => (window.location.href = "tel:044663344")}
               >
-                <Phone className="w-3.5 h-3.5 mr-1" />
+                <Phone className="w-3.5 h-3.5 mr-1.5" />
                 {language === "en" ? "Call" : "Telefono"}
               </Button>
               <Button
                 size="sm"
-                className="flex-1 bg-brand hover:bg-brand-dark text-primary-foreground font-bold py-2.5 px-3 rounded-lg shadow-md text-xs"
+                className="flex-1 bg-[#38b6ff] hover:bg-[#1da6f0] text-white font-bold rounded-lg text-xs"
                 onClick={emailAction}
               >
-                <Mail className="w-3.5 h-3.5 mr-1" />
+                <Mail className="w-3.5 h-3.5 mr-1.5" />
                 {language === "en" ? "Request Info" : "Informacion"}
               </Button>
             </div>
@@ -397,7 +422,6 @@ export function DestinationPageClient({ slug }: { slug: string }) {
         </div>
       </div>
 
-      {/* Image Lightbox */}
       {isLightboxOpen && (
         <ImageLightbox
           images={galleryImages}
@@ -412,7 +436,6 @@ export function DestinationPageClient({ slug }: { slug: string }) {
   )
 }
 
-/* Extracted BookingCard component */
 function BookingCard({
   destination,
   language,
@@ -422,66 +445,66 @@ function BookingCard({
   language: "en" | "sq"
   emailAction: () => void
 }) {
+  const currency = destinationsData.meta.currency
+
   return (
-    <Card className="border border-border/50 shadow-lg overflow-hidden rounded-2xl">
-      {/* Price header */}
-      <div className="bg-brand px-5 sm:px-6 py-6 sm:py-8 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.12)_0%,transparent_60%)]" />
-        <p className="text-[10px] font-bold text-primary-foreground/80 uppercase tracking-[0.2em] relative z-10">
-          {language === "en" ? "Starting From" : "Duke filluar nga"}
+    <div className="rounded-2xl border border-border/60 bg-card overflow-hidden shadow-sm">
+      {/* Price */}
+      <div className="px-6 py-6 border-b border-border/60">
+        <p className="text-xs text-muted-foreground uppercase tracking-widest font-medium mb-1">
+          {language === "en" ? "Starting from" : "Duke filluar nga"}
         </p>
-        <p className="text-4xl sm:text-5xl font-extrabold text-primary-foreground my-1 relative z-10">
-          {destinationsData.meta.currency}
-          {destination.pricing.from}
-        </p>
-        {destination.pricing.perPerson && (
-          <p className="text-xs text-primary-foreground/75 uppercase tracking-wider font-medium relative z-10">
-            {language === "en" ? "per person" : "per person"}
-          </p>
-        )}
+        <div className="flex items-end gap-2">
+          <span className="text-4xl font-extrabold text-foreground tracking-tight">
+            {currency}{destination.pricing.from}
+          </span>
+          {destination.pricing.perPerson && (
+            <span className="text-sm text-muted-foreground mb-1">/ {language === "en" ? "person" : "person"}</span>
+          )}
+        </div>
         {destination.pricing.note && (
-          <p className="text-[10px] text-primary-foreground/60 mt-2 leading-relaxed relative z-10 text-pretty">
+          <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed text-pretty">
             {getText(destination.pricing.note, language)}
           </p>
         )}
       </div>
 
-      {/* Action buttons */}
-      <div className="p-4 sm:p-5 space-y-3">
+      {/* Details */}
+      <div className="px-6 py-4 space-y-3 border-b border-border/60">
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-muted-foreground">{language === "en" ? "Duration" : "Kohëzgjatja"}</span>
+          <span className="font-semibold text-foreground">{destination.duration.minNights} {language === "en" ? "nights" : "net"}</span>
+        </div>
+        {destination.mealPlan && (
+          <div className="flex items-center justify-between text-sm">
+            <span className="text-muted-foreground">{language === "en" ? "Meals" : "Ushqimi"}</span>
+            <span className="font-semibold text-foreground">{getText(destination.mealPlan, language)}</span>
+          </div>
+        )}
+        <div className="flex items-center justify-between text-sm">
+          <span className="text-muted-foreground">{language === "en" ? "Type" : "Lloji"}</span>
+          <span className="font-semibold text-foreground capitalize">{destination.category}</span>
+        </div>
+      </div>
+
+      {/* CTAs */}
+      <div className="px-6 py-5 space-y-2.5">
         <Button
-          className="w-full bg-brand hover:bg-brand-dark text-primary-foreground font-bold py-3 rounded-xl shadow-md text-sm"
+          className="w-full bg-[#38b6ff] hover:bg-[#1da6f0] text-white font-bold py-3 rounded-xl text-sm"
           onClick={emailAction}
         >
           <Mail className="w-4 h-4 mr-2" />
-          {language === "en" ? "Request Information" : "Kerko Informacion"}
+          {language === "en" ? "Request Information" : "Kërko Informacion"}
         </Button>
         <Button
           variant="outline"
-          className="w-full font-semibold py-3 rounded-xl text-sm bg-transparent border-border hover:border-brand"
+          className="w-full font-semibold py-3 rounded-xl text-sm bg-transparent"
           onClick={() => (window.location.href = "tel:044663344")}
         >
           <Phone className="w-4 h-4 mr-2" />
-          {language === "en" ? "Call Us: 044 66 33 44" : "Na Telefononi: 044 66 33 44"}
+          {language === "en" ? "Call: 044 66 33 44" : "Telefono: 044 66 33 44"}
         </Button>
-
-        {/* Quick info */}
-        <div className="pt-2 space-y-2 border-t border-border/50">
-          <div className="flex items-center justify-between text-xs">
-            <span className="text-muted-foreground">{language === "en" ? "Duration" : "Kohezgjatja"}</span>
-            <span className="font-bold text-foreground">{destination.duration.minNights} {language === "en" ? "nights" : "net"}</span>
-          </div>
-          {destination.mealPlan && (
-            <div className="flex items-center justify-between text-xs">
-              <span className="text-muted-foreground">{language === "en" ? "Meals" : "Ushqimi"}</span>
-              <span className="font-bold text-foreground">{getText(destination.mealPlan, language)}</span>
-            </div>
-          )}
-          <div className="flex items-center justify-between text-xs">
-            <span className="text-muted-foreground">{language === "en" ? "Category" : "Kategoria"}</span>
-            <span className="font-bold text-foreground capitalize">{destination.category}</span>
-          </div>
-        </div>
       </div>
-    </Card>
+    </div>
   )
 }

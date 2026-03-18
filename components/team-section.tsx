@@ -1,6 +1,8 @@
 "use client"
+
+import { useState } from "react"
 import { getImagePath } from "@/lib/image-path"
-import { Briefcase } from "lucide-react"
+import { ChevronDown, Briefcase } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import teamData from "@/data/team.json"
 
@@ -15,6 +17,7 @@ interface TeamMember {
 export function TeamSection() {
   const { language } = useLanguage()
   const { members, ui } = teamData
+  const [expandedId, setExpandedId] = useState<string | null>(null)
 
   return (
     <section id="team" className="relative py-12 sm:py-16 overflow-hidden">
@@ -34,16 +37,89 @@ export function TeamSection() {
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2 text-balance">
             {ui.title[language]}
           </h2>
-          <p className="text-sm sm:text-base text-gray-600 max-w-xl mx-auto text-pretty">{ui.subtitle[language]}</p>
+          <p className="text-sm sm:text-base text-gray-600 max-w-xl mx-auto text-pretty">
+            {ui.subtitle[language]}
+          </p>
         </div>
 
-        <div className="max-w-6xl mx-auto space-y-8 sm:space-y-12">
+        {/* Mobile: compact accordion cards */}
+        <div className="sm:hidden max-w-lg mx-auto space-y-3">
+          {members.map((member: TeamMember, index: number) => {
+            const isOpen = expandedId === member.id
+            const initials = member.name.split(" ").map((n) => n[0]).join("")
+            return (
+              <div
+                key={member.id}
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden"
+              >
+                {/* Header row — always visible */}
+                <button
+                  onClick={() => setExpandedId(isOpen ? null : member.id)}
+                  className="w-full flex items-center gap-4 p-4 text-left"
+                  aria-expanded={isOpen}
+                >
+                  {/* Avatar */}
+                  <div className="relative flex-shrink-0">
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-[#38b6ff]/30 bg-[#38b6ff]/10">
+                      {member.image && !member.image.includes("placeholder") ? (
+                        <img
+                          src={getImagePath(member.image)}
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-[#38b6ff] font-bold text-lg">
+                          {initials}
+                        </div>
+                      )}
+                    </div>
+                    {/* Index dot */}
+                    <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-[#38b6ff] border-2 border-white flex items-center justify-center">
+                      <span className="text-white text-[8px] font-bold">{index + 1}</span>
+                    </div>
+                  </div>
+
+                  {/* Name + role */}
+                  <div className="flex-1 min-w-0">
+                    <p className="font-bold text-gray-900 text-base leading-tight">{member.name}</p>
+                    <p className="text-xs text-[#38b6ff] font-medium mt-0.5 leading-snug text-pretty">
+                      {member.role[language]}
+                    </p>
+                  </div>
+
+                  {/* Chevron */}
+                  <ChevronDown
+                    className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+
+                {/* Expandable bio */}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    isOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="px-4 pb-5 pt-1 border-t border-gray-50 space-y-2">
+                    {member.bio[language].map((paragraph: string, idx: number) => (
+                      <p key={idx} className="text-xs text-gray-600 leading-relaxed text-pretty">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Tablet + Desktop: existing alternating layout */}
+        <div className="hidden sm:block max-w-6xl mx-auto space-y-8 sm:space-y-12">
           {members.map((member: TeamMember, index: number) => (
             <div
               key={member.id}
               className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-4 sm:gap-6 items-center`}
             >
-              {/* Image Card - Different style for each */}
+              {/* Image Card */}
               <div className="w-full sm:w-4/5 md:w-3/5 lg:w-2/5 relative group">
                 <div
                   className={`relative overflow-hidden rounded-2xl shadow-xl transform transition-all duration-500 hover:scale-105 ${
@@ -71,20 +147,13 @@ export function TeamSection() {
                         <div
                           className={`w-32 h-32 ${
                             index % 2 === 0 ? "bg-white/20" : "bg-[#38b6ff]"
-                          } rounded-full flex items-center justify-center ${
-                            index % 2 === 0 ? "text-white" : "text-white"
-                          } text-4xl font-bold backdrop-blur-sm`}
+                          } rounded-full flex items-center justify-center text-white text-4xl font-bold backdrop-blur-sm`}
                         >
-                          {member.name
-                            .split(" ")
-                            .map((n) => n[0])
-                            .join("")}
+                          {member.name.split(" ").map((n) => n[0]).join("")}
                         </div>
                       </div>
                     )}
                   </div>
-
-                  {/* Decorative overlay */}
                   <div
                     className={`absolute inset-0 ${
                       index % 2 === 0
@@ -113,19 +182,14 @@ export function TeamSection() {
                     />
                     <div>
                       <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1 text-balance">{member.name}</h3>
-                      <p
-                        className={`text-sm sm:text-base font-semibold ${index % 2 === 0 ? "text-[#38b6ff]" : "text-gray-600"}`}
-                      >
+                      <p className={`text-sm sm:text-base font-semibold ${index % 2 === 0 ? "text-[#38b6ff]" : "text-gray-600"}`}>
                         {member.role[language]}
                       </p>
                     </div>
                   </div>
-
                   <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-gray-600 leading-relaxed">
                     {member.bio[language].map((paragraph: string, idx: number) => (
-                      <p key={idx} className="text-pretty">
-                        {paragraph}
-                      </p>
+                      <p key={idx} className="text-pretty">{paragraph}</p>
                     ))}
                   </div>
                 </div>

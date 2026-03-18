@@ -55,22 +55,6 @@ interface DestinationsGridProps {
 export function DestinationsGrid({ destinations, departures, currency }: DestinationsGridProps) {
   const { language } = useLanguage()
   const ui = destinationsData.ui
-
-  const emptyStateText = {
-    title: {
-      en: "New Destinations Coming Soon",
-      sq: "Destinacione te Reja Se Shpejti"
-    },
-    subtitle: {
-      en: "We're curating exciting new travel experiences for you. Follow us on social media to be the first to know when we launch new destinations!",
-      sq: "Po pergatisim pervoja te reja udhëtimi per ju. Na ndiqni ne rrjetet sociale per te qene te paret qe mesoni kur lançojme destinacione te reja!"
-    },
-    followUs: {
-      en: "Follow Us",
-      sq: "Na Ndiqni"
-    }
-  }
-
   const socialLinks = siteData.footer.social
 
   if (destinations.length === 0) {
@@ -81,14 +65,14 @@ export function DestinationsGrid({ destinations, departures, currency }: Destina
             <Plane className="w-10 h-10 text-[#38b6ff]" />
           </div>
           <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 text-balance">
-            {emptyStateText.title[language]}
+            {ui.emptyTitle[language]}
           </h3>
           <p className="text-muted-foreground text-base sm:text-lg mb-8 leading-relaxed text-pretty">
-            {emptyStateText.subtitle[language]}
+            {ui.emptySubtitle[language]}
           </p>
           <div className="space-y-4">
             <p className="text-sm font-semibold text-foreground uppercase tracking-wider">
-              {emptyStateText.followUs[language]}
+              {ui.emptyFollowUs[language]}
             </p>
             <div className="flex items-center justify-center gap-4">
               {socialLinks.map((social) => (
@@ -200,19 +184,14 @@ export function DestinationsGrid({ destinations, departures, currency }: Destina
       {/* Mobile & Tablet: 2-column grid */}
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:hidden">
         {destinations.map((destination) => (
-          <div key={destination.id} className="flex flex-col">
-            {renderCard(destination)}
-          </div>
+          <div key={destination.id}>{renderCard(destination)}</div>
         ))}
       </div>
 
-      {/* Desktop: centered flex grid */}
+      {/* Desktop: centered flex wrap — cards cap at ~300px so 1-2 cards look great */}
       <div className="hidden lg:flex flex-wrap justify-center gap-6">
         {destinations.map((destination) => (
-          <div
-            key={destination.id}
-            className="w-[calc(33.333%-16px)] xl:w-[calc(25%-18px)]"
-          >
+          <div key={destination.id} className="w-full max-w-[300px] xl:max-w-[280px] flex-grow-0 flex-shrink-0">
             {renderCard(destination)}
           </div>
         ))}

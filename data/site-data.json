@@ -200,14 +200,9 @@
         "icon": "instagram"
       },
       {
-        "name": "Twitter",
-        "url": "https://twitter.com/fluturo",
-        "icon": "twitter"
-      },
-      {
-        "name": "LinkedIn",
-        "url": "https://linkedin.com/company/fluturo",
-        "icon": "linkedin"
+        "name": "TikTok",
+        "url": "https://tiktok.com/@fluturo",
+        "icon": "tiktok"
       }
     ],
     "tagline": {
@@ -244,12 +239,14 @@
       "en": [
         "further.",
         "higher.",
-        "beyond."
+        "beyond.",
+        "away."
       ],
       "sq": [
         "më larg.",
         "më lart.",
-        "përtej."
+        "përtej.",
+        "tutje."
       ]
     },
     "startJourney": {

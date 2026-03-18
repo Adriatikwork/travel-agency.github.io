@@ -33,22 +33,6 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
   const { language } = useLanguage()
   const ui = packagesData.ui
   const [selectedPackage, setSelectedPackage] = useState<Package | null>(null)
-
-  const emptyStateText = {
-    title: {
-      en: "Exciting Packages Coming Soon",
-      sq: "Paketa Interesante Se Shpejti"
-    },
-    subtitle: {
-      en: "We're putting together amazing all-inclusive travel packages just for you. Follow us on social media to stay updated on our latest offerings and exclusive deals!",
-      sq: "Po pergatisim paketa te mahnitshme udhëtimi gjitheperfshirese vetem per ju. Na ndiqni ne rrjetet sociale per te qendruar te informuar mbi ofertat tona me te reja dhe ekskluzive!"
-    },
-    followUs: {
-      en: "Follow Us",
-      sq: "Na Ndiqni"
-    }
-  }
-
   const socialLinks = siteData.footer.social
 
   if (packages.length === 0) {
@@ -66,14 +50,14 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
                 <Package className="w-10 h-10 text-[#38b6ff]" />
               </div>
               <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 text-balance">
-                {emptyStateText.title[language]}
+                {ui.emptyTitle[language]}
               </h3>
               <p className="text-muted-foreground text-base sm:text-lg mb-8 leading-relaxed text-pretty">
-                {emptyStateText.subtitle[language]}
+                {ui.emptySubtitle[language]}
               </p>
               <div className="space-y-4">
                 <p className="text-sm font-semibold text-foreground uppercase tracking-wider">
-                  {emptyStateText.followUs[language]}
+                  {ui.emptyFollowUs[language]}
                 </p>
                 <div className="flex items-center justify-center gap-4">
                   {socialLinks.map((social) => (
@@ -172,9 +156,18 @@ export function PackagesSection({ packages, currency }: PackagesSectionProps) {
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">{ui.subtitle[language]}</p>
           </div>
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+            {/* Mobile & Tablet: 2-column grid */}
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:hidden">
               {packages.map((pkg) => (
                 <div key={pkg.id}>{renderCard(pkg)}</div>
+              ))}
+            </div>
+            {/* Desktop: centered flex wrap — cards cap at ~300px so 1-2 cards look great */}
+            <div className="hidden lg:flex flex-wrap justify-center gap-6">
+              {packages.map((pkg) => (
+                <div key={pkg.id} className="w-full max-w-[300px] xl:max-w-[280px] flex-grow-0 flex-shrink-0">
+                  {renderCard(pkg)}
+                </div>
               ))}
             </div>
           </div>

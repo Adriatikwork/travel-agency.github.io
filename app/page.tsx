@@ -209,11 +209,9 @@ export default function HomePage() {
         </section>
       </div>
 
-      {filteredPackages.length > 0 && (
-        <div id="packages">
-          <PackagesSection packages={filteredPackages} currency={destinationsData.meta.currency} />
-        </div>
-      )}
+      <div id="packages">
+        <PackagesSection packages={filteredPackages} currency={destinationsData.meta.currency} />
+      </div>
 
       <div id="services">
         <ServicesSection />

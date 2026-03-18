@@ -1,7 +1,6 @@
 "use client"
 
-import { X, Check, Clock, Tag, Phone, Mail, Star } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { X, Check, Clock, Tag, Phone, Mail } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 import packagesData from "@/data/packages"
 
@@ -46,7 +45,7 @@ export function PackageModal({ pkg, currency, onClose }: PackageModalProps) {
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 transition-opacity"
+        className="fixed inset-0 bg-black/50 z-50"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -58,85 +57,83 @@ export function PackageModal({ pkg, currency, onClose }: PackageModalProps) {
         aria-label={pkg.title[language]}
         className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4"
       >
-        <div className="bg-background w-full sm:max-w-lg md:max-w-2xl max-h-[92dvh] sm:max-h-[88vh] rounded-t-3xl sm:rounded-2xl overflow-hidden flex flex-col shadow-2xl">
+        <div className="bg-white w-full sm:max-w-lg md:max-w-xl max-h-[92dvh] sm:max-h-[88vh] rounded-t-2xl sm:rounded-2xl overflow-hidden flex flex-col shadow-2xl">
 
           {/* Hero image */}
-          <div className="relative w-full h-48 sm:h-56 flex-shrink-0">
+          <div className="relative w-full h-44 sm:h-52 flex-shrink-0">
             <img
               src={pkg.image || "/placeholder.svg"}
               alt={pkg.title[language]}
               className="w-full h-full object-cover"
             />
-            {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-black/20" />
 
-            {/* Badges */}
-            <div className="absolute top-3 left-3 flex gap-2">
-              {pkg.isFeatured && (
-                <span className="bg-yellow-400 text-yellow-900 text-[11px] font-bold px-2.5 py-1 rounded-full">
-                  {ui.featured[language]}
-                </span>
-              )}
-              {pkg.isOnSale && (
-                <span className="bg-[#38b6ff] text-white text-[11px] font-bold px-2.5 py-1 rounded-full">
-                  {ui.onSale[language]}
-                </span>
-              )}
-            </div>
-
-            {/* Close button */}
+            {/* Close */}
             <button
               onClick={onClose}
-              className="absolute top-3 right-3 bg-black/40 hover:bg-black/60 text-white rounded-full p-1.5 transition-colors"
+              className="absolute top-3 right-3 bg-black/30 hover:bg-black/50 text-white rounded-full p-1.5 transition-colors backdrop-blur-sm"
               aria-label="Close modal"
             >
               <X className="w-4 h-4" />
             </button>
 
-            {/* Title over image */}
-            <div className="absolute bottom-3 left-4 right-4">
-              <h2 className="text-white text-xl sm:text-2xl font-bold text-balance leading-tight">
+            {/* Title block */}
+            <div className="absolute bottom-4 left-4 right-12">
+              <div className="flex items-center gap-2 mb-1.5">
+                {pkg.isFeatured && (
+                  <span className="bg-amber-400 text-amber-900 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide">
+                    {ui.featured[language]}
+                  </span>
+                )}
+                {pkg.isOnSale && (
+                  <span className="bg-[#38b6ff] text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wide">
+                    {ui.onSale[language]}
+                  </span>
+                )}
+              </div>
+              <h2 className="text-white text-xl font-bold leading-tight text-balance">
                 {pkg.title[language]}
               </h2>
               {pkg.destinationName && (
-                <p className="text-white/80 text-sm mt-0.5">{pkg.destinationName}</p>
+                <p className="text-white/70 text-xs mt-0.5 font-medium">{pkg.destinationName}</p>
               )}
             </div>
           </div>
 
           {/* Scrollable content */}
-          <div className="overflow-y-auto flex-1 p-4 sm:p-6 space-y-5">
+          <div className="overflow-y-auto flex-1 p-5 sm:p-6">
 
-            {/* Price + quick stats row */}
-            <div className="flex items-center justify-between bg-[#38b6ff]/10 rounded-2xl px-4 py-3 border border-[#38b6ff]/20">
-              <div className="flex items-center gap-1.5 text-muted-foreground text-sm">
-                <Clock className="w-4 h-4 text-[#38b6ff]" />
-                <span className="font-medium text-foreground">{pkg.duration} {ui.nights[language]}</span>
+            {/* Stats row */}
+            <div className="flex items-center gap-6 pb-5 border-b border-gray-100">
+              <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                <Clock className="w-4 h-4 text-gray-400" />
+                <span className="font-medium text-gray-900">{pkg.duration}</span>
+                <span>{ui.nights[language]}</span>
               </div>
-              <div className="flex items-center gap-1.5 text-muted-foreground text-sm">
-                <Tag className="w-4 h-4 text-[#38b6ff]" />
-                <span className="font-medium text-foreground">{packageTypeLabel}</span>
+              <div className="flex items-center gap-1.5 text-sm text-gray-600">
+                <Tag className="w-4 h-4 text-gray-400" />
+                <span>{packageTypeLabel}</span>
               </div>
-              <div className="text-right">
-                <p className="text-[10px] uppercase tracking-wider text-muted-foreground">{ui.from[language]}</p>
-                <p className="text-[#38b6ff] font-extrabold text-lg leading-tight">
+              <div className="ml-auto text-right">
+                <p className="text-[10px] uppercase tracking-widest text-gray-400 font-medium">{ui.from[language]}</p>
+                <p className="text-[#38b6ff] font-extrabold text-xl leading-none">
                   {currency}{pkg.price}
                 </p>
               </div>
             </div>
 
             {/* Summary */}
-            <div>
-              <p className="text-foreground/80 text-sm leading-relaxed text-pretty">{pkg.summary[language]}</p>
-            </div>
+            <p className="text-gray-600 text-sm leading-relaxed text-pretty mt-5">
+              {pkg.summary[language]}
+            </p>
 
             {/* Themes */}
             {pkg.themes.length > 0 && (
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1.5 mt-4">
                 {pkg.themes.map((theme) => (
                   <span
                     key={theme}
-                    className="bg-[#38b6ff]/10 text-[#38b6ff] text-[11px] font-medium px-2.5 py-1 rounded-full capitalize border border-[#38b6ff]/20"
+                    className="text-[11px] font-medium text-gray-500 px-2.5 py-1 rounded-full bg-gray-100 capitalize"
                   >
                     {theme.replace(/-/g, " ")}
                   </span>
@@ -145,46 +142,40 @@ export function PackageModal({ pkg, currency, onClose }: PackageModalProps) {
             )}
 
             {/* What's included */}
-            <div>
-              <div className="flex items-center gap-2 mb-3">
-                <Star className="w-4 h-4 text-[#38b6ff]" />
-                <h3 className="text-sm font-bold text-foreground uppercase tracking-wider">
-                  {ui.whatsIncluded[language]}
-                </h3>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div className="mt-6">
+              <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
+                {ui.whatsIncluded[language]}
+              </h3>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-4">
                 {pkg.inclusions[language].map((item, i) => (
-                  <div key={i} className="flex items-center gap-2.5 bg-green-50 rounded-xl px-3 py-2 border border-green-100">
-                    <div className="bg-green-500/20 rounded-full p-0.5 flex-shrink-0">
-                      <Check className="w-3 h-3 text-green-600" />
-                    </div>
-                    <span className="text-sm text-foreground/90">{item}</span>
-                  </div>
+                  <li key={i} className="flex items-center gap-2.5 text-sm text-gray-700">
+                    <Check className="w-4 h-4 text-[#38b6ff] flex-shrink-0" />
+                    {item}
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
+
           </div>
 
-          {/* Sticky footer CTAs */}
-          <div className="flex-shrink-0 border-t border-border p-4 sm:p-5 bg-background space-y-2.5">
-            {/* Primary CTA — request by email/WhatsApp */}
+          {/* Footer CTAs */}
+          <div className="flex-shrink-0 border-t border-gray-100 p-4 sm:p-5 flex flex-col gap-2.5 bg-white">
             <a
               href={`mailto:info@fluturo.com?subject=Package Inquiry: ${pkg.title["en"]}&body=Hi, I'm interested in the ${pkg.title["en"]} package (${pkg.duration} nights from ${currency}${pkg.price}). Please send me more information.`}
-              className="flex items-center justify-center gap-2 w-full bg-[#38b6ff] hover:bg-[#1da6f0] text-white rounded-xl py-3.5 text-sm font-semibold transition-colors"
+              className="flex items-center justify-center gap-2 w-full bg-[#38b6ff] hover:bg-[#1da6f0] active:bg-[#1a96d8] text-white rounded-xl py-3.5 text-sm font-semibold transition-colors"
             >
               <Mail className="w-4 h-4" />
               {language === "en" ? "Request This Package" : "Kërko Këtë Paketë"}
             </a>
-
-            {/* Secondary CTA — call */}
             <a
               href="tel:+383"
-              className="flex items-center justify-center gap-2 w-full border border-border hover:bg-accent text-foreground rounded-xl py-3 text-sm font-medium transition-colors"
+              className="flex items-center justify-center gap-2 w-full border border-gray-200 hover:bg-gray-50 text-gray-700 rounded-xl py-3 text-sm font-medium transition-colors"
             >
               <Phone className="w-4 h-4 text-[#38b6ff]" />
               {language === "en" ? "Call Us Instead" : "Na Telefononi"}
             </a>
           </div>
+
         </div>
       </div>
     </>
